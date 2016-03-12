@@ -1,3 +1,5 @@
 import _ from 'lodash';
 
-console.log("Howdy, World!!");
+const howdy = "Howdy, World!";
+
+export default howdy;
