@@ -17,7 +17,9 @@ then open browser and point to `http://localhost:8000`
 
 It uses webpack-dev-server and hot-reloads the page whenever source changes.
 
-Bonus, Set Chrome DevTools workspace to edit `howdy.js` in Chrome DevTools:
+Bonus,
+
+Set Chrome DevTools workspace to edit `howdy.js` in Chrome DevTools:
 
 1. Go to the Source tab, 'Add Folder to Workspace', choose `howdy-web` root.
 2. Locate `howdy.js` in the Workspace navigation tree.
