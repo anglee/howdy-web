@@ -1,6 +1,6 @@
 import _ from 'lodash';
 // 1,2,3,4,5 (4)
-const binarySearchInner = (array, target, l, r) => {
+const binarySearch = (array, target, l = 0, r = array.length - 1) => {
   if (l > r) {
     return -1;
   }
@@ -8,14 +8,11 @@ const binarySearchInner = (array, target, l, r) => {
   if (array[m] === target) {
     return m;
   } else  if (array[m] < target) {
-    return binarySearchInner(array, target, m + 1, r);
+    return binarySearch(array, target, m + 1, r);
   } else { // array[m] > target
-    return binarySearchInner(array, target, l, m - 1);
+    return binarySearch(array, target, l, m - 1);
   }
 };
 
 
-export default (sortedArray, target) => {
-  //return _.indexOf(sortedArray, target);
-  return binarySearchInner(sortedArray, target, 0, sortedArray.length - 1);
-};
+export default binarySearch;
