@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "A minimal frontend setup for quick JS experiments",
   "license": "ISC",
-  "author": "Ang Lee",
+  "author": {
+    "name" : "Ang Lee",
+    "email" : "ang.lee@gmail.com",
+    "url" : "http://anglee.info/"
+  },
   "repository": "anglee/howdy-web",
   "main": "index.js",
   "scripts": {
