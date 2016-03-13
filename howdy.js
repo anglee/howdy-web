@@ -1,35 +1,25 @@
 import _ from 'lodash';
 
 const howdy = (string) => {
-
-
-  let i = 0, j = 0;
+  let i = 0;
   let maxSubstring = '';
-  while (i < string.length) {
-    const lastPositions = {};
-
-    // move j until the end or a duplicate occurs
-    while (j < string.length && _.isUndefined(lastPositions[string[j]])) {
-      lastPositions[string[j]] = j;
-      j++;
+  const exists = new Set();
+  // j scans from left to right
+  for (let j = 0; j < string.length; j++) {
+    // when j moved to a new position, make sure substring [i,j] has no duplicates
+    while (exists.has(string.charAt(j))) {
+      exists.delete(string.charAt(i));
+      i++;
     }
 
-    // if substring[i, j) is longer than the existing longest,
-    // update the longest
-    if (j - i > maxSubstring.length) {
-      maxSubstring = string.substring(i, j);
+    if (j - i + 1 > maxSubstring.length) {
+      maxSubstring = string.substring(i, j + 1);
     }
 
-    if (j > string.length) { // if j is at the end, we are done
-      break;
-    } else { // j is at a duplicate
-
-      const dupChar = string[j];
-
-      // move i, j to the duplicate position
-      i = j = lastPositions[dupChar] + 1;
-    }
+    // make sure at the end `exists` has all and only the characters in [i,j]
+    exists.add(string.charAt(j));
   }
+
   return maxSubstring;
 };
 
