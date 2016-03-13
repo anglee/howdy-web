@@ -1,23 +1,23 @@
 import _ from 'lodash';
 
-const howdy = (string) => {
+const howdy = (s) => {
   let i = 0;
   let maxSubstring = '';
-  const exists = new Set();
+  const lastPositions = new Map();
   // j scans from left to right
-  for (let j = 0; j < string.length; j++) {
+  for (let j = 0; j < s.length; j++) {
     // when j moved to a new position, make sure substring [i,j] has no duplicates
-    while (exists.has(string.charAt(j))) {
-      exists.delete(string.charAt(i));
-      i++;
+    if (lastPositions.has(s.charAt(j))) {
+      i = lastPositions.get(s.charAt(j)) + 1;
     }
 
+    // update `lastPositions`
+    lastPositions.set(s.charAt(j), j);
+
+    // update date maxSubstring if necessary
     if (j - i + 1 > maxSubstring.length) {
-      maxSubstring = string.substring(i, j + 1);
+      maxSubstring = s.substring(i, j + 1);
     }
-
-    // make sure at the end `exists` has all and only the characters in [i,j]
-    exists.add(string.charAt(j));
   }
 
   return maxSubstring;
