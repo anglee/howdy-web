@@ -18,6 +18,9 @@ describe('howdy', () => {
     it('should reverse 1234', () => {
       expect(howdy(1234)).to.equal(4321);
     });
+    it('should reverse 10234', () => {
+      expect(howdy(10234)).to.equal(43201);
+    });
   });
 
 });
