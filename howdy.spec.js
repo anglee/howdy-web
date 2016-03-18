@@ -1,8 +1,14 @@
 import {expect} from 'chai';
-import howdy from './howdy';
+import solution from './howdy';
 
-describe('howdy', () => {
+describe('solution', () => {
   it('should say "Howdy, World!"', () => {
-    expect(howdy).to.equal('Howdy, World');
+    expect(solution(9)).to.equal(2);
+  });
+  it('should say "Howdy, World!"', () => {
+    expect(solution(1041)).to.equal(5);
+  });
+  it('should say "Howdy, World!"', () => {
+    expect(solution(529)).to.equal(4);
   });
 });
