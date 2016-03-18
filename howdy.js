@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
-const howdy = "Howdy, World!";
+const soluiton = (A) => {
+  return _.reduce(A, (result, it) => result ^= it, 0);
+};
 
-export default howdy;
+export default soluiton;
