@@ -1,8 +1,10 @@
 import {expect} from 'chai';
-import howdy from './howdy';
+import solution from './howdy';
 
-describe('howdy', () => {
-  it('should say "Howdy, World!"', () => {
-    expect(howdy).to.equal('Howdy, World');
+describe('solution', () => {
+  it('should rotate array A, K times', () => {
+    const A = [3, 8, 9, 7, 6];
+    const K = 3;
+    expect(solution(A, K)).to.eql([9, 7, 6, 3, 8]);
   });
 });

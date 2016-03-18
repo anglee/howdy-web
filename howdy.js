@@ -1,5 +1,10 @@
 import _ from 'lodash';
 
-const howdy = "Howdy, World!";
+const solution = (A, K) => {
+  return [
+    ...A.slice(A.length - K),
+    ...A.slice(0, A.length - K)
+  ];
+};
 
-export default howdy;
+export default solution;
