@@ -20,7 +20,8 @@ const bruteForceSolution = (A) => {
   return minAvgI;
 };
 
-const solution = (A) => {
+// O(N) solution I came up with myself, not proven to work, but seems to work
+const secondTry = (A) => {
   const minAvgEndWithJ = _.range(A.length).map(()=>Number.POSITIVE_INFINITY);
   const theIAtJWhenMinAvg = _.range(A.length).map(() => null);
   let i = 0;
@@ -56,6 +57,48 @@ const solution = (A) => {
       ret = theIAtJWhenMinAvg[j];
     }
   }
+  return ret;
+};
+
+// looked it up on the internet, found:
+// https://codesays.com/2014/solution-to-min-avg-two-slice-by-codility/
+//The key to solve this task is these two patterns:
+//  (1) There must be some slices, with length of two or three, having the
+//      minimal average value among all the slices.
+//  (2) And all the longer slices with minimal average are built up with
+//      these 2-element and/or 3-element small slices.
+const solution = (A) => {
+  let minAvg = Number.POSITIVE_INFINITY;
+  let ret = null;
+
+  // length of 2
+  if (A.length >= 2) {
+    let sum = A[0];
+    for (let i = 0; i < A.length-1; i++) {
+      sum += A[i+1];
+      const avg = sum / 2;
+      if (avg < minAvg) {
+        minAvg = avg;
+        ret = i;
+      }
+      sum -= A[i];
+    }
+  }
+
+  // length of 3
+  if (A.length >= 3) {
+    let sum = A[0] + A[1];
+    for (let i = 0; i < A.length-2; i++) {
+      sum += A[i+2];
+      const avg = sum / 3;
+      if (avg < minAvg) {
+        minAvg = avg;
+        ret = i;
+      }
+      sum -= A[i];
+    }
+  }
+
   return ret;
 };
 

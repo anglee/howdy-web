@@ -52,11 +52,3 @@ describe('solution', () => {
     expect(solution(A)).to.equal(1);
   });
 });
-
-
-// https://codesays.com/2014/solution-to-min-avg-two-slice-by-codility/
-//The key to solve this task is these two patterns:
-//  (1) There must be some slices, with length of two or three, having the
-//      minimal average value among all the slices.
-//  (2) And all the longer slices with minimal average are built up with
-//      these 2-element and/or 3-element small slices.
