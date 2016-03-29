@@ -1,8 +1,10 @@
 import {expect} from 'chai';
-import howdy from './howdy';
+import {catepillar} from './howdy';
 
-describe('howdy', () => {
-  it('should say "Howdy, World!"', () => {
-    expect(howdy).to.equal('Howdy, World');
+describe('catepillar', () => {
+  it('should find the sequence in the input array A that sums to s', () => {
+    const A = [6, 2, 7, 4, 1, 3, 6];
+    const s = 12;
+    expect(catepillar(A, s)).to.eql([7, 4, 1]);
   });
 });
