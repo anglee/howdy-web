@@ -13,3 +13,7 @@ describe('bruteForceSolution', () => {
 // the instruction in the pdf was weird, my solution is essentially the same as
 // the given solution, which it claims to be O(n^2), but I think it should be O(n^3) instead
 // not sure if there is a O(n^2) solution.
+
+// !!!!
+// I finally know how to do this in O(n^2)
+// See branch `Codility_CountTriangles`
