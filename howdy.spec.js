@@ -1,8 +1,9 @@
 import {expect} from 'chai';
-import howdy from './howdy';
+import solution from './howdy';
 
-describe('howdy', () => {
-  it('should say "Howdy, World!"', () => {
-    expect(howdy).to.equal('Howdy, World');
+describe('solution', () => {
+  it('find number of distinct absolute values of elements', () => {
+    const A = [-5, -3, -1, 0, 3, 6];
+    expect(solution(A)).to.equal(5);
   });
 });

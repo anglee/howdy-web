@@ -1,5 +1,11 @@
 import _ from 'lodash';
 
-const howdy = "Howdy, World!";
+const solution = (A) => {
+  const s = new Set();
+  _.forEach(A, (it) => {
+    s.add(Math.abs(it));
+  });
+  return s.size;
+};
 
-export default howdy;
+export default solution;
