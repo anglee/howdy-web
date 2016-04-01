@@ -28,27 +28,21 @@ const solution = (A) => {
     let j = i + 1;
     let k = i + 2;
 
-    while (j < A.length - 1) {
-
-      // push k to the left as much as possible
-      while (A[k] < A[i] + A[j] && k < A.length) {
+    while (j < k && k < A.length) {
+      if (A[k] < A[i] + A[j]) {
         console.log(`triangle (${A[i]}, ${A[j]}, ${A[k]})`);
         count++;
-
-        if (k === A.length - 1) { // if k is already at the end, we are done
-          break;
-        }
-
-        k++;
       }
 
-      // at this point we've counted all triangles that use i and j in the while () { k++ } loop above
-      // and we are about to move to the next j (as shown as j++ below)
-      // note that, here, in a block of each i, k will never move left ever (and thus it's O(n^2) and not O(n^3)
-
-      j++;
-      // make sure j > k
-      k = Math.max(k, j + 1);
+      // if the triangle can be formed and we can still push k, then push k right
+      if (A[k] < A[i] + A[j] && k + 1 < A.length) {
+        k++;
+      } else { // otherwise push j right
+        j++;
+        if (j === k) {
+          k++;
+        }
+      }
     }
   }
 
