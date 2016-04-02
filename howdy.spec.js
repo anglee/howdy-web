@@ -2,7 +2,36 @@ import {expect} from 'chai';
 import howdy from './howdy';
 
 describe('howdy', () => {
-  it('should say "Howdy, World!"', () => {
-    expect(howdy).to.equal('Howdy, World');
+  it('should find the max sum of subarrays(continuous)', () => {
+    const A = [2, 1, -3, 4, -1, 2, 1, -5, 4];
+    expect(howdy(A)).to.equal(6); // sum of subarray [4, -1, 2, 1]
+  });
+  it('should find the max sum of subarrays(continuous)', () => {
+    const A = [1];
+    expect(howdy(A)).to.equal(1);
+  });
+  it('should find the max sum of subarrays(continuous)', () => {
+    const A = [1, 2];
+    expect(howdy(A)).to.equal(3);
+  });
+  it('should find the max sum of subarrays(continuous)', () => {
+    const A = [1, -2];
+    expect(howdy(A)).to.equal(1);
+  });
+  it('should find the max sum of subarrays(continuous)', () => {
+    const A = [-1, 2];
+    expect(howdy(A)).to.equal(2);
+  });
+  it('should find the max sum of subarrays(continuous)', () => {
+    const A = [-1, -2];
+    expect(howdy(A)).to.equal(-1);
+  });
+  it('should find the max sum of subarrays(continuous)', () => {
+    const A = [1, 2, 3, 4];
+    expect(howdy(A)).to.equal(10);
+  });
+  it('should find the max sum of subarrays(continuous)', () => {
+    const A = [-1, -2, -3];
+    expect(howdy(A)).to.equal(-1);
   });
 });
