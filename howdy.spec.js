@@ -14,6 +14,6 @@ const map = { // phone pad number to characters map
 
 describe('howdy', () => {
   it('should find all words that are possible given the number', () => {
-    expect(howdy).to.equal('Howdy, World');
+    expect(howdy([3, 6, 4])).to.eql(['dog', 'fog']);
   });
 });
