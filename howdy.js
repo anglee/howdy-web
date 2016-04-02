@@ -13,7 +13,6 @@ const bruteforeceSolution = (A) => {
   return maxSum;
 };
 
-
 // =======================================================
 
 // divideAndConquerSolution O(nlogn), space: O(logn)
@@ -56,10 +55,42 @@ const divideAndConquerSolution = (A) => {
 
 
 // =======================================================
-const dynamicProgrammingSolution = (A) => {
+// To devise a dynamic programming formula, let us assume that
+// we are calculating the maximum sum of subarray that ends at a specific index.
+// which is either extending the previous subarray or by itself:
+// maxSumOfSubarrayEndAtIndex(i) = Math.max(
+//    maxSumOfSubarrayEndAtIndex(i - 1) + A[i],
+//    A[i]
+// )
 
+const dynamicProgrammingSolution = (A) => { // time: O(n), space: O(n)
+  let maxSumOfSubarrayEndAtIndex = [A[0]];
+  for (let i = 1; i < A.length; i++) {
+    maxSumOfSubarrayEndAtIndex[i] = Math.max(
+      maxSumOfSubarrayEndAtIndex[i - 1] + A[i],
+      A[i]
+    )
+  }
+  return Math.max(...maxSumOfSubarrayEndAtIndex);
 };
 
+const dynamicProgrammingSolution2 = (A) => { // time: O(n), space: O(1)
+  let lastSumOfSubarrayEndAtIndex = A[0];
+  let maxSumOfSubarrayEndAtIndex = A[0];
+  for (let i = 1; i < A.length; i++) {
+    const sumOfSubarrayEndAtIndex = Math.max(
+      lastSumOfSubarrayEndAtIndex + A[i],
+      A[i]
+    );
+    if (sumOfSubarrayEndAtIndex > maxSumOfSubarrayEndAtIndex) {
+      maxSumOfSubarrayEndAtIndex = sumOfSubarrayEndAtIndex;
+    }
+    lastSumOfSubarrayEndAtIndex = sumOfSubarrayEndAtIndex;
+  }
+  return maxSumOfSubarrayEndAtIndex;
+};
 
 //export default bruteforeceSolution;
-export default divideAndConquerSolution;
+//export default divideAndConquerSolution;
+//export default dynamicProgrammingSolution;
+export default dynamicProgrammingSolution2;
