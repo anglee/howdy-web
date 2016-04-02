@@ -6,7 +6,7 @@ This is a minimal frontend setup for quick JS experiments.
 npm install
 ```
 
-### Develop
+### Develop (with Chrome Dev Tool)
 To experiment with JS(ES2015), update `howdy.js` and run
 
 ```
@@ -46,9 +46,22 @@ npm run build
 ```
 It will run webpack to generate the bundle in `./public`. 
 
+
 ### Start
 ```
 npm start
 ```
 
 It will start a simple http server at `http://localhost:3000` and serve from `./public`.
+
+
+### Run howdy.js
+```
+npm run howdy
+```
+
+run `howdy.js` with `babel-node`
+ 
+Bonus:
+
+If using Webstorm, you might also want to consider to 'Run > Edit Configurations...' and add a Node.js configuration to run howdy.js. Just remember to change Node Interpreter path to `babel-node`   
