@@ -1,20 +1,30 @@
 import _ from 'lodash';
 
-const helper = (A, i, j) => {
-  if (A[j] >= A[i]) {
-    return A[i];
-  }
-
-  const m = Math.floor((i + j) / 2);
-
-  if (A[m] > A[j]) {
-    return helper(A, m + 1, j);
-  } else {
-    return helper(A, i, m);
-  }
-};
 const howdy = (A) => {
-  return helper(A, 0, A.length - 1);
+  let i = 0;
+  let j = A.length - 1;
+
+  while (i < j) {
+    if (A[i] < A[j]) {
+      return A[i];
+    } else if (A[i] === A[j]) {
+      i++;
+    } else { // A[i] > A[j], e.g. [3, 1, 2], [2, 3, 1], [2, 1]
+      const m = Math.floor((i + j) / 2);
+      if (m === i) {
+        return Math.min(A[i], A[j]);
+      }
+
+      if (A[m] < A[i]) {
+        j = m;
+      } else if (A[m] === A[i]) {
+        i = m;
+      } else { // A[m] > A[i]
+        i = m;
+      }
+    }
+  }
+  return A[i];
 };
 
 export default howdy;
