@@ -1,8 +1,15 @@
 import {expect} from 'chai';
-import howdy from './howdy';
+import solution from './howdy';
 
-describe('howdy', () => {
-  it('should say "Howdy, World!"', () => {
-    expect(howdy).to.equal('Howdy, World');
+describe('MaxNonoverlappingSegments', () => {
+  it('should find the max count of non-overlapping segments', () => {
+    const A = [1, 3, 7, 9, 9]; // segment begins
+    const B = [5, 6, 8, 9, 10]; // segment ends
+
+    // segments are sorted by end points (ie. B is sorted)
+
+    expect(solution(A, B)).to.equal(3);
   });
 });
+
+//https://codesays.com/2015/solution-to-max-nonoverlapping-segments-by-codility/
