@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import howdy from './leet-50_FInd-Minimum-in-Sorted-Rotated-Array-II';
+import howdy from './leet-50_Find-Minimum-in-Sorted-Rotated-Array-II';
 
-describe('leet-50_FInd-Minimum-in-Sorted-Rotated-Array-II', () => {
+describe('leet-50_Find-Minimum-in-Sorted-Rotated-Array-II', () => {
   it('should find the minimum in a sorted array that could contain duplicates', () => {
     const sortedArray = [3, 4, 5, 0, 1, 2];
     expect(howdy(sortedArray)).to.equal(0);
