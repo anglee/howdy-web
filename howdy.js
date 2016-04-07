@@ -1,5 +1,16 @@
 import _ from 'lodash';
 
-const howdy = "Howdy, World!";
+const tieRopes = (K, A) => {
+  let sum = 0;
+  let count = 0;
+  A.forEach((it) => {
+    sum += it;
+    if (sum >= K) {
+      sum = 0;
+      count++;
+    }
+  });
+  return count;
+};
 
-export default howdy;
+export default tieRopes;
