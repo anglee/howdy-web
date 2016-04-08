@@ -35,7 +35,7 @@ const howdyI = (A, B, canUse) => {
   return minRoute;
 };
 
-const howdy = (A, B) => {
+const solution = (A, B) => {
   if (A === 5 || B === 5) {
     return null;
   }
@@ -43,4 +43,29 @@ const howdy = (A, B) => {
   console.log(`One possible shortest path from ${A} to ${B}:\n${ret.join(' -> ')}\n`);
   return ret;
 };
-export default howdy;
+
+const solution2 = (a, b) => {
+  // BFS
+  let q = [{
+    item: a,
+    visited: []
+  }];
+  while (!_.isEmpty(q)) {
+    const {item, visited} = q.shift();
+    const pathTaken = [...visited, item];
+    if (item === b) {
+      // found it
+      return pathTaken;
+    }
+    const nextSteps = _.difference(possibleNextSteps[item], visited);
+    nextSteps.forEach((nextStep) => {
+      q.push({
+        item: nextStep,
+        visited: pathTaken
+      });
+    });
+  }
+  return null;
+};
+//export default solution;
+export default solution2;
