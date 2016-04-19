@@ -30,7 +30,7 @@ const solution = (A) => {
 
     while (j < k && k < A.length) {
       if (A[k] < A[i] + A[j]) {
-        console.log(`triangle (${A[i]}, ${A[j]}, ${A[k]})`);
+        //console.log(`triangle (${A[i]}, ${A[j]}, ${A[k]})`);
         count++;
       }
 
