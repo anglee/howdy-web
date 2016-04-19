@@ -20,8 +20,6 @@ const findCommonFactor = (A, B) => {
 };
 
 const processTest = (K) => {
-  const F = 100;
-  const D = 100;
   let prevPrev = 0;
   let prev = 1;
   while (true) {
