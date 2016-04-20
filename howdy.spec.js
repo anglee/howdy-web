@@ -3,13 +3,12 @@ import solution from './howdy';
 
 describe('howdy', () => {
   it('should work with given sample test', () => {
-    const sampleInput = `2
-3 12
-1 6 9
-5 9
-3 4 4 4 8`;
-    const sampleOutput = `12
-9`;
+    const sampleInput = `3 3
+3 2
+0 0 0
+1 1 0
+1 0 0`;
+    const sampleOutput = `2`;
     expect(solution(sampleInput)).to.equal(sampleOutput);
   });
 });
