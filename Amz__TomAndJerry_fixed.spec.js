@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import solution from './Amz__TomAndJerry';
+import solution from './Amz__TomAndJerry_fixed';
 
 describe('Amz__TomAndJerry', () => {
   it('should work with given sample test', () => {
