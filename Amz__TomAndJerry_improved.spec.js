@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import solution from './Amz__TomAndJerry_fixed';
+import solution from './Amz__TomAndJerry_improved';
 
-describe('Amz__TomAndJerry_fixed', () => {
+describe('Amz__TomAndJerry_improved', () => {
   it('should work with given sample test', () => {
     const sampleInput = `3 3
 2 2

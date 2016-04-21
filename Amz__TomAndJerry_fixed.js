@@ -28,13 +28,13 @@ function getSteps(n, m, posR, posC, maze) {
     step: 0,
     visited: new Set([0])
   };
-  const stack = [root];
-  while (stack.length > 0) {
-    const node = stack.shift();
+  const queue = [root];
+  while (queue.length > 0) {
+    const node = queue.shift();
     if (node.row === posR && node.col === posC) {
       return node.step;
     } else {
-      stack.push(...getValidNeighbors(node, n, m, maze))
+      queue.push(...getValidNeighbors(node, n, m, maze))
     }
   }
   return -1;
