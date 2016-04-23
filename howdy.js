@@ -20,7 +20,7 @@ const solution = (actions) => {
       case ActionTypes.PUSH:
       {
         stack.push(item);
-        if (peek(maxStack) < item) {
+        if (peek(maxStack) <= item) {
           maxStack.push(item);
         }
         //console.log('push', item);
