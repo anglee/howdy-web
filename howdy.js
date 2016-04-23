@@ -1,9 +1,6 @@
 import _ from 'lodash';
 
-//const Primes = [2, 3, 5, 7, 11, 13];
-
 let previousPrimes = [];
-
 const getNextPrime = () => {
   if (previousPrimes.length === 0) {
     previousPrimes.push(2);
@@ -25,14 +22,31 @@ const getNextPrime = () => {
   }
 };
 
+//function* primeMaker() {
+//  yield 2;
+//  yield 3;
+//  const previousPrimes = [2, 3];
+//  let i = 5;
+//  while (true) {
+//    console.log("i", i);
+//    if (!_.some(previousPrimes, (pp) => i % pp === 0)) {
+//      previousPrimes.push(i);
+//      yield i;
+//    }
+//    i+=2;
+//  }
+//}
+
 const solution = (Q, plates) => {
-  //const primes = Primes.slice(0, Q);
+
   previousPrimes = [];
+  //const primeGen = primeMaker();
 
   let pile = plates;
   let divisiblePiles = [];
   for (let i = 0; i < Q; i++) {
     const prime = getNextPrime();
+    //const prime = primeGen.next().value;
     const divisiblePile = [];
     const lastPile = [];
     while (!_.isEmpty(pile)) {
@@ -50,5 +64,7 @@ const solution = (Q, plates) => {
     return [...ret, ...pi.reverse()];
   }, []);
 };
+
+console.log(solution(1, [3, 4, 7, 6, 5]));
 
 export default solution;
