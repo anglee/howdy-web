@@ -44,6 +44,8 @@ const breakBills = (targetNum, bills) => {
 // for everything else:
 // breakBills(*, []) === 0;
 
+
 const howdy = _.partial(breakBills, _, [100, 50, 20, 10, 5, 1]);
+// see also HackerRank_CoinChange
 
 export default howdy;
