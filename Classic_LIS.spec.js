@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import howdy from './LIS';
+import howdy from './Classic_LIS';
 
 const isIncrease = (A) => {
   for (let i = 1; i < A.length; i++) {
@@ -25,7 +25,7 @@ const isSubsequence = (SA, SB) => { // return true if SB is a subsequnce of SA
   }
 };
 
-describe('LIS', () => {
+describe('Classic_LIS', () => {
   describe('should find LIS(Longest Increasing Subsequence)', () => {
     it('given example', () => {
       const input = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15];

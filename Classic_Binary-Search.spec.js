@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import binarySearch from './Binary-Search';
+import binarySearch from './Classic_Binary-Search';
 
-describe('Binary-Search', () => {
+describe('Classic_Binary-Search', () => {
   it('find the index of the first element that is greater than target', () => {
     const A = [1,2,3,4,6];
     const target = 3;

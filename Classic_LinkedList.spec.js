@@ -5,9 +5,9 @@ import {
   linkedListToString,
   deleteNode,
   reverseLinkedList
-} from './LinkedList';
+} from './Classic_LinkedList';
 
-describe('LinkedList', () => {
+describe('Classic_LinkedList', () => {
   let linkedList = null;
   beforeEach(() => {
     let head = null;

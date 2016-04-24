@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import howdy from './LCS';
+import howdy from './Classic_LCS';
 
-describe('LCS', () => {
+describe('Classic_LCS', () => {
   describe('should find howdy of S1 and S2', () => {
     it('example1', () => {
       const S1 = 'ABXC';

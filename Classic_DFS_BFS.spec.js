@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {BFS, DFS} from './DFS_BFS';
+import {BFS, DFS} from './Classic_DFS_BFS';
 import Node from './DFS_BFS/Node';
 
 const A = new Node('A');
@@ -10,7 +10,7 @@ const E = new Node('E');
 const F = new Node('F', D, E);
 const G = new Node('G', C, F);
 
-describe('DFS_BFS', () => {
+describe('Classic_DFS_BFS', () => {
   describe('BFS', () => {
     it('should traverse the tree', () => {
       expect(BFS(G)).to.equal('GCABFDE');

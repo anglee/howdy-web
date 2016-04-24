@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import test from './Simple-Regex';
+import test from './FB_Simple-Regex';
 
-describe('Simple-Regex', () => {
+describe('FB_Simple-Regex', () => {
   describe("should check regular express with '.' and '*'", () => {
     it('base cases', () => {
       expect(test('', '')).to.be.true;

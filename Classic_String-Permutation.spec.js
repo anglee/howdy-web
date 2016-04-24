@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import {expect} from 'chai';
-import howdy from './String-Permutation';
+import howdy from './Classic_String-Permutation';
 
-describe('String-Permutation', () => {
+describe('Classic_String-Permutation', () => {
   it('should come up with all permutation of a string', () => {
     const input = 'abc';
     const actual = howdy(input);

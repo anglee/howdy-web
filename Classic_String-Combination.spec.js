@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import {expect} from 'chai';
-import howdy from './String-Combination';
+import howdy from './Classic_String-Combination';
 
-describe('String-Combination', () => {
+describe('Classic_String-Combination', () => {
   it('should generate all combination of a string', () => {
     const input = 'abc';
     const actual = howdy(input);

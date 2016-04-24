@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import howdy from './Simple_Rectanle-overlap';
+import howdy from './Classic_Rectanle-overlap';
 
-describe('Simple_Rectanle-overlap', () => {
+describe('Classic_Rectanle-overlap', () => {
   it('should determine if 2 rectangles overlap', () => {
     const r1 = {
       left: 0,
