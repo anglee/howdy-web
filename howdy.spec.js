@@ -1,8 +1,25 @@
 import {expect} from 'chai';
-import howdy from './howdy';
+import ed from './howdy';
 
 describe('howdy', () => {
-  it('should say "Howdy, World!"', () => {
-    expect(howdy).to.equal('Howdy, World');
+  it('should calculate edit distance', () => {
+    const s1 = 'geek';
+    const s2 = 'geek';
+    expect(ed(s1, s2)).to.equal(0);
+  });
+  it('should calculate edit distance', () => {
+    const s1 = 'geek';
+    const s2 = 'gesek';
+    expect(ed(s1, s2)).to.equal(1);
+  });
+  it('should calculate edit distance', () => {
+    const s1 = 'gesek';
+    const s2 = 'geek';
+    expect(ed(s1, s2)).to.equal(1);
+  });
+  it('should calculate edit distance', () => {
+    const s1 = 'gesek';
+    const s2 = 'geaek';
+    expect(ed(s1, s2)).to.equal(1);
   });
 });
