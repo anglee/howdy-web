@@ -113,21 +113,21 @@ const diffFilesDP = (file1, file2) => {
     })
     .join('\n');
 };
-const a = [
-  '1',
-  '2',
-  '3',
-  '4',
-  '9'
-].join('\n');
-const b = [
-  '1',
-  'X',
-  '3',
-  '9'
-].join('\n');
-const temp = diffFilesDP(a, b);
-console.log(temp);
+//const a = [
+//  '1',
+//  '2',
+//  '3',
+//  '4',
+//  '9'
+//].join('\n');
+//const b = [
+//  '1',
+//  'X',
+//  '3',
+//  '9'
+//].join('\n');
+//const temp = diffFilesDP(a, b);
+//console.log(temp);
 
 //export default diffFiles;
 export default diffFilesDP;
