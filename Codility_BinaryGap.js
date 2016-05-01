@@ -16,6 +16,6 @@ const solution = (N) => {
   return maxGap;
 };
 
-console.log(solution(1041));
+//console.log(solution(1041));
 
 export default solution;
