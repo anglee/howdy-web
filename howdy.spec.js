@@ -1,8 +1,12 @@
 import {expect} from 'chai';
-import howdy from './howdy';
+import NestedIterator from './howdy';
 
-describe('howdy', () => {
-  it('should say "Howdy, World!"', () => {
-    expect(howdy).to.equal('Howdy, World');
+describe('NestedIterator', () => {
+  it('should work', () => {
+    const nestedList = [[1, 1], 2, [1, 1]];
+    var i = new NestedIterator(nestedList), a = [];
+    while (i.hasNext()) a.push(i.next());
+    console.log(a);
+    expect(a).to.deep.equal([1, 1, 2, 1, 1]);
   });
 });
