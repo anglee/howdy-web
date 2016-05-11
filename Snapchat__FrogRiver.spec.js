@@ -16,7 +16,7 @@ import canCrossRiver from './Snapchat__FrogRiver';
  Victory: Any P(x) >= width of river
  */
 
-describe('Snapchat_FrogRiver', () => {
+describe('Snapchat__FrogRiver', () => {
   it('should say "Howdy, World!"', () => {
     const river = {
       stones: [0,1,2,3,4,7,8],
@@ -35,6 +35,42 @@ describe('Snapchat_FrogRiver', () => {
     const river = {
       stones: [0],
       width: 2
+    };
+    expect(canCrossRiver(river)).to.equal(false);
+  });
+
+  it('should say "Howdy, World!"', () => {
+    const river = {
+      stones: [0,1,2],
+      width: 3
+    };
+    expect(canCrossRiver(river)).to.equal(true);
+  });
+  it('should say "Howdy, World!"', () => {
+    const river = {
+      stones: [0,1,2],
+      width: 4
+    };
+    expect(canCrossRiver(river)).to.equal(true);
+  });
+  it('should say "Howdy, World!"', () => {
+    const river = {
+      stones: [0,1,2],
+      width: 5
+    };
+    expect(canCrossRiver(river)).to.equal(false);
+  });
+  it('should say "Howdy, World!"', () => {
+    const river = {
+      stones: [0,1,2,3,4],
+      width: 7
+    };
+    expect(canCrossRiver(river)).to.equal(true);
+  });
+  it('should say "Howdy, World!"', () => {
+    const river = {
+      stones: [0,1,2,3,4],
+      width: 8
     };
     expect(canCrossRiver(river)).to.equal(false);
   });

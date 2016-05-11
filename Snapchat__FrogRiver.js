@@ -28,7 +28,7 @@ const solution = (river) => {
 
 const solution2 = (river) => {
   const stones = river.stones;
-  const vsAtStones = [];
+  const vsAtStones = []; // [][], possible velocities at each stone
 
   // if there ins't a stone at starting pos (i.e. 0), fail immediately
   if (stones[0] !== 0) {
@@ -38,7 +38,7 @@ const solution2 = (river) => {
   // for each stone i
   for (let i = 0; i < stones.length; i++) {
 
-    // init vs, the vsAtStones entry for stone i
+    // init 'vs', the vsAtStones entry for stone i
     const vs = new Set();
 
     if (i === 0) { // first stone, only v is 0, vs === [0]
@@ -49,7 +49,7 @@ const solution2 = (river) => {
         // see if the frog can jump from that stone j to stone i
         // if so, record the v it used to jump to stone i
         for (let v of vsAtStones[j]) {
-          [1, 0, 1].forEach((vDelta) => {
+          [-1, 0, 1].forEach((vDelta) => {
             if (stones[j] + v + vDelta === stones[i]) {
               vs.add(v + vDelta);
             }
