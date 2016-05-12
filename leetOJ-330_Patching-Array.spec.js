@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import minPatches from './leetOJ-330_Patching-Array';
 
-describe('minPatches', () => {
+describe('leetOJ-330_Patching-Array', () => {
   it('find the minimum patches needed to fill range [1..n]', () => {
     const nums = [1, 3];
     const n = 6;
