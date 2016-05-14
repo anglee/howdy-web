@@ -48,19 +48,19 @@ const traverseLoop = (M, i, j, w, h) => {
   const ret = [];
   // go right
   ret.push(...goRight(M, i, j, w - 1));
-  console.log('right', ret);
+  //console.log('right', ret);
 
   // go down
   ret.push(...goDown(M, i + w - 1, j, h - 1));
-  console.log('down', ret);
+  //console.log('down', ret);
 
   // go left
   ret.push(...goLeft(M, i + w - 1, j + h - 1, w - 1));
-  console.log('left', ret);
+  //console.log('left', ret);
 
   // go up
   ret.push(...goUp(M, i, j + h - 1, h - 1));
-  console.log('up', ret);
+  //console.log('up', ret);
 
   return ret;
 };
