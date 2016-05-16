@@ -33,7 +33,7 @@ const listToArray = (head) => {
 };
 
 
-describe('leetOJ-86_Partition-List', () => {
+describe('leetOJ-086_Partition-List', () => {
   const input = arrayToList([2,1]);
   const x = 2;
 
