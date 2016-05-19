@@ -5,12 +5,12 @@ const p = (obj) => {
   var ret = '{';
   _.forEach(obj, (v, k) => {
     ret += `${k}: ${v}, `;
-  })
+  });
   return ret + '}';
 };
 
 const isMatch = (pattern, str, patternMap) => {
-  //console.log(`isMatch(${pattern}, ${str}), ${p(patternMap)}`);
+  console.log(`isMatch(${pattern}, ${str}), ${p(patternMap)}`);
   if (pattern.length === 0 && str.length === 0) {
     return true;
   }

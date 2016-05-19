@@ -174,7 +174,7 @@ const postOrderTraversal2 = (root) => {
   while (stack.length > 0) {
     const node = stack.pop();
     // when do we know we can output the popped node?
-    // when all it's children are visited, that is
+    // Answer: when all it's children are visited, that is
     // 1. it has a right child, and it is the last node we output
     // 2. it doesn't have have a right child, but a left child,
     //    and that left child is the last node we output
