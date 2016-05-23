@@ -10,7 +10,7 @@ const p = (obj) => {
 };
 
 const isMatch = (pattern, str, patternMap) => {
-  console.log(`isMatch(${pattern}, ${str}), ${p(patternMap)}`);
+  //console.log(`isMatch(${pattern}, ${str}), ${p(patternMap)}`);
   if (pattern.length === 0 && str.length === 0) {
     return true;
   }
