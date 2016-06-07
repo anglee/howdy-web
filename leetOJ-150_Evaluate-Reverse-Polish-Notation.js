@@ -4,7 +4,13 @@ const operations = {
   '+': (a, b) => a + b,
   '-': (a, b) => a - b,
   '*': (a, b) => a * b,
-  '/': (a, b) => Math.floor(a / b)
+  '/': (a, b) => {
+    if (b === 0) {
+      throw new Error("dividing by zero");
+    }
+    const ret = a / b;
+    return ret > 0 ? Math.floor(ret) : Math.ceil(ret);
+  }
 };
 
 const isOperator = (op) => {
@@ -20,8 +26,10 @@ const evalRPN = (ops) => {
       }
       const operandB = stack.pop();
       const operandA = stack.pop();
+      //console.log(`${operandA} ${op} ${operandB}`);
       stack.push(operations[op](operandA, operandB));
     } else {
+      //console.log('push ' + op);
       stack.push(parseInt(op));
     }
   }
