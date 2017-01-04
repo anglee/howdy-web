@@ -15,7 +15,7 @@ import _ from 'lodash';
 export const ListNode = function ListNode(val) {
   this.val = val;
   this.next = null;
-}
+};
 
 const toNumber = it => it == null ? 0 : it.val;
 
