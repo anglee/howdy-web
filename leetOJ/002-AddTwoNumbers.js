@@ -22,26 +22,26 @@ const toNumber = it => it == null ? 0 : it.val;
 const addTwoNumbers = function(l1, l2) {
   let p1 = l1;
   let p2 = l2;
-  let carryOver = 0;
-  let tail = null;
-  let head = null;
-  while (p1 !== null || p2 !== null || carryOver !== 0) {
-    const sum = toNumber(p1) + toNumber(p2) + carryOver;
+  let carry = 0;
+  let retTail = null;
+  let retHead = null;
+  while (p1 !== null || p2 !== null || carry !== 0) {
+    const sum = toNumber(p1) + toNumber(p2) + carry;
     const newNode = new ListNode(sum % 10);
-    carryOver = Math.floor(sum / 10);
-    if (head === null) {
-      tail = newNode;
-      head = tail;
+    carry = Math.floor(sum / 10);
+    if (retHead === null) {
+      retTail = newNode;
+      retHead = retTail;
     } else {
-      tail.next = newNode;
-      tail = tail.next;
+      retTail.next = newNode;
+      retTail = retTail.next;
     }
 
     p1 = p1 ? p1.next : p1;
     p2 = p2 ? p2.next : p2;
   }
 
-  return head;
+  return retHead;
 };
 
 export default addTwoNumbers;
