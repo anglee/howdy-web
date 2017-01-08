@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import lcs from './Classic_LCS';
 
-describe.only('Classic_LCS', () => {
+describe('Classic_LCS', () => {
   describe('should find LCS of S1 and S2', () => {
     it('example 1', () => {
       const S1 = 'ABXC';
