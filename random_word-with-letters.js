@@ -11,7 +11,7 @@ const dictionary = fs.readFileSync('./data/dictionary.txt').toString();
 const words = dictionary.split('\n');
 const onlyContainsCOAD = (w) => onlyContainsLetter(w, 'coad'.split(''));
 const ret = words.filter(onlyContainsCOAD);
-console.log(ret);
+// console.log(ret);
 
 export default null;
 
