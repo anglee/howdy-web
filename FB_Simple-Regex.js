@@ -6,7 +6,7 @@ const test = (S, P) => {
   }
   const isPatternStartWithStar = (P.length > 1 && P[1] === '*');
   if (!isPatternStartWithStar) {
-    if (P[0] == S[0] || P[0] === '.') {
+    if (S.length !== 0 && (P[0] == S[0] || P[0] === '.')) {
       return test(S.substring(1), P.substring(1));
     }
     return false;

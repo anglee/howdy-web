@@ -8,7 +8,7 @@ var isMatch = function(s, p) {
     return s.length === 0;
   }
   if (p[1] !== '*') {
-    if (s[0] === p[0] || p[0] === '.') {
+    if (s.length > 0 && (s[0] === p[0] || p[0] === '.')) {
       return isMatch(s.substring(1), p.substring(1));
     }
     return false;
