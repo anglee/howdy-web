@@ -1,6 +1,13 @@
 import {expect} from 'chai';
 import {BFS, DFS} from './Classic_DFS_BFS';
-import Node from './DFS_BFS/Node';
+
+export class Node {
+  constructor(val, leftChild = null, rightChild = null) {
+    this.val = val;
+    this.leftChild = leftChild;
+    this.rightChild = rightChild;
+  }
+}
 
 const A = new Node('A');
 const B = new Node('B');

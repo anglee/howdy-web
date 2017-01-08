@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-
 export const BFS = (root) => {
   let ret = '';
   const stack = [root];
