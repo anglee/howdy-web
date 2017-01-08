@@ -26,7 +26,7 @@ const create2DArray = (w, h) => {
   return A;
 };
 
-const LCS2 = (S1, S2) => {
+const LCS2 = (S1, S2) => { // non-recursive
   const L = create2DArray(S1.length + 1, S2.length + 1);
   for (let j = 1; j <= S2.length; j++) {
     for (let i = 1; i <= S1.length; i++) {
@@ -41,4 +41,24 @@ const LCS2 = (S1, S2) => {
   return L[S1.length][S2.length];
 };
 
-export default LCS2;
+
+const LCS3 = (S1, S2) => { // same as LCS2, but use a bit less space
+  let buf = _.range(S1.length + 1).map(it => '');
+  for (let j = 1; j <= S2.length; j++) {
+    const newBuf = buf.slice();
+    for (let i = 1; i <= S1.length; i++) {
+      if (S1[i-1] === S2[j-1]) {
+        newBuf[i] = buf[i-1] + S1[i-1];
+      } else if (newBuf[i-1].length > buf[i].length) {
+        newBuf[i] = newBuf[i-1];
+      } else {
+        newBuf[i] = buf[i];
+      }
+    }
+    buf = newBuf;
+  }
+
+  return buf[S1.length];
+};
+
+export default LCS3;
