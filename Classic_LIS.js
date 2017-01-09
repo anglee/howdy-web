@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 const longer = (a, b) => a.length > b.length ? a : b;
-const howdy = (A) => {
+const lis = (A) => {
   const LISs = [];
   for (let i = 0; i < A.length; i++) {
     LISs.push([A[i]]);
@@ -14,4 +14,4 @@ const howdy = (A) => {
   return _.isEmpty(LISs) ? [] : _.maxBy(LISs, it => it.length);
 };
 
-export default howdy;
+export default lis;
