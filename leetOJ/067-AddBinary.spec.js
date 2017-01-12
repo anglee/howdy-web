@@ -11,6 +11,3 @@ describe('LeetOJ 067-AddBinary', () => {
     });
   });
 });
-
-
-
