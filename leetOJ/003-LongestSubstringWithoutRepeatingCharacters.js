@@ -50,7 +50,7 @@ var lengthOfLongestSubstring = function(s) { // n^2
   let maxLength = 0;
   for (let start = 0; start < s.length; ++start) {
     const maxLengthStartingWithIndex = maxLengthOfLongestStartingAtIndex(s, start);
-    console.log('maxLengthStartingWithIndex', start, maxLengthStartingWithIndex);
+    // console.log('maxLengthStartingWithIndex', start, maxLengthStartingWithIndex);
     if (maxLengthStartingWithIndex > maxLength) {
       maxLength = maxLengthStartingWithIndex;
     }
