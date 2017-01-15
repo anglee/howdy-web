@@ -2,7 +2,7 @@ import {expect} from 'chai';
 
 import {
   treeDeserializer,
-} from './lib/tree';
+} from '../lib/tree';
 
 import {
   inOrderTraversal1,

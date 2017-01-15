@@ -3,7 +3,7 @@ import {
   TreeNode,
   treeSerializer,
   treeDeserializer
-} from './lib/tree';
+} from '../lib/tree';
 
 
 const inOrderTraversal1 = (root) => {

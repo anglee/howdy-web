@@ -50,8 +50,8 @@ describe('Hackerrank_MaximumElement', () => {
   });
 
   it('should work with sample case', () => {
-    const sampleInput = fs.readFileSync('./Hackerrank_MaximumElement.sampleTest6.input').toString();
-    const sampleOutput = fs.readFileSync('./Hackerrank_MaximumElement.sampleTest6.output').toString();
+    const sampleInput = fs.readFileSync('./HackerRank/Hackerrank_MaximumElement.sampleTest6.input').toString();
+    const sampleOutput = fs.readFileSync('./HackerRank/Hackerrank_MaximumElement.sampleTest6.output').toString();
 
     const input = transformInput(sampleInput);
     const output = transformOutput(solution((input)));

@@ -1,3 +1,5 @@
+// see new solutions: LeetOJ2017/403-FrogJump.js
+
 const isValidPosition = (P, river) => {
   return P >= river.width || river.stones.indexOf(P) !== -1;
 };
