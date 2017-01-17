@@ -4,6 +4,7 @@ import solution from './158-ReadNCharactersGivenRead4II';
 describe('LeetOJ 158-ReadNCharactersGivenRead4II', () => {
 
   describe('solution', () => {
+
     it('should work, test cases 1', () => {
       const input = "ab";
       const read4 = (() => {
