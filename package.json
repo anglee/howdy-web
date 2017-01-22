@@ -4,9 +4,9 @@
   "description": "A minimal frontend setup for quick JS experiments",
   "license": "ISC",
   "author": {
-    "name" : "Ang Lee",
-    "email" : "ang.lee@gmail.com",
-    "url" : "http://anglee.info/"
+    "name": "Ang Lee",
+    "email": "ang.lee@gmail.com",
+    "url": "http://anglee.info/"
   },
   "repository": "anglee/howdy-web",
   "main": "index.js",
@@ -25,6 +25,7 @@
     "babel-core": "^6.7.2",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.6.0",
+    "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.7.2",
     "chai": "^3.5.0",
     "copy-webpack-plugin": "^1.1.1",
