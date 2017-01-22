@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import mergeKLists, { LinkList } from './023-MergeKSortedLists';
-describe('LeetOJ 23-MergeKSortedLists', () => {
+describe('LeetOJ 023-MergeKSortedLists', () => {
 
   describe('mergeKLists', () => {
     it('should work with test case 1', () => {
