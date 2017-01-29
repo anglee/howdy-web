@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import getSkyline from './218-TheSkylineProblem';
 
-describe('LeeOJ 218-TheSkylineProblem', () => {
+describe('LeetOJ 218-TheSkylineProblem', () => {
 
   describe('getSkyline', () => {
     it('should solve given example', () => {
