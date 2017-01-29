@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import productExceptSelf from './238-ProductOfArrayExceptSelf';
 
-describe.only('LeetOJ 238-ProductOfArrayExceptSelf', () => {
+describe('LeetOJ 238-ProductOfArrayExceptSelf', () => {
   describe('productExceptSelf', () => {
     it('should solve the given example', () => {
       const input = [1, 2, 3, 4];
