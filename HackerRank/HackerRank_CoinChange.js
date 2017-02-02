@@ -98,3 +98,5 @@ const solution = (input) => {
 //console.log(solution(sampleInput));
 
 export default solution;
+
+// see also LeetOJ 039-CombinationSum, https://leetcode.com/problems/combination-sum/

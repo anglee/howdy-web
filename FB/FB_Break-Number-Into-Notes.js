@@ -47,5 +47,6 @@ const breakBills = (targetNum, bills) => {
 
 const howdy = _.partial(breakBills, _, [100, 50, 20, 10, 5, 1]);
 // see also HackerRank_CoinChange
+// see also LeetOJ 039-CombinationSum, https://leetcode.com/problems/combination-sum/
 
 export default howdy;
