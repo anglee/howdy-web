@@ -1,5 +1,5 @@
 import _ from 'lodash';
 
-const howdy = "Howdy, World!";
+const solve = () => "Howdy, World!";
 
-export default howdy;
+export default solve;
