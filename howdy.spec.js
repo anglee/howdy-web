@@ -1,8 +1,10 @@
 import {expect} from 'chai';
-import howdy from './howdy';
+import solve from './howdy';
 
-describe('howdy', () => {
-  it('should say "Howdy, World!"', () => {
-    expect(howdy).to.equal('Howdy, World!');
+describe('solve', () => {
+  it('should solve the given example', () => {
+    const input = null;
+    const expected = 'Howdy, World!';
+    expect(solve(input)).to.equal(expected);
   });
 });
