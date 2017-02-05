@@ -21,7 +21,7 @@ class Solution0 {
   }
 }
 
-class Solution {
+class Solution { // Reservoir Sampling
 
   constructor (nums) { // time: O(1), space: O(1)
     this.nums = nums;
