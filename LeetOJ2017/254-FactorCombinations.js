@@ -23,6 +23,7 @@ var getFactors0 = function(n) {
   return facts;
 };
 
+//-------------------------------------------------------------
 const doGetFactors1 = (prevs, start, n, ret) => {
   for (let i = start; i*i <= n; ++i) {
     if (n % i === 0) {
@@ -42,6 +43,7 @@ var getFactors1 = function(n) {
   return ret;
 };
 
+//-------------------------------------------------------------
 const doGetFactors = (start, n) => {
   const ret = [];
   for (let i = start; i*i <= n; ++i) {
@@ -63,4 +65,4 @@ var getFactors = function(n) {
   return doGetFactors(2, n);
 };
 
-export default getFactors0;
+export default getFactors;
