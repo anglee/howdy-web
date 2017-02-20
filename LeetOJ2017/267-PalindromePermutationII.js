@@ -17,7 +17,7 @@ const process = (s) => {
           evenGuysCountsMap: null,
         };
       }
-      evenGuysCountsMap[key] = (frequencyMap[key] - 1) / 2
+      evenGuysCountsMap[key] = (frequencyMap[key] - 1) / 2;
       theOddGuy = key;
     }
   }
