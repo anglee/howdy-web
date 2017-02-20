@@ -29,7 +29,7 @@ var nextPermutation = function(nums) {
     return;
   }
 
-  for (let j = nums.length; j > i; --j) {
+  for (let j = nums.length - 1; j > i; --j) {
     if (nums[j] > nums[i]) {
       swap(nums, i, j);
       break;
