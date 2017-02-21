@@ -1,6 +1,8 @@
 ## Recursive
 
-CombinationSum([1,1,1,2,5,6], 7)
+For example, the candidates are `[1,1,1,2,5,6]`, target = 7
+
+`CombinationSum([1,1,1,2,5,6], 7)`
 
 the combinations can be divided into 2 groups:
 
@@ -18,6 +20,7 @@ combinationSum([], T) = []
 ## DP
 
 For example, the candidates are `[1,1,1,2,5,6]`, target = 7
+
 `combinationSum([1,1,1,2,5,6], 7)`
 
 Use 2D array, X dimension ranges `[0, 7]`,
