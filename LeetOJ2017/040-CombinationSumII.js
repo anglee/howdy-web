@@ -29,7 +29,7 @@ const dedup = (AA) => {
  * @param {number} target
  * @return {number[][]}
  */
-var combinationSum0 = function(candidates, target) {
+var combinationSum0 = function(candidates, target) { // DP
   let buf = [[[]], ...Array(target).fill([])];
 
   for (let c of candidates) {
