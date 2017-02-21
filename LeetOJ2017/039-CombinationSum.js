@@ -26,7 +26,7 @@ var combinationSum = function(candidates, target) { // DP
   const buf = new Array(target + 1).fill([]);
   buf[0] = [[]];
   for (let can of candidates) {
-    for (let i = 0; i <= target; ++i) {
+    for (let i = 1; i <= target; ++i) {
       if (i - can >= 0) {
         buf[i] = buf[i].concat(buf[i - can].map(it => [can, ...it]))
       }
