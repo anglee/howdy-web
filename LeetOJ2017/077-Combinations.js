@@ -18,8 +18,8 @@ var combine0 = function(n, k) {
     return [[]];
   }
   return [
-    ...combine(n - 1, k - 1).map(it => [n, ...it]),
-    ...combine(n - 1, k)
+    ...combine0(n - 1, k - 1).map(it => [n, ...it]),
+    ...combine0(n - 1, k)
   ];
 };
 
