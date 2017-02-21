@@ -1,4 +1,4 @@
-## recursive
+## Recursive
 
 `c(n, k) = c(n - 1, k - 1) + c(n - 1, k)`
 
@@ -15,4 +15,4 @@ if n === k, output is the same as the input
 
 ## DP
 
-(see image notes)
+(see [image](https://www.evernote.com/l/AEy2dx9I5eJCsrEM61RBTfxq9bHXn0G4oos))
