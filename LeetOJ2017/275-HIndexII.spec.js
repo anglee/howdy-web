@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import hIndex from './275-HIndexII';
 
 describe('LeeOJ 275-HIndexII', () => {

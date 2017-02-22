@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './Amz_TrappingRainWater';
 
 describe('Amz_TrappingRainWater', () => {

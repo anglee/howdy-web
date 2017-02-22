@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import findKthLargest from './215-KthLargestElementInAnArray';
 
 describe('LeetOJ 215-KthLargestElementInAnArray', () => {

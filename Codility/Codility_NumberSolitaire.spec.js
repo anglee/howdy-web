@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './Codility_NumberSolitaire';
 
 describe('Codility_NumberSolitaire', () => {

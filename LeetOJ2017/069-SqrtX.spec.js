@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import mySqrt, {mySqrt0} from './069-SqrtX';
 
 describe('LeetOJ 069-SqrtX', () => {

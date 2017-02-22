@@ -33,7 +33,7 @@
  The required fibonacci number is guranteed to be less than 10^18.
  */
 
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './Amz_FibonacciFactor';
 
 describe('Amz_FibonacciFactor', () => {

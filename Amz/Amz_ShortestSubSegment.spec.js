@@ -26,7 +26,7 @@
  0 < Each word length < 15
  */
 
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './Amz_ShortestSubSegment';
 
 describe('Amz_ShortestSubSegment', () => {

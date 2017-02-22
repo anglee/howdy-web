@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import { onlyContainsLetter } from './random_word-with-letters';
 
 describe('onlyContainsLetter', () => {

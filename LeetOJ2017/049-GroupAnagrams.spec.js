@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import groupAnagrams from './049-GroupAnagrams';
 
 describe('LeetOJ 049-GroupAnagrams', () => {

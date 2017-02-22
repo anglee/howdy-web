@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import fullJustify from './068-TextJustification';
 
 describe('LeetOJ 068-TextJustification', () => {

@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import convert from './006-ZigZagConversion';
 
 describe('LeetOJ 006-ZigZagConversion', () => {

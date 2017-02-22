@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import {bruteForceSolution, solution} from './Codility_Caterpillar-Method_Exercise';
 
 describe('Codility_Caterpillar-Method_Exercise', () => {

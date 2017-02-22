@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import NestedIterator from './341-FlattenNestedListIterator';
 
 

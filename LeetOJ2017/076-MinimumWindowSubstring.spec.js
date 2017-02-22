@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import minWindow from './076-MinimumWindowSubstring';
 
 describe('LeetOJ 076-MinimumWindowSubstring', () => {

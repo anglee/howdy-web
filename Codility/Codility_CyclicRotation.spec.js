@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './Codility_CyclicRotation';
 
 describe('Codility_CyclicRotation', () => {

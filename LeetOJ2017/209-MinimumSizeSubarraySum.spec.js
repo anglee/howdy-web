@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import minSubArrayLen from './209-MinimumSizeSubarraySum';
 
 describe('LeetOJ 209-MinimumSizeSubarraySum', () => {

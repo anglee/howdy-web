@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import convertToTitle from './168-ExcelSheetColumnTitle';
 
 describe('LeetOJ 168-ExcelSheetColumnTitle', () => {

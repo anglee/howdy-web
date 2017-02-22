@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './EPI_17.4_PathCountIn2DArray';
 
 describe('EPI_17.4_PathCountIn2DArray', () => {

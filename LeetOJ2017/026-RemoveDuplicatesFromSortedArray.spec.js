@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import removeDuplicates from './026-RemoveDuplicatesFromSortedArray';
 
 describe('LeetOJ 026-RemoveDuplicatesFromSortedArray', () => {

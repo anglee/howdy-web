@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import ed from './Classic_EditDistance';
 
 describe('Classic_EditDistance', () => {

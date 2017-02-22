@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import minPatches from './leetOJ-330_Patching-Array';
 
 describe('leetOJ-330_Patching-Array', () => {

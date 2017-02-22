@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './Google_Shortest-Path-On-Phone-Pad';
 
 // on the phone pad

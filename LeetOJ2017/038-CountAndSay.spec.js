@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import countAndSay from './038-CountAndSay';
 
 describe('LeetOJ 038-CountAndSay', () => {

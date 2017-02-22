@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import test from './FB_Simple-Regex';
 
 describe('FB_Simple-Regex', () => {

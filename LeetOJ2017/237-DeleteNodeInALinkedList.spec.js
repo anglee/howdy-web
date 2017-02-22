@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import { fromArray, toArray, findNodeOfValue } from '../lib/LinkedList';
 import deleteNode from './237-DeleteNodeInALinkedList';
 

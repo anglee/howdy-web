@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import myAtoi from './008-StringToInteger(atoi)';
 
 describe('LeetOJ 008-StringToInteger(atoi)', () => {

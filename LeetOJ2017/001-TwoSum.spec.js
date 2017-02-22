@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import twoSum from './001-TwoSum';
 describe('LeetOJ 001-TwoSum', () => {
   it('twoSum', () => {

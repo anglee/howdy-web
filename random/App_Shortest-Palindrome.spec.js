@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './App_Shortest-Palindrome';
 // A palindrome is a string which reads the same forward and backwards.
 // You are provided a function shortPalin which accepts a string S.

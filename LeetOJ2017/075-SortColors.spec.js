@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import sortColors from './075-SortColors';
 
 describe('LeetOJ 075-SortColors', () => {

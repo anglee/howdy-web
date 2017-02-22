@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './CI-1.5_Compress-String';
 
 describe('CI-1.5_Compress-String', () => {

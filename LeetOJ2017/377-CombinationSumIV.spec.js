@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import combinationSum4 from './377-CombinationSumIV';
 
 describe('LeetOJ 377-CombinationSumIV', () => {

@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './leet-40_Evaluate-Reverse-Polish-Notation';
 describe('leet-40_Evaluate-Reverse-Polish-Notation', () => {
   describe('solution', () => {

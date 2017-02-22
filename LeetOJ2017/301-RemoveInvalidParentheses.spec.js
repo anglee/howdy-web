@@ -1,5 +1,5 @@
 
-import {expect} from 'chai';
+import { expect } from 'chai';
 import removeInvalidParentheses from './301-RemoveInvalidParentheses';
 
 describe('LeetOJ 301-RemoveInvalidParentheses', () => {

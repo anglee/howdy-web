@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './Codility_BinaryGap';
 
 describe('Codility_BinaryGap', () => {

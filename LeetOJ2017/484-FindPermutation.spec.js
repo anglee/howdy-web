@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import findPermutation from './484-FindPermutation';
 
 describe('LeetOJ 484-Find Permutation', () => {

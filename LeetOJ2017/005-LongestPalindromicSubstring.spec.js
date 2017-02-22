@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import longestPalindrome, { isPalindrome } from './005-LongestPalindromicSubstring';
 
 describe('LeetOJ 005-LongestPalindromicSubstring', () => {

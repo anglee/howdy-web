@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import minMeetingRooms from './253-MeetingRoomsII';
 
 describe('LeetOJ 253-MeetingRoomsII', () => {

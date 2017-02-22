@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import maxArea from './011-ContainerWithMostWater';
 
 describe('LeetOJ 011-ContainerWithMostWater', () => {

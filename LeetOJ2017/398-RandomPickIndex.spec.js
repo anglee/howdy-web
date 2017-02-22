@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import Solution from './398-RandomPickIndex';
 
 

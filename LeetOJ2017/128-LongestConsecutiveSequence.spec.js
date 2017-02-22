@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import longestConsecutive from './128-LongestConsecutiveSequence';
 
 

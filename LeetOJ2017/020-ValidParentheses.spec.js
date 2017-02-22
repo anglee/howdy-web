@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import isValid from './020-ValidParentheses';
 
 describe('LeetOJ 020-ValidParentheses', () => {

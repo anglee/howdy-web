@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import spiralOrder from './leetOJ-054_Spiral-Matrix';
 
 describe('leetOJ-054_Spiral-Matrix', () => {

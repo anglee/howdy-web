@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './Amz__Start-Template';
 
 describe('Amz__Start-Template', () => {

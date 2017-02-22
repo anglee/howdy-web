@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 
 describe('chai', () => {
   it('should say "Howdy, World!"', () => {

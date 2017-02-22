@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import maxSubArrayLen from './leetOJ-325_Maximum-Size-Subarray-Sum-Equals-k';
 
 //https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/

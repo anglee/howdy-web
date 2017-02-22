@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import canCrossRiver from './Snapchat__FrogRiver';
 
 // This is the text editor interface.

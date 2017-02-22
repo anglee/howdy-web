@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './277-FindTheCelebrity';
 
 describe('LeetOJ 277-FindTheCelebrity', () => {

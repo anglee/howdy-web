@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import inorderSuccessor from './285-InorderSuccessorInBST';
 import {treeDeserializer } from '../lib/tree';
 

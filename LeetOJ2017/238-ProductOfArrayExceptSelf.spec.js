@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import productExceptSelf from './238-ProductOfArrayExceptSelf';
 
 describe('LeetOJ 238-ProductOfArrayExceptSelf', () => {

@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import {MinStack, MinStack2} from './leet-39_Min-Stack';
 describe('leet-39_Min-Stack', () => {
   describe('MinStack', () => {

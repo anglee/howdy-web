@@ -67,7 +67,7 @@
  0 < N < 1009
  */
 
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './Amz_ConnectedSets';
 
 describe('Amz_ConnectedSets', () => {

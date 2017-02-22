@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './HackerRank_Knapsack';
 
 describe('HackerRank_Knapsack', () => {

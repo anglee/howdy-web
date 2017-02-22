@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import isPalindrome from './009-PalindromeNumber';
 
 describe('LeetOJ 009-PalindromeNumber', () => {

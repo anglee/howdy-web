@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './leet-13_Longest-Palindromic-Substring_Dynamic-programming';
 describe('leet-13_Longest-Palindromic-Substring_Dynamic-programming', () => {
   describe('howdy', () => {

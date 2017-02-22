@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import search from './033-SearchInRotatedSortedArray';
 
 describe('LeetOJ 033-SearchInRotatedSortedArray', () => {

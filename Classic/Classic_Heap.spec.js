@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import {Heap, heapSort} from './Classic_Heap';
 
 const isNotValid = (array, i) => {

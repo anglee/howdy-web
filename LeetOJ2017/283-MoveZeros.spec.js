@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import moveZeroes from './283-MoveZeroes';
 
 describe('LeetOJ 283-MoveZeroes', () => {

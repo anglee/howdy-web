@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import diffFiles from './Snapchat_DiffFiles';
 
 describe('Snapchat_DiffFiles', () => {

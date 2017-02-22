@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import lowestCommonAncestor from './236-LowestCommonAncestorOfABinaryTree';
 import { treeDeserializer } from '../lib/tree';
 

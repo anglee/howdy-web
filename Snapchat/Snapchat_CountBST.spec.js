@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './Snapchat_CountBST';
 
 describe('Snapchat_CountBST', () => {

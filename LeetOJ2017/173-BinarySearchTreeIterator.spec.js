@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import BSTIterator from './173-BinarySearchTreeIterator';
 import { treeDeserializer } from '../lib/tree';
 

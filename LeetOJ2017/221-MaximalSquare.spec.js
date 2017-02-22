@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import maximalSquare from './221-MaximalSquare';
 
 describe('LeetOJ 221-MaximalSquare', () => {

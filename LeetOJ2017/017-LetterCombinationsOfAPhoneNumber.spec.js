@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import letterCombinations from './017-LetterCombinationsOfAPhoneNumber';
 
 describe('LeetOJ 017-LetterCombinationsOfAPhoneNumber', () => {

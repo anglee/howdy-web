@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import reverseList from './206-ReverseLinkedList';
 
 const toArray = (head) => { // debug only

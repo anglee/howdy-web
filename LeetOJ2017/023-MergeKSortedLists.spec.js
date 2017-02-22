@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import mergeKLists, { LinkList } from './023-MergeKSortedLists';
 describe('LeetOJ 023-MergeKSortedLists', () => {
 

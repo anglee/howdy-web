@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './leet-01_Two-Sum_Two_pointers';
 
 describe('leet-01_Two-Sum_Two_pointers', () => {

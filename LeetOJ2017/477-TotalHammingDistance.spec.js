@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import totalHammingDistance from './477-TotalHammingDistance';
 
 describe('LeetOJ 477-TotalHammingDistance', () => {

@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import findMedianSortedArrays from './004-MedianOfTwoSortedArrays';
 
 describe('LeetOJ 004-MedianOfTwoSortedArrays', () => {

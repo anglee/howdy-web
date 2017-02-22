@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import {isPalindrome} from './leet-04_Valid_Palindrome';
 
 describe('leet-04_Valid_Palindrome', () => {

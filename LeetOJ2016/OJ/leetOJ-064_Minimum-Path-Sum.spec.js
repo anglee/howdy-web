@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import minPathSum from './leetOJ-064_Minimum-Path-Sum';
 
 describe('leetOJ-064_Minimum-Path-Sum', () => {

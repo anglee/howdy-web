@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './leet-35_Spiral-Matrix';
 
 describe('leet-35_Spiral-Matrix', () => {

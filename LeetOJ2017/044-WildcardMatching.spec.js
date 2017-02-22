@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import isMatch from './044-WildcardMatching';
 
 describe('LeetOJ 044-WildcardMatching', () => {

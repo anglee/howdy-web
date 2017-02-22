@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './leet-45_Max-Sum-Subarray';
 
 describe('leet-45_Max-Sum-Subarray', () => {

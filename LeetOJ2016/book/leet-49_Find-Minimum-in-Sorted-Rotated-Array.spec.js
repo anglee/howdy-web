@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './leet-49_Find-Minimum-in-Sorted-Rotated-Array';
 
 describe('leet-49_Find-Minimum-in-Sorted-Rotated-Array', () => {

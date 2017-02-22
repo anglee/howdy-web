@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import reverse from './007-ReverseInteger';
 
 describe('LeetOJ 007-ReverseInteger', () => {

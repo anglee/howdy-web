@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import RandomizedSet from './380-InsertDeleteGetRandomO1';
 
 describe('LeetOJ 380-InsertDeleteGetRandomOJ', () => {

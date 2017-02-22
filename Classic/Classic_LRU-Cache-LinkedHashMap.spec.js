@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import {LinkedHashMap, LRU_Cache} from './Classic_LRU-Cache-LinkedHashMap';
 
 describe('Classic_LRU-Cache-LinkedHashMap', () => {

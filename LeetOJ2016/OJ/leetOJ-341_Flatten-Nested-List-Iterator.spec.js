@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import NestedIterator from './leetOJ-341_Flatten-Nested-List-Iterator';
 
 describe('leetOJ-341_Flatten-Nested-List-Iterator', () => {

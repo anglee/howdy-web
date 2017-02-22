@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import insert, {Interval} from './057-InsertInterval';
 
 const toInterval = ([start, end]) => new Interval(start, end);

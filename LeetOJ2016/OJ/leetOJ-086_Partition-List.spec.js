@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import partition from './leetOJ-086_Partition-List';
 
 function ListNode(val) {

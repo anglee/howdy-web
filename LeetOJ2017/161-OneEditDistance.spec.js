@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import isOneEditDistance, { editDistance, editDistanceDP } from './161-OneEditDistance';
 
 describe('LeetOJ 161-OneEditDistance', () => {

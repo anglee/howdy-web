@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import { treeDeserializer } from '../lib/tree';
 import binaryTreePaths from './257-BinaryTreePaths';
 

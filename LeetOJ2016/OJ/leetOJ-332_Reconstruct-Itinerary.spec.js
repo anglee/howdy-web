@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import findItinerary from './leetOJ-332_Reconstruct-Itinerary';
 
 

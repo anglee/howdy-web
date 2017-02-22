@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './Hackerrank_Waiter';
 import fs from 'fs';
 

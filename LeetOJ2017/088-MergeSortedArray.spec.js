@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import merge from './088-MergeSortedArray';
 
 describe('LeetOJ 088-MergeSortedArray', () => {

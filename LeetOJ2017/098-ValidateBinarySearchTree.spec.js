@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import isValidBST from './098-ValidateBinarySearchTree';
 import { treeDeserializer } from '../lib/tree';
 

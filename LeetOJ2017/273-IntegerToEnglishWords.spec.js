@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import numberToWords from './273-IntegerToEnglishWords';
 
 describe('LeetOJ 273-IntegerToEnglishWords', () => {

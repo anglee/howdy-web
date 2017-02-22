@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import myPow from './050-Pow';
 
 describe('LeeOJ 050-Pow', () => {

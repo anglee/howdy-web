@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './Oscar_Merging-Segments';
 
 describe('Oscar_Merging-Segments', () => {

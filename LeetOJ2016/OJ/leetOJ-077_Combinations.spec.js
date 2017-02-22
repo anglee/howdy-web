@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import combine from './leetOJ-077_Combinations';
 
 const process = (A) => {

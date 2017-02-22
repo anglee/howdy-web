@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './Oscar_Telephone-Number-Words';
 
 const map = { // phone pad number to characters map

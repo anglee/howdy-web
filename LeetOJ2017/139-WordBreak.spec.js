@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import wordBreak from './139-WordBreak';
 
 describe('LeetOJ 139-WordBreak', () => {

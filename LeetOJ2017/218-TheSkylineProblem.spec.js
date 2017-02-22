@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import getSkyline from './218-TheSkylineProblem';
 
 describe('LeetOJ 218-TheSkylineProblem', () => {

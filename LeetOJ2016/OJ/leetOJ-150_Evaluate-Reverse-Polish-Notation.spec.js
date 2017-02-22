@@ -1,6 +1,6 @@
 // https://leetcode.com/problems/evaluate-reverse-polish-notation/
 
-import {expect} from 'chai';
+import { expect } from 'chai';
 import evalRPN from './leetOJ-150_Evaluate-Reverse-Polish-Notation';
 
 describe('leetOJ-150_Evaluate-Reverse-Polish-Notation', () => {

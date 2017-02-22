@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './Snapchat_VerifySudoku';
 
 describe('Snapchat_VerifySudoku', () => {

@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import Trie from './208-ImplementTrie';
 
 describe('LeetOJ 208-ImplementTrie', () => {

@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import lis from './Classic_LIS';
 
 const isIncrease = (A) => {

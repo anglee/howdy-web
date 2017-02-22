@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import simplifyPath from './071-SimplifyPath';
 
 describe('LeetOJ 071-SimplifyPath', () => {

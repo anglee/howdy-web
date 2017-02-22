@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import findOrder from './210-CourseScheduleII';
 
 

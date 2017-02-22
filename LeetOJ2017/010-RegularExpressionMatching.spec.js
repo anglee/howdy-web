@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import isMatch from './010-RegularExpressionMatching';
 
 describe('LeetOJ 010-RegularExpressionMatching', () => {

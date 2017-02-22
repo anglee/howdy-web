@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import permute from './leetOJ-046_Permutations';
 
 describe('leetOJ-046_Permutations', () => {

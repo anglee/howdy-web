@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './leet-17_Reverse-Integer';
 
 describe('leet-17_Reverse-Integer', () => {

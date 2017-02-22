@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import hammingDistance from './461-HammingDistance';
 
 describe('LeeOJ 461-HammingDistance', () => {

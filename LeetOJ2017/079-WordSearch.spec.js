@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import exist from './079-WordSearch';
 
 describe('LeetOJ 079-WordSearch', () => {

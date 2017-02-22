@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './App_Maximum-Difference-in-an-Array';
 
 // Given an array of integers, a, return the maximum difference of any pair of numbers such that

@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import subsetsWithDup from './090-SubsetsII';
 
 describe('LeetOJ 090-SubsetsII', () => {

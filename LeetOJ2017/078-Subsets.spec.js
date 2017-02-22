@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import originalSubsets from './078-Subsets';
 
 const subsets = (nums) => new Set(originalSubsets(nums));

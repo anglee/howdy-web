@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import twoSum from './Snapchat_TwoSum';
 
 describe('Snapchat_TwoSum', () => {

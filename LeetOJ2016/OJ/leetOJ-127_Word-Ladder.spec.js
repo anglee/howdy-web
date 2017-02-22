@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import ladderLength from './leetOJ-127_Word-Ladder';
 
 describe('leetOJ-127_Word-Ladder', () => {

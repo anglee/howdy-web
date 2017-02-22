@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import merge from './056-MergeIntervals';
 
 describe('LeetOJ 056-MergeIntervals', () => {

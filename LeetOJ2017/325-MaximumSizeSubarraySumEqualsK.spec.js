@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import maxSubArrayLen from './325-MaximumSizeSubarraySumEqualsK';
 
 describe('LeetOJ 325-MaximumSizeSubarraySumEqualsK', () => {

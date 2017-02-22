@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import numIslands from './200-NumberOfIslands';
 
 describe('LeetOJ 200-NumberOfIslands', () => {

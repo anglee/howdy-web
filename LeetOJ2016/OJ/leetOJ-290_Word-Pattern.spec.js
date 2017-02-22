@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import wordPattern from './leetOJ-290_Word-Pattern';
 
 describe('leetOJ-290_Word-Pattern', () => {

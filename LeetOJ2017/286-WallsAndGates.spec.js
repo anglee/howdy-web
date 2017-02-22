@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import wallsAndGates from './286-WallsAndGates';
 
 const INF = 2147483647;

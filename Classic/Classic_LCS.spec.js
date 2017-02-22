@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import lcs from './Classic_LCS';
 
 describe('Classic_LCS', () => {

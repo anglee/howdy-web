@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import getPermutation from './060-PermutationSequence';
 
 

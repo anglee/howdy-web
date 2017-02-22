@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import WordDictionary from './211-AddAndSearchWord';
 
 describe('LeetOJ 211-AddAndSearchWord', () => {

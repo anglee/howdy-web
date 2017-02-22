@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import multiply from './311-SparseMatrixMultiplication';
 
 describe('LeetOJ 311-SparseMatrixMultiplication', () => {

@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import maxProfit from './121-BestTimeToBuyAndSellStock';
 
 describe('LeetOJ 121-BestTimeToBuyAndSellStock', () => {

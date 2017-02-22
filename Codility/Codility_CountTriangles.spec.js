@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './Codility_CountTriangles';
 
 describe('Codility_CountTriangles', () => {

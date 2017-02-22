@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import cd from './FB_cd';
 
 describe('FB_cd', () => {

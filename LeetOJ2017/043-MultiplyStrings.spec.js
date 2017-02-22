@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import multiply from './043-MultiplyStrings';
 
 describe('LeetOJ 043-MultiplyStrings', () => {

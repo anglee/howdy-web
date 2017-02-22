@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import binarySearch from './Classic_Binary-Search';
 
 describe('Classic_Binary-Search', () => {

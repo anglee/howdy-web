@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './Classic_Rectanle-overlap';
 
 describe('Classic_Rectanle-overlap', () => {

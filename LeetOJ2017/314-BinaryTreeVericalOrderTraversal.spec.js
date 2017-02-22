@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import verticalOrder from './314-BinaryTreeVericalOrderTraversal';
 
 describe('LeetOJ 314-BinaryTreeVericalOrderTraversal', () => {

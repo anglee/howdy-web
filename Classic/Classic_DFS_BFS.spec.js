@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import {BFS, DFS} from './Classic_DFS_BFS';
 
 export class Node {

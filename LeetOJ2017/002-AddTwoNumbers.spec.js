@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import addTwoNumbers, { ListNode } from './002-AddTwoNumbers';
 
 const toListNode = (array) => {

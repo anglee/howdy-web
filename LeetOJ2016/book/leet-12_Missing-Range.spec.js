@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './leet-12_Missing-Range';
 
 describe('leet-12_Missing-Range', () => {

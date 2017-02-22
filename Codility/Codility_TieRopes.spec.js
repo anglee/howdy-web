@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import tieRopes from './Codility_TieRopes';
 
 describe('Codility_TieRopes', () => {

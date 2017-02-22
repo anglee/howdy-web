@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import LRUCache from './146-LRUCache';
 
 describe('LeetOJ 146-LRUCache', () => {

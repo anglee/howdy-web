@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import binarySearch from './binarySearch';
 
 describe('leet-01_Two-Sum_Binary-search_binarySearch', () => {

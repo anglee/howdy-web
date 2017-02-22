@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import validTree from './261-GraphValidTree';
 
 

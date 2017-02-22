@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import upsideDownBinaryTree from './leetOJ-156_Binary-Tree-UpsideDown';
 
 function TreeNode(val) {

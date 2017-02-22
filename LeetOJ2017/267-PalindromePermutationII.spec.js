@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import generatePalindromes from './267-PalindromePermutationII';
 
 describe('LeetOJ 267-Palindrome PermutationII', () => {

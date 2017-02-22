@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './leet-10_Longest-Substring-Without-Repeating-Characters_Brute-force';
 
 describe('leet-10_Longest-Substring-Without-Repeating-Characters_Brute-force', () => {

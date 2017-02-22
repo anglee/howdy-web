@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import alienOrder from './269-AlienDictionary';
 
 describe('LeetOJ 269-AlienDictionary', () => {

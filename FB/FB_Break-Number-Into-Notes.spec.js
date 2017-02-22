@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './FB_Break-Number-Into-Notes';
 
 describe('FB_Break-Number-Into-Notes', () => {

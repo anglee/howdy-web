@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import romanToInt from './013-RomanToInteger';
 
 describe('LeetOJ 013-RomanToInteger', () => {

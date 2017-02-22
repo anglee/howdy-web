@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import LRU from './Snapchat_LRU';
 
 describe('Snapchat_LRU', () => {

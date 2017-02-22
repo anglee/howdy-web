@@ -51,7 +51,7 @@
 
  */
 
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './Amz_MeetingSchedules';
 
 describe('Amz_MeetingSchedules', () => {

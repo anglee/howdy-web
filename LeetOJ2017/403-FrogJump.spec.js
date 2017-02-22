@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import canCross from './403-FrogJump';
 
 describe('LeetOJ 403-FrogJump', () => {

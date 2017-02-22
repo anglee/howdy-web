@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import twoRectsArea from './JumpTrading_RectsOverlap';
 
 function Point(x, y) {

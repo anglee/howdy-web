@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import {TreeNode} from './Classic_2-3-Tree';
 
 describe('Classic_2-3-Tree', () => {

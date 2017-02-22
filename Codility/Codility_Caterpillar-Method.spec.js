@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import {catepillar} from './Codility_Caterpillar-Method';
 
 describe('Codility_Caterpillar-Method', () => {

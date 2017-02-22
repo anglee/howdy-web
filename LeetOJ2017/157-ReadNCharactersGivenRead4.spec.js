@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './157-ReadNCharactersGivenRead4';
 
 describe('LeetOJ 157-ReadNCharactersGivenRead4', () => {

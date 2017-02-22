@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import solution from './278-FirstBadVersion';
 
 describe('LeetOJ 278-FirstBadVersion', () => {

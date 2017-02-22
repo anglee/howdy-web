@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 import howdy from './JumpTrading__Knight-Pattern';
 
 describe('JumpTrading__Knight-Pattern', () => {
