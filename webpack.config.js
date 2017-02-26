@@ -1,42 +1,33 @@
 /* global __dirname */
 
 var path = require('path');
-
 var webpack = require('webpack');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var dir_js = path.resolve(__dirname, 'js');
-var dir_html = path.resolve(__dirname, 'html');
-var dir_build = path.resolve(__dirname, 'public');
 var main_js = path.resolve(__dirname, 'howdy.js');
+var dir_public = path.resolve(__dirname, 'public');
+var dir_js = path.resolve(dir_public, 'js');
 
 module.exports = {
+  devtool: 'source-map',
   entry: main_js,
   output: {
-    path: dir_build,
+    path: dir_js,
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: dir_build,
+    contentBase: dir_public,
     port: 8000
   },
   module: {
     loaders: [
       {
-        loader: 'babel-loader',
         test: main_js,
+        loaders: ['babel'],
         exclude: 'node_modules',
-        query: {
-          presets: ['es2015', 'stage-0']
-        }
       }
     ]
   },
   plugins: [
-    // Simply copies the files over
-    new CopyWebpackPlugin([
-      { from: 'index.html' } // to: output.path
-    ]),
     // Avoid publishing files when compilation fails
     new webpack.NoErrorsPlugin()
   ],
@@ -44,20 +35,4 @@ module.exports = {
     // Nice colored output
     colors: true
   },
-  // Create Sourcemaps for the bundle
-  devtool: 'source-map'
 };
-
-
-module: {
-  loaders: [
-    {
-      test: /\.jsx?$/,
-      exclude: /(node_modules|bower_components)/,
-      loader: 'babel', // 'babel-loader' is also a legal name to reference
-      query: {
-        presets: ['react', 'es2015', 'stage-0']
-      }
-    }
-  ]
-}
