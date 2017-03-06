@@ -23,15 +23,18 @@ var findKthLargest0 = function(nums, k) {
   });
 
   if (bigger.length >= k) {
-    return findKthLargest(bigger, k);
+    return findKthLargest1(bigger, k);
   } else if (bigger.length + same.length >= k) {
     return target;
   } else {
-    return findKthLargest(smaller, k - bigger.length - same.length);
+    return findKthLargest1(smaller, k - bigger.length - same.length);
   }
 };
 
+// ====================================================================
+
 const swap = (A, i, j) => {
+  if (i === j) { return; }
   const temp = A[i];
   A[i] = A[j];
   A[j] = temp;
@@ -42,7 +45,7 @@ const swap = (A, i, j) => {
  * @param {number} k
  * @return {number}
  */
-var findKthLargest = function(nums, k) {
+var findKthLargest1 = function(nums, k) {
 
   const findKthLargetInRange = (k, start, end) => {
     // console.log('start=', start, 'end=', end, 'k=', k);
@@ -89,5 +92,44 @@ var findKthLargest = function(nums, k) {
   return findKthLargetInRange(k, 0, nums.length - 1);
 };
 
+// ====================================================================
+
+// process makes it so that in the range A[l, r]
+// to the left of return index, i, all elements >= A[i]
+// to the right of return index, i, all elements < A[i]
+const process = (A, l, r) => {
+  let i = l;
+  let j = r;
+  while (i < j) {
+    if (A[i + 1] >= A[i]) {
+      swap(A, i, i + 1);
+      ++i;
+    } else {
+      swap(A, i + 1, j);
+      --j;
+    }
+  }
+  return i;
+};
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var findKthLargest = function(nums, k) {
+  let l = 0;
+  let r = nums.length - 1;
+  while (true) {
+    const i = process(nums, l, r);
+    if (i === k - 1) {
+      return nums[i];
+    } else if (i > k - 1) {
+      r = i - 1;
+    } else { // i < k - 1
+      l = i + 1;
+    }
+  }
+};
 
 export default findKthLargest;
