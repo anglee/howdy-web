@@ -102,11 +102,9 @@ const process = (A, l, r) => {
   let j = r;
   while (i < j) {
     if (A[i + 1] >= A[i]) {
-      swap(A, i, i + 1);
-      ++i;
+      swap(A, i + 1, i++);
     } else {
-      swap(A, i + 1, j);
-      --j;
+      swap(A, i + 1, j--);
     }
   }
   return i;
