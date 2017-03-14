@@ -14,7 +14,7 @@ var minCostII = function(costs) {
     let current = {
       minCost: Number.POSITIVE_INFINITY,
       minCost2: Number.POSITIVE_INFINITY,
-      color: -1, // the color used on house i to achieve minCost
+      color: -1, // the color used to paint house i to achieve minCost
     };
 
     const colorPriceList = house;
