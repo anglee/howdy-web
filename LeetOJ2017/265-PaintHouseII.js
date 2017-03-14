@@ -17,8 +17,8 @@ var minCostII = function(costs) {
       color: -1, // the color used on house i to achieve minCost
     };
 
-    const colorPriceList = house.entries();
-    for (let [color, price] of colorPriceList) {
+    const colorPriceList = house;
+    colorPriceList.forEach((price, color) => {
       const cost = price + (color !== last.color ? last.minCost : last.minCost2);
       if (cost < current.minCost) {
         current.minCost2 = current.minCost;
@@ -27,7 +27,7 @@ var minCostII = function(costs) {
       } else if (cost < current.minCost2) {
         current.minCost2 = cost;
       }
-    }
+    });
     last = current;
   });
 
