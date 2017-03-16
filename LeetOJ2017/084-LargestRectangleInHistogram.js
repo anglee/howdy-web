@@ -42,6 +42,7 @@ var largestRectangleArea = function(heights) {
       const it = stack.pop();
       const width = (i - 1) - it.pos + 1;
       maxArea = Math.max(maxArea, it.h * width);
+      
       pos = it.pos;
     }
     if (isEmpty(stack) || h > peek(stack).h) {
