@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { fromArray, toArray } from './lib/LinkedList';
+import { fromArray, toArray } from '../lib/LinkedList';
 import mergeTwoLists from './021-MergeTwoSortedLists';
 
 describe('LeetOJ 021-MergeTwoSortedLists', () => {
