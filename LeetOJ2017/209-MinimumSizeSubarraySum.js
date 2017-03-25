@@ -3,7 +3,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-var minSubArrayLen = function(s, nums) {
+var minSubArrayLen0 = function(s, nums) {
   let ret = null;
   const buf = [];
   for (let j = 0; j < nums.length; ++j) {
@@ -19,6 +19,41 @@ var minSubArrayLen = function(s, nums) {
     }
   }
   return ret ? ret : 0;
+};
+
+/**
+ * @param {number} s
+ * @param {number[]} nums
+ * @return {number}
+ */
+var minSubArrayLen = function(s, nums) {
+  let head = 0;
+  let tail = 0;
+  let sum = nums[0];
+  // console.log(`sum =`, sum);
+  let minLength = sum >= s ? 1 : Number.POSITIVE_INFINITY;
+
+  while (head < nums.length) {
+
+    if (sum < s) {
+      head++;
+      if (head < nums.length) {
+        sum += nums[head];
+      }
+      // console.log(`head moved to ${head}, sum =`, sum);
+    } else {
+      tail++;
+      sum -= nums[tail - 1];
+      // console.log(`tail moved to ${tail}, sum =`, sum);
+    }
+
+    if (sum >= s) {
+      const length = head - tail + 1;
+      minLength = Math.min(minLength, length);
+    }
+  }
+
+  return Number.isFinite(minLength) ? minLength : 0;
 };
 
 export default minSubArrayLen;

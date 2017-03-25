@@ -13,5 +13,17 @@ describe('LeetOJ 209-MinimumSizeSubarraySum', () => {
       const nums = [2, 3, 1, 2, 4, 3];
       expect(minSubArrayLen(s, nums)).to.equal(0);
     });
+
+    it('should solved the case of single element - test case 1', () => {
+      const s = 4;
+      const nums = [4];
+      expect(minSubArrayLen(s, nums)).to.equal(1);
+    });
+
+    it('should solved the case of single element - test case 2', () => {
+      const s = 5;
+      const nums = [4];
+      expect(minSubArrayLen(s, nums)).to.equal(0);
+    });
   });
 });
