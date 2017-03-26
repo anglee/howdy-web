@@ -2,7 +2,30 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var threeSum0 = function(nums) {
+var threeSum = function(nums) { // brute force, O(n^3)
+  nums.sort((a, b) => a - b);
+  const n = nums.length;
+  const ret = [];
+  for (let i = 0; i < n - 2 && nums[i] <= 0; ++i) {
+    if (i > 0 && nums[i] === nums[i-1]) continue;
+    for (let j = i + 1; j < n - 1 &&  nums[i] + nums[j] <= 0; ++j) {
+      if (j > i + 1 && nums[j] === nums[j-1]) continue;
+      for (let k = j + 1; k < n; ++k) {
+        if (nums[i] + nums[j] + nums[k] === 0) {
+          if (k > j + 1 && nums[k] === nums[k-1]) continue;
+          ret.push([nums[i], nums[j], nums[k]])
+        }
+      }
+    }
+  }
+  return ret;
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum1 = function(nums) { // O(n^2) + O(n) space
   const countMap = new Map();
   for (let num of nums) {
     countMap.has(num)
@@ -39,7 +62,7 @@ var threeSum0 = function(nums) {
  * @param {number[]} nums
  * @return {number[][]}
  */
-var threeSum = function(nums) {
+var threeSum = function(nums) { // O(n^2) + O(1) space
   const moveRight = (nums, i) => { // move i to right until nums[i] is not the same (skip duplicates)
     const num = nums[i];
     while (nums[i] === num){
