@@ -1,4 +1,3 @@
-import { LinkedList } from '../lib/LinkedList';
 import PriorityQueue from '../lib/PriorityQueue';
 
 /**
@@ -14,7 +13,8 @@ import PriorityQueue from '../lib/PriorityQueue';
  */
 var mergeKLists = function(lists) {
   const queue = new PriorityQueue((a, b) => (a.val - b.val));
-  const ret = new LinkedList();
+  let retHead = null;
+  let retTail = null;
 
   lists.forEach((head) => {
     if (head) {
@@ -27,10 +27,15 @@ var mergeKLists = function(lists) {
     if (node.next) {
       queue.add(node.next);
     }
-    ret.add(node);
+    if (retHead === null) {
+      retHead = retTail = node;
+    } else {
+      retTail.next = node;
+      retTail = node;
+    }
   }
 
-  return ret;
+  return retHead;
 };
 
 export default mergeKLists;
