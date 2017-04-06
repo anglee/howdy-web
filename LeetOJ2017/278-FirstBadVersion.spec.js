@@ -3,33 +3,29 @@ import solution from './278-FirstBadVersion';
 
 describe('LeetOJ 278-FirstBadVersion', () => {
   describe('solution', () => {
-    it('should work with test case', () => {
-      const input = [1];
-      const isBadVersion = (i) => input[i] === 1;
-
-      expect(solution(isBadVersion)(input.length))
-        .to.equal(input.indexOf(1));
+    it('should work with test case 1', () => {
+      const n = 1;
+      const firstBadVertion = 1;
+      const isBadVersion = (i) => i >= firstBadVertion;
+      expect(solution(isBadVersion)(n)).to.equal(firstBadVertion);
     });
-    it('should work with test case', () => {
-      const input = [0, 0, 1];
-      const isBadVersion = (i) => input[i] === 1;
-
-      expect(solution(isBadVersion)(input.length))
-        .to.equal(input.indexOf(1));
+    it('should work with test case 2', () => {
+      const n = 3;
+      const firstBadVertion = 3;
+      const isBadVersion = (i) => i >= firstBadVertion;
+      expect(solution(isBadVersion)(n)).to.equal(firstBadVertion);
     });
-    it('should work with test case', () => {
-      const input = [0, 1, 1];
-      const isBadVersion = (i) => input[i] === 1;
-
-      expect(solution(isBadVersion)(input.length))
-        .to.equal(input.indexOf(1));
+    it('should work with test case 3', () => {
+      const n = 3;
+      const firstBadVertion = 2;
+      const isBadVersion = (i) => i >= firstBadVertion;
+      expect(solution(isBadVersion)(n)).to.equal(firstBadVertion);
     });
-    it('should work with test case', () => {
-      const input = [1, 1, 1];
-      const isBadVersion = (i) => input[i] === 1;
-
-      expect(solution(isBadVersion)(input.length))
-        .to.equal(input.indexOf(1));
+    it('should work with test case 4', () => {
+      const n = 3;
+      const firstBadVertion = 1;
+      const isBadVersion = (i) => i >= firstBadVertion;
+      expect(solution(isBadVersion)(n)).to.equal(firstBadVertion);
     });
   });
 });
