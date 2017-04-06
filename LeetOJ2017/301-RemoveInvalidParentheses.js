@@ -51,9 +51,9 @@ var remove = function(s, ans) {
     }
   }
 
-  // if we are here, we finished removing all ')'s
+  // if we are here, we finished removing all ')'s that would make s invalid
 
-  // from left to right, remove '('s
+  // from right to left, remove '('s
   stack = 0;
   for (let i = s.length - 1; i >= 0; --i) {
     const ch = s[i];
@@ -75,7 +75,7 @@ var remove = function(s, ans) {
     }
   }
 
-  // if we are here, we finished removing all ')'s
+  // if we are here, we finished removing all ')'s that would make s invalid
   ans.add(s);
 };
 
