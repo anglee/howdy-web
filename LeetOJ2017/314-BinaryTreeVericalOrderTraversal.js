@@ -1,36 +1,31 @@
-import _ from 'lodash';
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var verticalOrder = function(root) {
+  const queue = [{x: 0, node: root}];
+  const map = new Map();
 
-import {
-  treeDeserializer,
-} from '../lib/tree';
-
-const verticalOrder = (head) => {
-  const queue = [[head, 0]];
-  const positionMap = {};
   while (queue.length > 0) {
-    const [node, i] = queue.shift();
-    if (_.isNull(node)) {
+    const { x, node } = queue.shift();
+    if (node === null) {
       continue;
     }
-    if (positionMap[i]) {
-      positionMap[i].push(node.val);
-    } else {
-      positionMap[i] = [node.val];
+    if (!map.has(x)) {
+      map.set(x, []);
     }
-    const {left, right} = node;
-    queue.push([left, i - 1]);
-    queue.push([right, i + 1]);
+    map.get(x).push(node.val);
+    queue.push({ x: x - 1, node: node.left});
+    queue.push({ x: x + 1, node: node.right});
   }
-
-  // return _(positionMap)
-  //   .keys()
-  //   .map(_.toNumber)
-  //   .sortBy()
-  //   .map(key => positionMap[key])
-  //   .value();
-
-  const sortedKeys = Object.keys(positionMap).map(it => parseInt(it)).sort((a, b) => a > b);
-  return sortedKeys.map(key => positionMap[key]);
+  return Array.from(map.keys()).sort((a, b) => a - b).map(key => map.get(key));
 };
 
-export default (A) => verticalOrder(treeDeserializer(A, null));
+export default verticalOrder;
