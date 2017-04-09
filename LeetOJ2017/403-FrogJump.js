@@ -1,121 +1,93 @@
+const canCross0 = (stones) => { // recursive
+  const stonesSet = new Set(stones);
+  const lastStone = stones[stones.length - 1];
 
-var canCrossI = function(stones, frog, jump) {
-  if (jump <= 0) {
-    return false;
-  }
+  const canCrossI = (i, k) => { // k is the jump that was used to reach stone i
+    if (i === lastStone) { return true; }
+    if (!stonesSet.has(i)) { return false; }
 
-  if (stones.indexOf(frog) === -1) { // should optimize to use a Set
-    return false;
-  }
+    return (
+      (k - 1 > 0 && canCrossI(i + k - 1, k - 1)) ||
+      (k > 0 && canCrossI(i + k, k)) ||
+      canCrossI(i + k + 1, k + 1)
+    )
+  };
 
-  if (frog === stones[stones.length - 1]) {
-    return true;
-  }
-
-  return canCrossI(stones, frog + jump, jump - 1)
-    || canCrossI(stones, frog + jump, jump)
-    || canCrossI(stones, frog + jump, jump + 1);
+  return canCrossI(0, 0);
 };
 
+const canCross = (stones) => { // recursive + memoize
+  const stonesSet = new Set(stones);
+  const lastStone = stones[stones.length - 1];
+  const memoizeMap = new Map();
 
-/**
- * @param {number[]} stones
- * @return {boolean}
- */
-var canCross0 = function(stones) { // recursive
-  return canCrossI(stones, 0, 1);
+  const canCrossI = (i, k) => { // k is the jump that was used to reach stone i
+    const key = `${[i, k]}`;
+    if (memoizeMap.has(key)) { return memoizeMap.get(key); }
+
+    let ret = false;
+    if (i === lastStone) {
+      ret = true;
+    } else if (!stonesSet.has(i)) {
+      ret = false;
+    } else {
+      ret = (
+        canCrossI(i + k + 1, k + 1) ||
+        (k > 0 && canCrossI(i + k, k)) ||
+        (k - 1 > 0 && canCrossI(i + k - 1, k - 1))
+      );
+    }
+
+    memoizeMap.set(key, ret);
+
+    return ret;
+  };
+
+  return canCrossI(0, 0);
 };
 
-/**
- * @param {number[]} stones
- * @return {boolean}
- */
-var canCross1 = function(stones) {
+const canCross1 = (stones) => { // dp
 
-  // the most progressive arrange is [0, 1, 3, 6, 10, 15, 21, ...]
-  // the right-most point is at most 0 + (1 + len - 1) * (len - 1) / 2
-  if (
-    stones == null
-    || stones.length == 0
-    || (stones.length > 1 && stones[1] != 1)
-    || (stones.length > 1 && stones[stones.length - 1] > (stones.length * (stones.length - 1)) / 2)
-  ) {
-    return false;
-  }
+  const generateNextKs = (ks) => {
+    const nextKs = new Set();
+    for (let k of ks) {
+      if (k - 1 > 0) {
+        nextKs.add(k - 1);
+      }
+      if (k > 0) {
+        nextKs.add(k);
+      }
+      nextKs.add(k + 1);
+    }
+    return nextKs
+  };
 
-  // an array records possible jumps the frog can make when jumping from stone X
-  const jumpsAtStoneX = [
-    new Set([1]) // the possible jumps the frog can do when jump from stone 0 is: [1]
-  ];
+  // ksMap keeps the k's that were used to reach stone i
+  const ksMap = Array(stones.length).fill().map(() => new Set());
 
-  for (let i = 1; i < stones.length; i++) {
-    const jumpsAtStoneI = new Set();
-    jumpsAtStoneX.push(jumpsAtStoneI);
+  // nextKsMap keeps the k's that can be used to jump from stone i
+  const nextKsMap = Array(stones.length).fill();
 
-    for (let j = 0; j < i; j++) {
-      const jumpsAtStoneJ = jumpsAtStoneX[j];
-      for (let jump of jumpsAtStoneJ) {
-        if (jump > 0 && stones[j] + jump === stones[i]) {
-          if (i === stones.length - 1) { // last stone
+  ksMap[0].add(0);
+  nextKsMap[0] = generateNextKs(ksMap[0]);
+
+  for (let i = 1; i < stones.length; ++i) {
+    // for each previous stones
+    for (let j = 0; j < i; ++j) {
+      for (let k of nextKsMap[j]) {
+        if (stones[j] + k === stones[i]) {
+          ksMap[i].add(k);
+
+          if (i === stones.length - 1) {
             return true;
           }
-          if (jump - 1 > 0) {
-            jumpsAtStoneI.add(jump - 1);
-          }
-          jumpsAtStoneI.add(jump);
-          jumpsAtStoneI.add(jump + 1);
         }
       }
     }
+
+    nextKsMap[i] = generateNextKs(ksMap[i]);
   }
-
-  return jumpsAtStoneX[stones.length - 1].size > 0;
-};
-
-class SetMap  {
-  constructor() {
-    this.map = new Map();
-  }
-
-  has(i, j) {
-    return this.map.has(i) && this.map.get(i).has(j);
-  }
-
-  add(i, j) {
-    if (this.map.has(i)) {
-      this.map.get(i).add(j);
-    } else {
-      this.map.set(i, new Set([j]));
-    }
-  }
-}
-
-/**
- * @param {number[]} stones
- * @return {boolean}
- */
-var canCross = function(stones) {
-  if (stones.length === 1) { return true; }
-  if (stones.length > 1 && stones[1] !== 1) { return false; }
-  // if (stones.length > 2 && !(stones[2] === 2 || stones[2] === 3)) { return false; }
-
-  const visits = new SetMap();
-  const ss = new Set(stones); // set of stones
-  const last = stones[stones.length - 1];
-  const queue = [[1, 1]];
-
-  for (let [pos, jump] of queue) {
-    if (pos === last) { return true; }
-    if (jump <= 0 || !ss.has(pos)) { continue; }
-    for (let nextJump of [jump, jump - 1, jump + 1]) {
-      const nextPos = pos + nextJump;
-      if (nextJump > 0 && !visits.has(nextPos, nextJump)) {
-        visits.add(nextPos, nextJump);
-        queue.push([nextPos, nextJump]);
-      }
-    }
-  }
-  return false;
+  return ksMap[stones.length - 1].size > 0;
 };
 
 export default canCross;
