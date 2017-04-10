@@ -28,10 +28,66 @@ const binaryTreePathsI = (prefix, root, allRootToLeafPaths) => {
  * @param {TreeNode} root
  * @return {string[]}
  */
-var binaryTreePaths = function(root) {
+var binaryTreePaths0 = function(root) {
   const allRootToLeafPaths = [];
   binaryTreePathsI([], root, allRootToLeafPaths);
   return allRootToLeafPaths.map(path => path.join('->'));
+};
+
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {string[]}
+ */
+var binaryTreePaths = function(root) {
+  
+  const buildParentMap = (root) => {
+    const parentMap = new Map();
+    const doBuildParentMap = (node, parent) => {
+      if (node === null) { return; }
+      parentMap.set(node, parent);
+      doBuildParentMap(node.left, node);
+      doBuildParentMap(node.right, node);
+    };
+    doBuildParentMap(root, null);
+    return parentMap;
+  };
+
+  const visitLeafs = (rootNode, parentMap) => {
+    const paths = [];
+    const isLeaf = node => node.left === null && node.right === null;
+    const getParent = node => parentMap.get(node);
+    const getPathToRoot = (node) => {
+      const path = [];
+      while (node) {
+        path.push(node);
+        node = getParent(node);
+      }
+      return path;
+    };
+
+    const doVisitLeafs = (node) => {
+      if (node === null) { return; }
+      if (isLeaf(node)) {
+        paths.push(getPathToRoot(node).reverse());
+      } else {
+        doVisitLeafs(node.left);
+        doVisitLeafs(node.right);
+      }
+    };
+
+    doVisitLeafs(rootNode);
+    return paths.map(path => path.map(node => node.val).join('->'));
+  };
+
+  return visitLeafs(root, buildParentMap(root));
 };
 
 export default binaryTreePaths;
