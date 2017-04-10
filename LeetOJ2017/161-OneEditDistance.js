@@ -52,7 +52,7 @@ export const editDistanceDP = (s1, s2) => {
  * @param {string} t
  * @return {boolean}
  */
-var isOneEditDistance = function(s1, s2) {
+var isOneEditDistance0 = function(s1, s2) {
   let buffer1 = [];
   for (let i = 0; i <= s1.length; i++) {
     buffer1.push(i);
@@ -77,6 +77,29 @@ var isOneEditDistance = function(s1, s2) {
     buffer2 = [];
   }
   return buffer1[buffer1.length - 1] === 1;
+};
+
+const isOneEditDistance = (s1, s2) => {
+  if (s1.length === 0 && s2.length === 0) {
+    return false;
+  }
+
+  if (s1.length === 0) {
+    return s2.length === 1;
+  }
+
+  if (s2.length === 0) {
+    return s1.length === 1;
+  }
+
+  if (s1[0] === s2[0]) {
+    return isOneEditDistance(s1.substr(1), s2.substr(1));
+  }
+  return (
+    s1 === s2.substr(1) ||
+    s1.substr(1) === s2 ||
+    s1.substr(1) === s2.substr(1)
+  );
 };
 
 export default isOneEditDistance;

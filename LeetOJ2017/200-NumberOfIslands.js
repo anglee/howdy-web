@@ -18,7 +18,7 @@ var numIslands = function(grid) {
     if (isWater(x, y) || isMarked(x, y)) {
       return;
     }
-    
+
     marked[y][x] = true;
     mark(x, y - 1);
     mark(x, y + 1);
