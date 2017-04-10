@@ -8,20 +8,17 @@ var numIslands = function(grid) {
   const width = grid[0].length;
   let ret = 0;
 
-  const marked = [];
-  for (let y = 0; y < height; ++y) {
-    const row = [];
-    marked.push(row);
-    for (let x = 0; x < width; ++x) {
-      row.push(grid[y][x] !== '1');
-    }
-  }
-
+  const isWater = (x, y) => x < 0 || y < 0 || x >= width || y >= height || grid[y][x] === '0';
+  const marked = Array(height).fill().map(
+    () => Array(width).fill(false)
+  );
   const isMarked = (x, y) => marked[y][x];
+
   const mark = (x, y) => {
-    if (x < 0 || y < 0 || x >= width || y >= height || isMarked(x, y)) {
+    if (isWater(x, y) || isMarked(x, y)) {
       return;
     }
+    
     marked[y][x] = true;
     mark(x, y - 1);
     mark(x, y + 1);
@@ -31,7 +28,7 @@ var numIslands = function(grid) {
 
   for (let y = 0; y < height; ++y) {
     for (let x = 0; x < width; ++x) {
-      if (grid[y][x] === '1' && !isMarked(x, y)) {
+      if (!isWater(x, y) && !isMarked(x, y)) {
         ret++;
         mark(x, y);
       }
