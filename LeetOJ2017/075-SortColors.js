@@ -4,14 +4,14 @@
  */
 var sortColors0 = function(nums) {
   const map = new Map();
+  map.set(0, []);
   map.set(1, []);
   map.set(2, []);
-  map.set(3, []);
 
   nums.forEach(num => {
     map.get(num).push(num);
   });
-  return [...map.get(1),...map.get(2),...map.get(3)];
+  return [...map.get(0),...map.get(1),...map.get(2)];
 };
 
 const swap = (A, i, j) => {
@@ -26,21 +26,13 @@ const swap = (A, i, j) => {
  */
 var sortColors1 = function(nums) {
   let i = 0, j = 0, k = nums.length - 1;
-  let x = 0;
-  while (x <= k && i <= k && j <= k) {
-    if (nums[x] === 1) {
-      swap(nums, x, i);
-      i++;
-      if (j < i) {
-        j++;
-        x++;
-      }
-    } else if (nums[x] === 2) {
+  while (j <= k) {
+    if (nums[j] === 0) {
+      swap(nums, i++, j++);
+    } else if (nums[j] === 1) {
       j++;
-      x++;
-    } else { // nums[x] === 3
-      swap(nums, x, k);
-      k--;
+    } else { // nums[j] === 2
+      swap(nums, j, k--);
     }
   }
   return nums;
@@ -54,10 +46,10 @@ var sortColors1 = function(nums) {
 var sortColors = function(nums) {
   let left = 0, right = nums.length - 1;
   for (let x = 0; x <= right; ++x) {
-    while (nums[x] === 3 && x < right) {
+    while (nums[x] === 2 && x < right) {
       swap(nums, x, right--);
     }
-    while (nums[x] === 1 && x > left) {
+    while (nums[x] === 0 && x > left) {
       swap(nums, x, left++);
     }
   }
