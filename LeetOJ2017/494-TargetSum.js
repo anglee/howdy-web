@@ -41,7 +41,7 @@ const  memoize = function(fun) {
  * @param {number} S
  * @return {number}
  */
-var findTargetSumWays = function(nums, S) {
+var findTargetSumWays1 = function(nums, S) {
 
   const findTargetSumWaysI = memoize((sum, i) => {
     if (i === nums.length) {
@@ -58,6 +58,34 @@ var findTargetSumWays = function(nums, S) {
   });
 
   return findTargetSumWaysI(0, 0);
+};
+
+/**
+ * @param {number[]} nums
+ * @param {number} S
+ * @return {number}
+ */
+var findTargetSumWays = function(nums, S) {
+
+  const addToMap = (map, key, delta) => {
+    if (!map.has(key)) {
+      map.set(key, delta);
+    } else {
+      map.set(key, map.get(key) + delta);
+    }
+  };
+
+  let prev = new Map();
+  prev.set(0, 1);
+  for (let num of nums) {
+    const map = new Map();
+    for (let [key, value] of prev) {
+      addToMap(map, key + num, value);
+      addToMap(map, key - num, value);
+    }
+    prev = map;
+  }
+  return prev.has(S) ? prev.get(S) : 0;
 };
 
 export default findTargetSumWays;

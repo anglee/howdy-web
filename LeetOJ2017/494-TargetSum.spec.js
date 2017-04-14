@@ -37,5 +37,11 @@ describe('LeetOJ 494-TargetSum', () => {
       expect(findTargetSumWays(nums, S)).to.equal(6056);
     });
 
+    it('should solve test case 4', () => {
+      const nums = [1];
+      const S = 2;
+      expect(findTargetSumWays(nums, S)).to.equal(0);
+    });
+
   });
 });
