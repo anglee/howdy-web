@@ -57,7 +57,7 @@ var lowestCommonAncestor0 = function(root, p, q) {
  * @param {TreeNode} q
  * @return {TreeNode}
  */
-var lowestCommonAncestor = function(root, p, q) {
+var lowestCommonAncestor1 = function(root, p, q) {
   const parentMap = new Map();
   let done = false;
 
@@ -110,5 +110,64 @@ var lowestCommonAncestor = function(root, p, q) {
   return ret;
 };
 
+
+// ---------------------------------------------
+
+
+const memoize = (f) => {
+  const map = new Map();
+  return (root, node) => {
+    if (map.has(root) && map.get(root).has(node)) {
+      return map.get(root).get(node);
+    }
+    const ret = f(root, node);
+    if (!map.has(root)) { map.set(root, new Map()); }
+    if (!map.get(root).has(node)) { map.get(root).set(node, ret); }
+    return ret;
+  }
+};
+
+const isNodeInTheTree = memoize((root, node) => {
+  if (root === null) {
+    return false;
+  }
+  if (root === node) {
+    return true;
+  }
+  return (
+    isNodeInTheTree(root.left, node) ||
+    isNodeInTheTree(root.right, node)
+  );
+});
+
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+var lowestCommonAncestor = function(root, p, q) {
+
+  const helper = (node) => {
+    if (
+      isNodeInTheTree(node.left, p) &&
+      isNodeInTheTree(node.left, q)
+    ) {
+      return helper(node.left);
+    }
+
+    if (
+      isNodeInTheTree(node.right, p) &&
+      isNodeInTheTree(node.right, q)
+    ) {
+      return helper(node.right);
+    }
+
+    return node;
+  };
+
+  return helper(root);
+
+};
 export default lowestCommonAncestor;
 
