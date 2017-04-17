@@ -1,138 +1,158 @@
-import Heap from '../lib/FastHeap';
 
-/**
- * @param {number[][]} buildings
- * @return {number[][]}
- */
-var getSkyline0 = function(buildings) {
-  const getMaxHeightFromSet = (vs) => {
-    let max = 0;
-    for (let v of vs) {
-      if (max === null || v.y > max) {
-        max = v.y;
-      }
-    }
-    return max;
-  };
+class Heap {
+  constructor() {
+    this.A = [null];
+  }
 
-  const criticalPts = [];
-  buildings.forEach(([left, right, height]) => {
-    const leftPt = {
-      x: left,
-      y: height,
-      isLeft: true,
-    };
-    const rightPt = {
-      x: right,
-      y: height,
-      isLeft: false,
-      matchingLeft: leftPt,
-    };
-    criticalPts.push(
-      leftPt,
-      rightPt,
-    );
-  });
+  add(border) {
+    this.A.push(border);
+    this.siftUp(this.A.length - 1)
+  }
 
-  criticalPts.sort((v1, v2) => {
-    if (v1.x !== v2.x) {
-      return v1.x - v2.x;
-    }
-    if (v1.isLeft && v2.isLeft) {
-      return v2.y - v1.y;
-    }
-    if (!v1.isLeft && !v2.isLeft) {
-      return v1.y - v2.y;
-    }
-    if (v1.isLeft) {
-      return -1
-    }
-    return 1;
-  });
-
-  const ret = [];
-  const currentPts = new Set();
-  let lastMaxHeight = null;
-  criticalPts.forEach((v) => {
-    if (v.isLeft) {
-      currentPts.add(v);
+  remove(border) {
+    const { A } = this;
+    const index = this.indexOf(border);
+    if (index === A.length - 1) {
+      A.pop();
     } else {
-      currentPts.delete(v.matchingLeft);
+      this.swap(index, A.length - 1);
+      A.pop();
+      this.heapify(index);
     }
-    const maxHeight = getMaxHeightFromSet(currentPts);
-    if (maxHeight === null || maxHeight !== lastMaxHeight) {
-      ret.push([v.x, maxHeight]);
+  }
+
+  get max() {
+    return this.A[1];
+  }
+
+  indexOf(border) {
+    return this.A.indexOf(border);
+  }
+
+  swap (i, j) {
+    const { A } = this;
+    const temp = A[i];
+    A[i] = A[j];
+    A[j] = temp;
+  }
+
+  siftUp (i) {
+    const { A } = this;
+    let index = i;
+    let parentI = Math.floor(index / 2);
+
+    while (parentI > 0 && A[index].h > A[parentI].h) {
+      this.swap(index, parentI);
+      index = parentI;
+      parentI = Math.floor(index / 2);
     }
-    lastMaxHeight = maxHeight;
-  });
+  }
 
-  return ret;
-};
+  heapify (i) {
+    const { A } = this;
+    const leftI = i * 2;
+    const rightI = i * 2 + 1;
+    const max = Math.max(
+      A[i].h,
+      leftI < A.length ? A[leftI].h : Number.NEGATIVE_INFINITY,
+      rightI < A.length ? A[rightI].h: Number.NEGATIVE_INFINITY
+    );
 
-//
-// a detailed (but IMO, not very good) explanation
-// https://briangordon.github.io/2014/08/the-skyline-problem.html
-//
+    if (max === A[i].h) {
+      return;
+    }
 
+    if (max === A[leftI].h) {
+      this.swap(i, leftI);
+      this.heapify(leftI);
+    } else if (max === A[rightI].h) {
+      this.swap(i, rightI);
+      this.heapify(rightI);
+    }
+  }
+}
 
+// FastHeap as compared to Heap supports faster delete of random element
+// this is by adding a map so a random element can be found in constant time
+// note if there are duplicate values in the heap, it may fall back to linear search, O(n)
+
+class FastHeap extends Heap {
+
+  constructor() {
+    super();
+    this.indexMap = new Map();
+  }
+
+  add(border) {
+    this.indexMap.set(border, this.A.length);
+    super.add(border);
+  }
+
+  remove(border) {
+    super.remove(border);
+    this.indexMap.delete(border);
+  }
+
+  indexOf(border) {
+    return this.indexMap.get(border);
+  }
+
+  swap(i, j) {
+    super.swap(i, j);
+    this.indexMap.set(this.A[i], i);
+    this.indexMap.set(this.A[j], j);
+  }
+
+}
 
 /**
  * @param {number[][]} buildings
  * @return {number[][]}
  */
 var getSkyline = function(buildings) {
-  const criticalPts = [];
-  buildings.forEach(([left, right, height]) => {
-    const leftPt = {
-      x: left,
-      y: height,
-      isLeft: true,
-    };
-    const rightPt = {
-      x: right,
-      y: height,
-      isLeft: false,
-      matchingLeft: leftPt,
-    };
-    criticalPts.push(
-      leftPt,
-      rightPt,
+  const borders = [];
+  buildings.forEach((([l, r, h]) => {
+    const leftBorder = { at: l, h, isLeft: true };
+    const rightBorder = { at: r, h, isLeft: false, leftBorder };
+    borders.push(
+      leftBorder,
+      rightBorder
     );
-  });
+  }));
 
-  criticalPts.sort((v1, v2) => {
-    if (v1.x !== v2.x) {
-      return v1.x - v2.x;
+  borders.sort((a, b) => {
+    if (a.at !== b.at) {
+      return a.at - b.at;
     }
-    if (v1.isLeft && v2.isLeft) {
-      return v2.y - v1.y;
+    if (a.isLeft !== b.isLeft) {
+      return a.isLeft ? -1 : 1;
     }
-    if (!v1.isLeft && !v2.isLeft) {
-      return v1.y - v2.y;
-    }
-    if (v1.isLeft) {
-      return -1
-    }
-    return 1;
-  });
-
-  const ret = [];
-  const heap = new Heap([0]);
-  let lastMaxHeight = null;
-  criticalPts.forEach((v) => {
-    if (v.isLeft) {
-      // console.log(`at ${v.x}, insert ${v.y}`);
-      heap.insert(v.y);
+    if (a.isLeft) {
+      return b.h - a.h;
     } else {
-      // console.log(`at ${v.x}, delete ${v.matchingLeft.y}`);
-      heap.delete(v.matchingLeft.y);
+      return a.h - b.h;
     }
-    const maxHeight = heap.peek();
-    // console.log(`max = ${maxHeight}, heap = ${heap.A}`);
-    if (maxHeight === null || maxHeight !== lastMaxHeight) {
-      ret.push([v.x, maxHeight]);
+
+  });
+
+  let hs = new FastHeap();
+  let currentMaxH = 0;
+  const ret = [];
+  borders.forEach((border) => {
+    if (border.isLeft) {
+      hs.add(border);
+      if (border.h > currentMaxH) {
+        currentMaxH = border.h;
+        ret.push([border.at, border.h])
+      }
+    } else { // is right border
+      hs.remove(border.leftBorder);
+      const maxH = hs.max ? hs.max.h : 0;
+      if (maxH < currentMaxH) {
+        currentMaxH = maxH;
+        ret.push([border.at, currentMaxH]);
+      }
     }
-    lastMaxHeight = maxHeight;
   });
 
   return ret;
