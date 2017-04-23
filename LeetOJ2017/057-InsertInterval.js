@@ -5,50 +5,41 @@
  *     this.end = end;
  * }
  */
-
 export function Interval(start, end) {
   this.start = start;
   this.end = end;
 }
 
+const compare = (pt1, pt2) => {
+  if (pt1 === null) {
+    return -1;
+  }
+  if (pt1.at !== pt2.at) {
+    return pt1.at - pt2.at;
+  }
+  return pt1.isStart ? -1 : 1;
+};
 
-const insertPoint = (pts, pt) => {
-
-  const compareFunction = (a, b) => {
-    if (a.at !== b.at) { return a.at - b.at; }
-    if (a.isStart === b.isStart) { return 0; }
-    return a.isStart ? -1 : 1;
-  };
-
+const binarySearch = (pts, pt) => {
   if (pts.length === 0) {
-    pts.push(pt);
-    return;
+    return 0;
   }
 
-  const firstPt = pts[0];
-  if (compareFunction(pt, firstPt) <= 0) {
-    pts.unshift(pt);
-    return;
+  if (compare(pts[pts.length - 1], pt) < 0) {
+    return pts.length;
   }
 
-  const lastPt = pts[pts.length - 1];
-  if (compareFunction(pt, lastPt) > 0) {
-    pts.push(pt);
-    return;
-  }
-
-  for (let i = 1; i < pts.length; ++i) {
-    const lastPt = pts[i - 1];
-    const thisPt = pts[i];
-
-    if (
-      compareFunction(pt, lastPt) > 0 &&
-      compareFunction(pt, thisPt) <= 0
-    ) {
-      pts.splice(i, 0, pt);
-      return;
+  let i = 0;
+  let j = pts.length - 1;
+  while (i !== j) {
+    const m = Math.floor((i + j) / 2);
+    if (compare(pts[m], pt) >= 0) {
+      j = m;
+    } else {
+      i = m + 1;
     }
   }
+  return i;
 };
 
 /**
@@ -57,47 +48,37 @@ const insertPoint = (pts, pt) => {
  * @return {Interval[]}
  */
 var insert = function(intervals, newInterval) {
-  const criticalPoints = [];
-  intervals.forEach(({start, end}) => {
-    criticalPoints.push({
-      at: start,
-      isStart: true,
-    }, {
-      at: end,
-      isStart: false,
-    });
+  const pts = [];
+  intervals.forEach(({ start, end }) => {
+    pts.push({ at: start, isStart: true }, { at: end, isStart: false });
   });
 
-  insertPoint(criticalPoints, {
-    at: newInterval.start,
-    isStart: true,
-  });
-  insertPoint(criticalPoints, {
-    at: newInterval.end,
-    isStart: false,
-  });
+  const newIntervalStart = { at: newInterval.start, isStart: true };
+  const i = binarySearch(pts, newIntervalStart);
+  pts.splice(i, 0, newIntervalStart);
 
-  // console.log(`criticalPoints`, criticalPoints);
+  const newIntervalEnd = { at: newInterval.end, isStart: false };
+  const j = binarySearch(pts, newIntervalEnd);
+  pts.splice(j, 0, newIntervalEnd);
 
-  const ret = [];
   let overlap = 0;
   let start = null;
-  criticalPoints.forEach((pt) => {
+  let ret = [];
+  pts.forEach(pt => {
     if (pt.isStart) {
-      ++overlap;
+      overlap++;
       if (overlap === 1) {
         start = pt.at;
       }
     } else {
-      --overlap;
+      overlap--;
       if (overlap === 0) {
-        ret.push(new Interval(start, pt.at));
+        ret.push({ start, end: pt.at });
       }
     }
   });
 
   return ret;
-
 };
 
 export default insert;
