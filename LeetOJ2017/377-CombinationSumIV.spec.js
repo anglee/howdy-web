@@ -25,4 +25,11 @@ describe('LeetOJ 377-CombinationSumIV', () => {
     });
   });
 
+  it('should solve OJ test case 1', () => {
+    const nums = [3,33,333];
+    const target = 10000;
+    expect(combinationSum4(nums, target)).to.equal(0);
+  });
+
+
 });
