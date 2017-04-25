@@ -160,6 +160,9 @@ describe('LeetOJ 013-RomanToInteger', () => {
     it('should solve test case 1900', () => {
       expect(romanToInt('MCM')).to.equal(1900);
     });
+    it('should solve test case 1996', () => {
+      expect(romanToInt("MCMXCVI")).to.equal(1996);
+    });
     it('should solve test case', () => {
       expect(romanToInt('DCXXI')).to.equal(621);
     });

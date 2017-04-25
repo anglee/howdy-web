@@ -2,7 +2,7 @@
  * @param {string} s
  * @return {number}
  */
-var romanToInt = function(s) {
+var romanToInt0 = function(s) {
   let ret = 0;
   for (let i = 0; i < s.length; ++i) {
     if (s[i] === 'M') {
@@ -41,6 +41,47 @@ var romanToInt = function(s) {
       }
     }
   }
+  return ret;
+};
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+  const valueMap = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000,
+  };
+  const keys = Object.keys(valueMap);
+  const keysIndexMap = keys.reduce((indexMap, key, index) => {
+    indexMap[key] = index;
+    return indexMap;
+  }, {});
+
+  let lastIndex = null;
+  let ret = 0;
+  // iterate from right to left if a digit has lower index than the last encountered, then it is a negative
+  // a key observation is that a negative digit will not locate next to another negative digit,
+  // in other words, there is no consecutive negative digits
+  const digits = s.split('').reverse();
+  digits.forEach((digit) => {
+    const index = keysIndexMap[digit];
+    if (lastIndex === null || lastIndex <= index) {
+      ret += valueMap[digit];
+    } else {
+      ret -= valueMap[digit];
+    }
+    if (lastIndex === null || index != lastIndex) {
+      lastIndex = index;
+    }
+  });
+
   return ret;
 };
 
