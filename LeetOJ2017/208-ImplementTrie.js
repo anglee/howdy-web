@@ -20,7 +20,6 @@ Trie.prototype.insert = function(word) {
     node = node.get(char);
   }
   node.set('nil', true);
-  return null;
 };
 
 /**
