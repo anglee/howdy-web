@@ -1,13 +1,10 @@
-import DoublyLinkedList, { Node } from '../lib/DoublyLinkedList';
-
 /**
  * @param {number} capacity
  */
 var LRUCache0 = function(capacity) {
-  this.capacity = capacity;
-  this.size = 0;
+  this.list = [];
   this.map = new Map();
-  this.list = new DoublyLinkedList();
+  this.capacity = capacity;
 };
 
 /**
@@ -18,9 +15,10 @@ LRUCache0.prototype.get = function(key) {
   if (!this.map.has(key)) {
     return -1;
   }
-  const node = this.map.get(key);
-  this.put(key, node.val.value);
-  return node.val.value;
+  const value = this.map.get(key);
+  this._unlist(key);
+  this._add(key, value);
+  return value;
 };
 
 /**
@@ -30,18 +28,28 @@ LRUCache0.prototype.get = function(key) {
  */
 LRUCache0.prototype.put = function(key, value) {
   if (this.map.has(key)) {
-    this.list.delete(this.map.get(key));
-    this.size--;
+    this._unlist(key);
   }
-  const node = new Node({key, value});
-  this.map.set(key, node);
-  this.list.push(node);
-  this.size++;
-  if (this.size > this.capacity) {
-    const leastUsed = this.list.shift();
-    this.map.delete(leastUsed.val.key);
-    this.size--;
+  this._add(key, value);
+  if (this.list.length > this.capacity) {
+    this._evict();
   }
+};
+
+LRUCache0.prototype._unlist = function (key) {
+  const index = this.list.indexOf(key);
+  this.list.splice(index, 1);
+  this.map.delete(key);
+};
+
+LRUCache0.prototype._add = function (key, value) {
+  this.list.push(key);
+  this.map.set(key, value);
+};
+
+LRUCache0.prototype._evict = function () {
+  const key = this.list.shift();
+  this.map.delete(key);
 };
 
 /**
@@ -53,6 +61,7 @@ LRUCache0.prototype.put = function(key, value) {
 
 //export default LRUCache0;
 
+// =========================================================================
 
 import LinkedHashMap from '../lib/LinkedHashMap';
 
@@ -60,8 +69,8 @@ import LinkedHashMap from '../lib/LinkedHashMap';
  * @param {number} capacity
  */
 var LRUCache = function(capacity) {
+  this.linkedHashMap = new LinkedHashMap();
   this.capacity = capacity;
-  this.map = new LinkedHashMap();
 };
 
 /**
@@ -69,13 +78,13 @@ var LRUCache = function(capacity) {
  * @return {number}
  */
 LRUCache.prototype.get = function(key) {
-  if (!this.map.has(key)) {
+  if (!this.linkedHashMap.has(key)) {
     return -1;
   }
-  const ret = this.map.get(key);
-  this.map.delete(key);
-  this.map.set(key, ret);
-  return ret;
+  const value = this.linkedHashMap.get(key);
+  this.linkedHashMap.delete(key);
+  this.linkedHashMap.set(key, value);
+  return value;
 };
 
 /**
@@ -84,12 +93,10 @@ LRUCache.prototype.get = function(key) {
  * @return {void}
  */
 LRUCache.prototype.put = function(key, value) {
-  if (this.map.has(key)) {
-    this.map.delete(key);
-  }
-  this.map.set(key, value);
-  if (this.map.size > this.capacity) {
-    this.map.shift();
+  this.linkedHashMap.delete(key);
+  this.linkedHashMap.set(key, value);
+  if (this.linkedHashMap.size > this.capacity) {
+    this.linkedHashMap.shift();
   }
 };
 
