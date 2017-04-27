@@ -90,5 +90,3 @@ var exist = function(board, word) {
 };
 
 export default exist;
-
-export default exist;

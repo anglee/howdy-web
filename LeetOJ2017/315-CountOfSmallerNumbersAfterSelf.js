@@ -2,14 +2,14 @@ const binarySearch = (array, node, compareFunc) => {
   // return the index of first element in array whose val is greater than val
   // assumes array is sorted
   if (array.length === 0) { return 0; }
-  if (array[array.length - 1] <= val) { return array.length; }
+  if (compareFunc(array[array.length - 1], node)  <= 0) { return array.length; }
 
   let i = 0;
   let j = array.length - 1;
 
   while (i < j) {
     const m = Math.floor((i + j) / 2);
-    if (compareFunc(array[m], val) <= 0) {
+    if (compareFunc(array[m], node) <= 0) {
       i = m + 1;
     } else {
       j = m;
@@ -30,8 +30,8 @@ class PriorityQueue {
     this.queue.splice(i, 0, node);
   }
 
-  countToTheLeftOf(num) {
-    return binarySearch(this.queue, num, this.comparator);
+  countToTheLeftOf(node) {
+    return binarySearch(this.queue, node, this.comparator);
   }
 
   pop() {

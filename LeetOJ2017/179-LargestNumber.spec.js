@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import largestNumber from './howdy';
+import largestNumber from './179-LargestNumber';
 
 describe('largestNumber', () => {
   it('should solve the given example', () => {
