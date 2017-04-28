@@ -1,17 +1,35 @@
 import _ from 'lodash';
 // 1,2,3,4,5 (4)
-const binarySearch = (array, target, l = 0, r = array.length - 1) => {
-  if (l > r) {
+const binarySearch0 = (A, target, l = 0, r = A.length - 1) => {
+  if (r < l) {
     return -1;
   }
-  let m = _.floor((l + r) / 2);
-  if (array[m] === target) {
+  const m = Math.floor((l + r) / 2);
+  if (A[m] === target) {
     return m;
-  } else  if (array[m] < target) {
-    return binarySearch(array, target, m + 1, r);
-  } else { // array[m] > target
-    return binarySearch(array, target, l, m - 1);
   }
+  if (A[m] > target) {
+    return binarySearch0(A, target, l, m - 1);
+  } else { // A[m] < target
+    return binarySearch0(A, target, m + 1, r);
+  }
+};
+
+const binarySearch = (A, target) => {
+  let i = 0;
+  let j = A.length - 1;
+  while (i <= j) {
+    const m = Math.floor((i + j) / 2);
+    if (A[m] === target) {
+      return m;
+    }
+    if (A[m] > target) {
+      j = m - 1;
+    } else {
+      i = m + 1;
+    }
+  }
+  return -1;
 };
 
 
