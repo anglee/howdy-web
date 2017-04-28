@@ -35,4 +35,104 @@ describe('Classic_Binary-Search', () => {
       expect(binarySearch(A, target)).to.equal(-1);
     });
   });
+
+  describe('break down test case by array length', () => {
+
+    describe('when input array is empty', () => {
+      it('should always return -1', () => {
+        const sortedArray = [];
+        const target = 7;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(-1);
+      });
+    });
+
+    describe('when input array is of length 1', () => {
+      const sortedArray = [5];
+      it('should return the index of the first element that > target was found', () => {
+        const target = 1;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(0);
+      });
+      it('should return -1 if no element > target was not found', () => {
+        const target = 5;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(-1);
+      });
+      it('should return -1 if no element > target was not found', () => {
+        const target = 7;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(-1);
+      });
+    });
+
+    describe('when input array is of length 2', () => {
+      const sortedArray = [10,100];
+      it('should return the index of the first element that > target was found', () => {
+        const target = 1;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(0);
+      });
+      it('should return the index of the first element that > target was found', () => {
+        const target = 10;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(1);
+      });
+      it('should return the index of the first element that > target was found', () => {
+        const target = 50;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(1);
+      });
+      it('should return -1 if no element > target was not found', () => {
+        const target = 100;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(-1);
+      });
+      it('should return -1 if no element > target was not found', () => {
+        const target = 200;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(-1);
+      });
+    });
+
+    describe('when input array is of length 3', () => {
+      const sortedArray = [10, 100, 1000];
+      it('should return the index of the first element that > target was found', () => {
+        const target = 1;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(0);
+      });
+      it('should return the index of the first element that > target was found', () => {
+        const target = 10;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(1);
+      });
+      it('should return the index of the first element that > target was found', () => {
+        const target = 50;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(1);
+      });
+      it('should return the index of the first element that > target was found', () => {
+        const target = 100;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(2);
+      });
+      it('should return the index of the first element that > target was found', () => {
+        const target = 200;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(2);
+      });
+      it('should return -1 if no element > target was not found', () => {
+        const target = 1000;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(-1);
+      });
+      it('should return -1 if no element > target was not found', () => {
+        const target = 2000;
+        const index = binarySearch(sortedArray, target);
+        expect(index).to.equal(-1);
+      });
+    });
+  });
+
 });
