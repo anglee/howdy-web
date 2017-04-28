@@ -4,6 +4,12 @@ import search from './033-SearchInRotatedSortedArray';
 describe('LeetOJ 033-SearchInRotatedSortedArray', () => {
 
   describe('search', () => {
+    it('should handle empty input', () => {
+      const rotated = [];
+      const target = 1;
+      expect(search(rotated, target)).to.equal(-1);
+    });
+
     it('should solve test case left < mid < right and target is on the left half', () => {
       const rotated = [0, 1, 2, 4, 5, 6, 7];
       const target = 1;
