@@ -6,7 +6,7 @@
  */
 var RandomizedSet = function() {
   this.array = [];
-  this.map = new Map();
+  this.indexMap = new Map();
 };
 
 /**
@@ -15,10 +15,10 @@ var RandomizedSet = function() {
  * @return {boolean}
  */
 RandomizedSet.prototype.insert = function(val) {
-  if (this.map.has(val)) {
+  if (this.indexMap.has(val)) {
     return false;
   }
-  this.map.set(val, this.array.length);
+  this.indexMap.set(val, this.array.length);
   this.array.push(val);
   // console.log(`insert ${val}, array after = ${JSON.stringify(this.array)}`);
   return true;
@@ -36,17 +36,17 @@ const swap = (A, i, j) => {
  * @return {boolean}
  */
 RandomizedSet.prototype.remove = function(val) {
-  if (!this.map.has(val)) {
+  if (!this.indexMap.has(val)) {
     return false;
   }
-  const index = this.map.get(val);
-  this.map.delete(val);
+  const index = this.indexMap.get(val);
+  this.indexMap.delete(val);
   if (index !== this.array.length - 1) { // it the val to be removed is not the last in the array
     // swap it with the last
     const lastVal = this.array[this.array.length - 1];
     swap(this.array, index, this.array.length - 1);
-    // update index in the map;
-    this.map.set(lastVal, index);
+    // update index in the indexMap;
+    this.indexMap.set(lastVal, index);
   }
   this.array.pop();
   // console.log(`remove ${val}, array after = ${JSON.stringify(this.array)}`);
