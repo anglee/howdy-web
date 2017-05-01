@@ -36,7 +36,7 @@ var longestConsecutive0 = function(nums) { // union find
   let maxCount = 0;
   for (let num of nums) {
     if (map.has(num)) {
-      break;
+      continue;
     }
     const node = new Node(num);
     rootMap.set(node, 1);
@@ -87,7 +87,7 @@ var longestConsecutive1 = function(nums) {
 
   for (let num of nums) {
     if (seen.has(num)) {
-      break;
+      continue;
     }
     seen.add(num);
 
