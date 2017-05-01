@@ -144,7 +144,7 @@ class Seg {
  * @param {number[]} nums
  * @return {number}
  */
-var longestConsecutive = function(nums) {
+var longestConsecutive2 = function(nums) {
 
   const seen = new Set();
   const segStartMap = new Map();
@@ -189,6 +189,31 @@ var longestConsecutive = function(nums) {
   });
 
   return ret;
+};
+
+//------------------------------------------------------------------------------------------
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var longestConsecutive = function(nums) {
+  const map = new Map();
+
+  let maxLength = 0;
+  for (let num of nums) {
+    if (map.has(num)) {
+      continue;
+    }
+    const left = map.has(num - 1) ? map.get(num - 1) : 0;
+    const right = map.has(num + 1) ? map.get(num + 1) : 0;
+    const length = left + right + 1;
+    maxLength = Math.max(maxLength, length);
+    map.set(num, length);
+    map.set(num - left, length);
+    map.set(num + right, length);
+  }
+  return maxLength;
 };
 
 export default longestConsecutive;
