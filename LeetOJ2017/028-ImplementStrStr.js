@@ -34,7 +34,7 @@ const toCharCode = (char) => char.charCodeAt(0);
  * @param {string} needle
  * @return {number}
  */
-var strStr = function(haystack, needle) {
+var strStr0 = function(haystack, needle) {
   if (needle.length === 0) {
     return 0; // ???, I only do this for LeetOJ to pass
   }
@@ -69,5 +69,49 @@ var strStr = function(haystack, needle) {
 
   return -1;
 };
+
+//------------------------------------------------------------------------------------------
+
+const hash = (str) => {
+  let ret = 0;
+  for (let i = 0; i < str.length; ++i) {
+    ret += str.charCodeAt(i);
+  }
+  return ret;
+};
+
+const subStrMatch = (str, index, needle) => {
+  // check if str.substr(i, needle.length) === needle
+  // return str.substr(i, needle.length) === needle;
+
+  for (let i = 0; i < needle.length; ++i) {
+    if (str[index + i] !== needle[i]) {
+      return false;
+    }
+  }
+  return true;
+};
+
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+var strStr = function(haystack, needle) {
+  const needleHash = hash(needle);
+  let running = 0;
+  for (let i = 0; i < needle.length; ++i) {
+    running += haystack.charCodeAt(i);
+  }
+  for (let i = needle.length; i <= haystack.length; ++i) {
+    if (running === needleHash && subStrMatch(haystack, i - needle.length, needle)) {
+      return i - needle.length;
+    }
+    running += haystack.charCodeAt(i);
+    running -= haystack.charCodeAt(i - needle.length);
+  }
+  return -1;
+};
+
 
 export default strStr;
