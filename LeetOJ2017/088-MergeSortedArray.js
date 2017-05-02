@@ -20,7 +20,7 @@ var merge0 = function(nums1, m, nums2, n) { // time O(m+n), space O(m+n)
   // return ret;
 };
 
-var merge = function(nums1, m, nums2, n) { // time O(m+n), space O(1)
+var merge1 = function(nums1, m, nums2, n) { // time O(m+n), space O(1)
   const ret = [];
   // push all element in nums1 to the end
   const offset = nums1.length - m;
@@ -43,6 +43,27 @@ var merge = function(nums1, m, nums2, n) { // time O(m+n), space O(1)
   }
   while (iRet < nums1.length) {
     nums1[iRet++] = null;
+  }
+};
+
+/**
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void} Do not return anything, modify nums1 in-place instead.
+ */
+var merge = function(nums1, m, nums2, n) { // time O(m+n), space O(1)
+  let i = m + n - 1;
+  let i1 = m - 1;
+  let i2 = n - 1;
+
+  while (i >= 0) {
+    if (nums1[i1] > nums2[i2] || i2 < 0) {
+      nums1[i--] = nums1[i1--];
+    } else {
+      nums1[i--] = nums2[i2--];
+    }
   }
 };
 
