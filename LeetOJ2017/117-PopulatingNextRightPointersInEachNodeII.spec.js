@@ -14,6 +14,8 @@ describe('LeetOJ 117-PopulatingNextRightPointersInEachNodeII', () => {
         findNodeOfValue(root, 7),
       ];
 
+      nodes.forEach(node => { if (node) { node.next = null; }});
+
       connect(root);
       expect(nodes[1].next).to.be.null;
       expect(nodes[2].next).to.equal(nodes[3]);
