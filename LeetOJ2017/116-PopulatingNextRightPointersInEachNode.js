@@ -10,7 +10,7 @@
  * @param {TreeLinkNode} root
  * @return {void} Do not return anything, modify tree in-place instead.
  */
-var connect = function(root) {
+var connect0 = function(root) {
   const q = [{ node: root, level: 0 }];
   let last = null;
   let lastLevel = -1;
@@ -32,6 +32,36 @@ var connect = function(root) {
       last = node;
       lastLevel = level;
     }
+  }
+};
+
+
+
+/**
+ * @param {TreeLinkNode} root
+ * @return {void} Do not return anything, modify tree in-place instead.
+ */
+var connect = function(root) {
+  const processNode = (node) => {
+    node.left.next = node.right;
+    node.right.next = node.next ? node.next.left : null;
+  };
+
+  const processRow = (start) => {
+    let node = start;
+    if (!node.left) {
+      return; // return if this is the last row (i.e. all leaves), no need to process
+    }
+    while (node) {
+      processNode(node);
+      node = node.next;
+    }
+  };
+
+  let rowStart = root;
+  while (rowStart) {
+    processRow(rowStart);
+    rowStart = rowStart.left;
   }
 };
 
