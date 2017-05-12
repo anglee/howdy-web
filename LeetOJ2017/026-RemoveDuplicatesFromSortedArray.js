@@ -2,6 +2,22 @@
  * @param {number[]} nums
  * @return {number}
  */
+var removeDuplicates0 = function(nums) {
+  let r = 1;
+  let w = 0;
+  while (r < nums.length) {
+    if (nums[w] !== nums[r]) {
+      nums[++w] = nums[r];
+    }
+    r++;
+  }
+  return w + 1;
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
 var removeDuplicates = function(nums) {
   let read = 0;
   let write = 0;
