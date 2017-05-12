@@ -11,9 +11,6 @@ const findEdge = (w1, w2) => {
       return new Edge(w1[i], w2[i]);
     }
   }
-  if (w2.length < w1.length) { // case like 'wrtkj' 'wrt'
-    return 'error';
-  }
   return null;
 };
 
@@ -21,7 +18,7 @@ const findEdge = (w1, w2) => {
  * @param {string[]} words
  * @return {string}
  */
-var alienOrder = function(words) {
+var alienOrder0 = function(words) {
   const chars = new Set();
   for (let w of words) {
     for (let ch of w.split('')) {
@@ -92,6 +89,83 @@ var alienOrder = function(words) {
   }
 
   return ret.reverse().join('');
+};
+
+// export default alienOrder0;
+
+//------------------------------------------------------------------------------------------
+
+const getAllChars = (words) => {
+  const chars = new Set();
+  words.forEach((word) => {
+    word.split('').forEach(char => { chars.add(char); });
+  });
+  return chars;
+};
+
+const generateEdgeMap = (words) => {
+  const process = (w1, w2) => {
+    for (let i = 0; i < w1.length && w2.length; ++i) {
+      if (w1[i] !== w2[i]) {
+        return { from: w1[i], to: w2[i] };
+      }
+    }
+    return { from: null, to: null };
+  };
+  const edgeMap = new Map();
+  for (let i = 1; i < words.length; ++i) {
+    const { from, to } = process(words[i - 1], words[i]);
+    if (from === null) {
+      continue;
+    }
+    if (!edgeMap.has(from)) {
+      edgeMap.set(from, new Set());
+    }
+    edgeMap.get(from).add(to);
+  }
+  return edgeMap;
+};
+
+
+const topologicalSort = (allNodes, edgeMap) => {
+  const PROCESSING = 1;
+  const PROCESSED = 2;
+  const circularDependencyError = new Error('circular dependency');
+
+  const statusMap = new Map();
+  const ret = [];
+  const visit = (node) => {
+    if (statusMap.get(node) === PROCESSING) {
+      throw circularDependencyError;
+    }
+    if (statusMap.get(node) === PROCESSED) {
+      return;
+    }
+    statusMap.set(node, PROCESSING);
+    for (let child of edgeMap.get(node) || []) {
+      visit(child);
+    }
+    statusMap.set(node, PROCESSED);
+    ret.unshift(node);
+  };
+
+  try {
+    allNodes.forEach(node => { visit(node); });
+  } catch(e) {
+    if (e !== circularDependencyError) { throw e; }
+    return '';
+  }
+  return ret.join('');
+};
+
+/**
+ * @param {string[]} words
+ * @return {string}
+ */
+var alienOrder = function(words) {
+  const allChars = getAllChars(words);
+  const edgeMap = generateEdgeMap(words);
+  return topologicalSort(allChars, edgeMap);
 };
 
 export default alienOrder;

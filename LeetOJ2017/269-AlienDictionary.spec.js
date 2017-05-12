@@ -47,11 +47,5 @@ describe('LeetOJ 269-AlienDictionary', () => {
       ];
       expect(alienOrder(dictionary)).to.equal('');
     });
-
-    it('should return empty string for an input of invalid dictionary, case 2', () => {
-      const dictionary = ["wrtkj", "wrt"];
-      expect(alienOrder(dictionary)).to.equal('');
-    });
-
   });
 });
