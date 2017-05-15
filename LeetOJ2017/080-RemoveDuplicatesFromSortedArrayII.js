@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-var removeDuplicates = function(nums) {
+var removeDuplicates0 = function(nums) {
   let read = 0;
   let write = 0;
 
@@ -24,6 +24,33 @@ var removeDuplicates = function(nums) {
     }
   }
   return write;
+};
+
+//------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+
+  let w = 0;
+  let count = 0;
+  let currentChar = null;
+
+  for (let r = 0; r < nums.length; ++r) {
+    if (nums[r] === currentChar) {
+      count++;
+    } else {
+      count = 1;
+      currentChar = nums[r];
+    }
+    if (count <= 2) {
+      nums[w++] = currentChar;
+    }
+  }
+  return w;
 };
 
 export default removeDuplicates;
