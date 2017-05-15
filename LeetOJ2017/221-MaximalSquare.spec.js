@@ -10,12 +10,12 @@ describe('LeetOJ 221-MaximalSquare', () => {
         [1, 0, 1, 1, 1],
         [1, 1, 1, 1, 1],
         [1, 0, 0, 1, 0],
-      ];
+      ].map(row => row.map(it => `${it}`));
       expect(maximalSquare(input)).to.equal(4);
     });
     it('should solve test case 1', () => {
       const input = [
-        [0],
+        ['0'],
       ];
       expect(maximalSquare(input)).to.equal(0);
     });
@@ -26,9 +26,12 @@ describe('LeetOJ 221-MaximalSquare', () => {
         "11111110",
         "11111000",
         "01111000"
-      ].map(row => row.split('').map(it => parseInt(it, 10)));
+      ].map(row => row.split(''));
       expect(maximalSquare(input)).to.equal(16);
     });
-
+    it('should solve empty test case', () => {
+      const input = [];
+      expect(maximalSquare(input)).to.equal(0);
+    });
   });
 });
