@@ -31,6 +31,12 @@ describe('LeetOJ 210-CourseScheduleII', () => {
       const order = findOrder(numCourses, prerequisites);
       expect(order).to.eql([0]);
     });
-
+    
+    it('should solve OJ test case 1', () => {
+      const numCourses = 2;
+      const prerequisites = [[0,1],[1,0]];
+      const order = findOrder(numCourses, prerequisites);
+      expect(order).to.eql([]);
+    });
   });
 });

@@ -117,7 +117,6 @@ var isPalindrome1 = function (head) { // the original list is changed
 
 //------------------------------------------------------------------------------------------
 
-
 /**
  * Definition for singly-linked list.
  * function ListNode(val) {

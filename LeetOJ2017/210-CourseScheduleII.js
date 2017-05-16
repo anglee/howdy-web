@@ -4,43 +4,37 @@
  * @return {number[]}
  */
 var findOrder = function(numCourses, prerequisites) {
-  const nodes = new Set();
   const neighborsMap = new Map(); // node -> []
-
+  for (let i = 0; i < numCourses; ++i) {
+    neighborsMap.set(i, new Set());
+  }
   for (let [to, from] of prerequisites) {
-    nodes.add(to);
-    nodes.add(from);
-    if (!neighborsMap.has(from)) {
-      neighborsMap.set(from, []);
-    }
-    neighborsMap.get(from).push(to);
+    neighborsMap.get(from).add(to);
   }
 
-  const isVisiting = new Set();
-  const isVisited = new Set();
+  const colorMap = new Map();
+  const PROCESSING = 1;
+  const DONE = 2;
   const ret = [];
 
-  const visit = (node) => {
-
-    if (isVisited.has(node)) {
-      return;
-    }
-
-    if (isVisiting.has(node)) {
+  const dfs = (i) => {
+    if (colorMap.get(i) === PROCESSING) {
       throw new Error('loop');
     }
-    isVisiting.add(node);
-    const neighbors = neighborsMap.get(node) || [];
-    for (let n of neighbors) {
-      visit(n);
+    if (colorMap.get(i) === DONE) {
+      return;
     }
-    ret.unshift(node);
-    isVisited.add(node);
+    colorMap.set(i, PROCESSING);
+    for (let neighbor of neighborsMap.get(i)) {
+      dfs(neighbor);
+    }
+    ret.unshift(i);
+    colorMap.set(i, DONE);
   };
 
   try {
     for (let i = 0; i < numCourses; ++i) {
-      visit(i);
+      dfs(i);
     }
   } catch (error) {
     if (error.message === 'loop') {
