@@ -1,9 +1,5 @@
 import { expect } from 'chai';
-import {
-  fromArray,
-  toArray,
-  reverse
-} from '../lib/LinkedList';
+import { fromArray } from '../lib/LinkedList';
 import isPalindrome from './234-PalindromeLinkedList';
 
 describe('LeetOJ 234-PalindromeLinkedList', () => {
@@ -32,6 +28,22 @@ describe('LeetOJ 234-PalindromeLinkedList', () => {
     it('should solve test case 6', () => {
       const head = fromArray([1, 2, 1]);
       expect(isPalindrome(head)).to.be.true;
+    });
+    it('should solve test case 7', () => {
+      const head = fromArray([1, 2, 3, 3, 2, 1]);
+      expect(isPalindrome(head)).to.be.true;
+    });
+    it('should solve test case 8', () => {
+      const head = fromArray([1, 2, 3, 4, 3, 2, 1]);
+      expect(isPalindrome(head)).to.be.true;
+    });
+    it('should solve test case 9', () => {
+      const head = fromArray([1, 2, 4, 5, 3, 2, 1]);
+      expect(isPalindrome(head)).to.be.false;
+    });
+    it('should solve test case 10', () => {
+      const head = fromArray([1, 2, 3, 4, 2, 1]);
+      expect(isPalindrome(head)).to.be.false;
     });
   });
 });

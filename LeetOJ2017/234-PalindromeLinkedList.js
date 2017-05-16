@@ -7,11 +7,84 @@ import { reverse } from '../lib/LinkedList';
  *     this.next = null;
  * }
  */
+
+const getLength = (head) => {
+  let node = head;
+  let count = 0;
+  while (node) {
+    count++;
+    node = node.next;
+  }
+  return count;
+};
+
+const nth = (head, n) => { // 0 based
+  let node = head;
+  let count = 0;
+  while (node) {
+    if (count === n) {
+      return node;
+    }
+    count++;
+    node = node.next;
+  }
+  return count;
+};
+
+const reverse = (head) => {
+
+  let node = head;
+  let prev = null;
+
+  while (node) {
+    const next = node.next;
+    node.next = prev;
+    prev = node;
+    node = next;
+  }
+  const newHead = prev;
+  return newHead;
+};
+
+const isMatch = (head1, head2, length) => {
+  let node1 = head1;
+  let node2 = head2;
+  for (let i = 0; i < length; ++i) {
+    if (node1.val !== node2.val) {
+      return false;
+    }
+    node1 = node1.next;
+    node2 = node2.next;
+  }
+  return true;
+};
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
 /**
  * @param {ListNode} head
  * @return {boolean}
  */
-var isPalindrome0 = function (head) { // the original list is changed
+var isPalindrome0 = function (head) {
+  const length = getLength(head);
+  if (length <= 1) { return true; }
+  const secondHalfStart = nth(head, Math.ceil(length / 2));
+  const head2 = reverse(secondHalfStart);
+  return isMatch(head, head2, Math.floor(length / 2));
+};
+
+//------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome1 = function (head) { // the original list is changed
   if (head === null || head.next === null) {
     return true;
   }
@@ -41,6 +114,8 @@ var isPalindrome0 = function (head) { // the original list is changed
 
   return true;
 };
+
+//------------------------------------------------------------------------------------------
 
 
 /**
