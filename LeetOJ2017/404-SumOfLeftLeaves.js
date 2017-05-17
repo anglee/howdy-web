@@ -5,9 +5,8 @@
  *     this.left = this.right = null;
  * }
  */
-const isLeaf = (node) => {
-  return node.left === null && node.right === null;
-};
+const isLeaf = (node) => node.left === null && node.right === null;
+
 /**
  * @param {TreeNode} root
  * @return {number}
