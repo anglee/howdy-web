@@ -3,7 +3,7 @@
  * @param {number[][]} edges
  * @return {boolean}
  */
-var validTree0 = function(n, edges) { // time: O(E * V), space: O(V), see http://www.geeksforgeeks.org/union-find/
+var validTree0 = function(n, edges) { // Union Find, time: O(E * V), space: O(V), see http://www.geeksforgeeks.org/union-find/
   if (edges.length !== n - 1) {
     return false;
   }
@@ -29,6 +29,44 @@ var validTree0 = function(n, edges) { // time: O(E * V), space: O(V), see http:/
   }
   return true;
 };
+
+//------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @return {boolean}
+ */
+var validTree1 = function(n, edges) { // Union Find, alternative solution
+  if (edges.length !== n - 1) { return false; }
+  const nodes = new Map();
+  for (let i = 0; i < n; ++i) {
+    nodes.set(i, { parent: null });
+  }
+  const getRoot = (node) => {
+    while (node.parent) {
+      node = node.parent;
+    }
+    return node;
+  };
+
+  for (let e of edges) {
+    const v0 = nodes.get(e[0]);
+    const v1 = nodes.get(e[1]);
+    const root0 = getRoot(v0);
+    const root1 = getRoot(v1);
+    if (root0 === root1 && root0 !== null) {
+      return false;
+    }
+    root1.parent = root0;
+  }
+  return true;
+};
+
+
+//------------------------------------------------------------------------------------------
+
 
 /**
  * @param {number} n
