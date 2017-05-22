@@ -38,6 +38,7 @@ var letterCombinations0 = function(digits) {
 };
 
 //------------------------------------------------------------------------------------------
+// this solution use less space
 
 const map = new Map();
 map.set('2', ['a', 'b', 'c']);
