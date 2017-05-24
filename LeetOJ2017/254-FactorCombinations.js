@@ -61,8 +61,46 @@ const doGetFactors = (start, n) => {
  * @param {number} n
  * @return {number[][]}
  */
-var getFactors = function(n) {
+var getFactors2 = function(n) {
   return doGetFactors(2, n);
+};
+
+//--------------------------------------------------------------------------------------------------
+
+const memoize = (f) => {
+  const map = new Map();
+  return (n, i = 2) => {
+    if (!map.has(n)) {
+      map.set(n, new Map());
+    }
+    if (map.get(n).has(i)) {
+      return map.get(n).get(i);
+    }
+    const ret = f(n, i);
+    map.get(n).set(i, ret);
+    return ret;
+  }
+};
+
+const helper = memoize((n, i = 2) => {
+  const ret = [[n]];
+  for (; i <= Math.sqrt(n); ++i) {
+    if (n % i === 0) {
+      ret.push(
+        ...helper(n / i, i).map(it => [i, ...it])
+      )
+    }
+  }
+  return ret;
+});
+/**
+ * @param {number} n
+ * @return {number[][]}
+ */
+var getFactors = function(n) {
+  const ret = helper(n);
+  ret.shift();
+  return ret;
 };
 
 export default getFactors;
