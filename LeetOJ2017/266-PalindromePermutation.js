@@ -19,4 +19,23 @@ var canPermutePalindrome = function(s) {
   return true;
 };
 
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var canPermutePalindrome = function(s) {
+  const set = new Set();
+  for (let char of s.split('')) {
+    if (set.has(char)) {
+      set.delete(char);
+    } else {
+      set.add(char);
+    }
+  }
+  return set.size <= 1;
+};
+
 export default canPermutePalindrome;
