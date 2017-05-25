@@ -17,7 +17,7 @@ describe('LeetOJ 267-Palindrome PermutationII', () => {
         .to.eql(['aaa']);
     });
     it('should solve test case "aabbccc"', () => {
-      expect(generatePalindromes('aabbccc'))
+      expect(generatePalindromes('aabbccc').sort())
         .to.eql([
         "abcccba",
         "acbcbca",
@@ -25,7 +25,7 @@ describe('LeetOJ 267-Palindrome PermutationII', () => {
         "bcacacb",
         "cabcbac",
         "cbacabc"
-      ]);
+      ].sort());
     });
   });
 });
