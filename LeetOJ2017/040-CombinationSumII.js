@@ -48,6 +48,9 @@ var combinationSum0 = function(candidates, target) { // DP
   return dedup(buf[target]);
 };
 
+//--------------------------------------------------------------------------------------------------
+
+
 const without = (nums, num) => {
   const ret = [];
   for (let n of nums) {
@@ -63,7 +66,7 @@ const without = (nums, num) => {
  * @param {number} target
  * @return {number[][]}
  */
-var combinationSum = function(candidates, target) {
+var combinationSum1 = function(candidates, target) {
   if (target === 0) {
     return [[]];
   }
@@ -77,4 +80,59 @@ var combinationSum = function(candidates, target) {
   ];
 };
 
-export default combinationSum0;
+//--------------------------------------------------------------------------------------------------
+
+const countBy = (nums) => nums.reduce((map, num) => map.set(num, (map.get(num) || 0) + 1), new Map());
+const head = (iterator) => Array.from(iterator)[0];
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum2 = function(candidates, target) {
+  const countMap = countBy(candidates);
+  const helper = (target) => {
+    if (target === 0) { return [[]]; }
+    if (target < 0 || countMap.size === 0) { return []; }
+    const candidate = head(countMap.keys());
+    const count = countMap.get(candidate);
+    countMap.delete(candidate);
+    const ret = [];
+    for (let c = 0; c <= count; ++ c) {
+      const prefix = Array(c).fill(candidate);
+      ret.push(
+        ...helper(target - candidate * c).map(A => [...prefix, ...A])
+      )
+    }
+    countMap.set(candidate, count);
+    return ret;
+  };
+  return helper(target);
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum = function(candidates, target) {
+  const countMap = countBy(candidates);
+  const ret = Array(target + 1).fill().map(() => []);
+  ret[0] = [[]];
+  for (let [num, count] of countMap) {
+    for (let i = target; i >= 1; --i) {
+      for (let c = count; c > 0; --c) {
+        const j = i - num * c;
+        if (j < 0) { continue; }
+        ret[i].push(
+          ...ret[j].map(A => [...Array(c).fill(num), ...A])
+        )
+      }
+    }
+  }
+  return ret[target];
+};
+
+export default combinationSum;
