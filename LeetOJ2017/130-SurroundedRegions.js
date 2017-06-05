@@ -1,62 +1,41 @@
-const preprocess0 = (BB, w, h, x, y) => { // turn 'O' into 'B'
-  if (x < 0 || y < 0 || x >= w || y >= h || BB[y][x] !== 'O') {
-    return;
-  }
-  BB[y][x] = 'B'; // means it touches the border
-  preprocess0(BB, w, h, x - 1, y);
-  preprocess0(BB, w, h, x + 1, y);
-  preprocess0(BB, w, h, x, y + 1);
-  preprocess0(BB, w, h, x, y - 1);
-};
-
-const postprocess0 = (BB, w, h, x, y) => { // turn 'B' into 'O'
-  if (x < 0 || y < 0 || x >= w || y >= h || BB[y][x] !== 'B') {
-    return;
-  }
-  BB[y][x] = 'O';
-};
-
-const flip0 = (BB, w, h, x, y) => { // turn 'O' into 'X'
-  if (x < 1 || y < 1 || x >= w - 1 || y >= h - 1 || BB[y][x] !== 'O') {
-    return;
-  }
-  BB[y][x] = 'X';
-  flip0(BB, w, h, x - 1, y);
-  flip0(BB, w, h, x + 1, y);
-  flip0(BB, w, h, x, y + 1);
-  flip0(BB, w, h, x, y - 1);
+const getWidthAndHeight = board => {
+  const h = board.length;
+  const w = h === 0 ? 0 : board[0].length;
+  return { h, w };
 };
 /**
  * @param {character[][]} board
  * @return {void} Do not return anything, modify board in-place instead.
  */
-var solve0 = function(board) {
-  const h = board.length;
-  if (h <= 1) { return; }
-  const w = board[0].length;
-  if (w <= 1) { return; }
-
+var solve0 = function(board) { // DFS, easier to cause call stack overflow
+  const { w, h } = getWidthAndHeight(board);
+  if (w === 0 || h === 0) { return; }
+  const visit = (x, y) => {
+    if (x < 0 || y < 0 || x >= w || y >= h || board[y][x] !== 'O') {
+      return;
+    }
+    board[y][x] = 'B'; // meaning it touches the border
+    visit(x - 1, y);
+    visit(x + 1, y);
+    visit(x, y - 1);
+    visit(x, y + 1);
+  };
   for (let x = 0; x < w; ++x) {
-    preprocess0(board, w, h, x, 0);
-    preprocess0(board, w, h, x, h - 1);
+    visit(x, 0);
+    visit(x, h - 1);
   }
   for (let y = 0; y < h; ++y) {
-    preprocess0(board, w, h, 0, y);
-    preprocess0(board, w, h, w - 1, y);
+    visit(0, y);
+    visit(w - 1, y);
   }
-  for (let x = 1; x < w - 1; ++x) {
-    for (let y = 1; y < h - 1; ++y) {
-      flip0(board, w, h, x, y);
-    }
-  }
-  for (let x = 0; x < w; ++x) {
-    for (let y = 0; y < h; ++y) {
-      postprocess0(board, w, h, x, y);
+  for (let y = 0; y < h; ++y) {
+    for (let x = 0; x < w; ++x) {
+      board[y][x] = (board[y][x] === 'B') ? 'O' : 'X';
     }
   }
 };
 
-// ----------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 const process = (BB, w, h, ix, iy, fromCh, toCh) => {
   const q = [{ x: ix, y: iy }];
@@ -79,7 +58,7 @@ const process = (BB, w, h, ix, iy, fromCh, toCh) => {
  * @param {character[][]} board
  * @return {void} Do not return anything, modify board in-place instead.
  */
-var solve = function(board) {
+var solve = function(board) { // BFS, less likely to cause call stack overflow
   const h = board.length;
   if (h <= 1) { return; }
   const w = board[0].length;
