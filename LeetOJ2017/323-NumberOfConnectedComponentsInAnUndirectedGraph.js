@@ -136,7 +136,7 @@ var countComponents = function(n, edges) {
   // e,g. parentMap[8] = 7 will mean the parent of node 8 is node 7
   const parentMap = range(0, n);
 
-  edges.forEach(([v1, v2], i) => {
+  edges.forEach(([v1, v2]) => {
     const rootOfV1 = findRoot(parentMap, v1);
     const rootOfV2 = findRoot(parentMap, v2);
     parentMap[rootOfV2] = rootOfV1;

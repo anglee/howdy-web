@@ -1,12 +1,6 @@
 const countPerimeter = (grid, w, h, x, y) => {
   // console.log(`${x}, ${y}`);
-  if (
-    x < 0 ||
-    y < 0 ||
-    x >= w ||
-    y >= h ||
-    grid[y][x] === 0
-  ) {
+  if (grid[y][x] === 0) {
     return 0;
   }
 
