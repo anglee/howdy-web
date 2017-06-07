@@ -100,7 +100,7 @@ const createGrid = (w, h) => {
  * @param {number[][]} positions
  * @return {number[]}
  */
-var numIslands2 = function(m, n, positions) {
+var numIslands2_1 = function(m, n, positions) {
   const w = n;
   const h = m;
 
@@ -136,6 +136,73 @@ var numIslands2 = function(m, n, positions) {
     numberOfIslands += process(grid, x, y + 1, node);
     return numberOfIslands;
   });
+};
+
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {number} m
+ * @param {number} n
+ * @param {number[][]} positions
+ * @return {number[]}
+ */
+var numIslands2 = function(m, n, positions) {
+  class Node {
+    constructor() {
+      this.parent = this;
+      this.isMarked = false;
+    }
+  }
+
+  const createNodeMap = (m, n) => Array(m).fill().map(() => (
+    Array(n).fill().map(() => new Node())
+  ));
+
+  const getRoot = (nodeMap, x, y) => {
+    if (x < 0 || y < 0 || x >= n || y >= m) {
+      return null;
+    }
+    let node = nodeMap[y][x];
+    while (node.parent !== node) {
+      node.parent = node.parent.parent; // halving
+      node = node.parent
+    }
+    return node;
+  };
+
+  const getNewRoot = nodes => nodes[0];
+  // const getNewRoot = nodes => _.maxBy(nodes, 'rank');
+
+  const union = (nodes) => {
+    const newRoot = getNewRoot(nodes);
+    nodes = new Set(nodes.filter(node => node !== null && node.isMarked));
+    const groupCount = nodes.size;
+    for (let node of nodes) {
+      node.parent = newRoot;
+    }
+    return 1 - groupCount;
+  };
+
+  const ret = [];
+  const nodeMap = createNodeMap(m, n);
+  let count = 0;
+  positions.forEach(([y, x]) => {
+    const node = nodeMap[y][x];
+    node.isMarked = true;
+    // * C *
+    // A x B
+    // * D *
+    const rootA = getRoot(nodeMap, x - 1, y);
+    const rootB = getRoot(nodeMap, x + 1, y);
+    const rootC = getRoot(nodeMap, x, y - 1);
+    const rootD = getRoot(nodeMap, x, y + 1);
+    count += 1;
+    const delta = union([node, rootA, rootB, rootC, rootD]);
+    count += delta;
+    ret.push(count);
+  });
+  return ret;
 };
 
 export default numIslands2;
