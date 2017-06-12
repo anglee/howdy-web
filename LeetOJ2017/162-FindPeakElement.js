@@ -11,6 +11,7 @@ var findPeakElement0 = function(nums) { // time: O(n)
   }
   return n - 1;
 };
+//--------------------------------------------------------------------------------------------------
 
 
 /**
@@ -18,6 +19,41 @@ var findPeakElement0 = function(nums) { // time: O(n)
  * @return {number}
  */
 var findPeakElement1 = function(nums) { // time: O(log n)
+  let i = 0;
+  let j = nums.length - 1;
+  while (i < j) {
+    if (j === i + 1) {
+      return nums[i] > nums[j] ? i : j;
+    }
+    const m = Math.floor((i + j) / 2);
+    if (
+      nums[m] > nums[i] &&
+      nums[m] > nums[j]
+    ) {
+      if(nums[m] < nums[m + 1]) {
+        i = m;
+      } else {
+        j = m;
+      }
+    } else {
+      if (nums[i] > nums[j]) {
+        j = m;
+      } else {
+        i = m;
+      }
+    }
+  }
+  return 0;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findPeakElement2 = function(nums) { // time: O(log n)
   const n = nums.length;
   let i = 0;
   let j = n - 1;
@@ -35,6 +71,7 @@ var findPeakElement1 = function(nums) { // time: O(log n)
   return i;
 };
 
+//--------------------------------------------------------------------------------------------------
 
 const helper = (nums, i, j) => {
   if (i === j) { return i; }
@@ -52,11 +89,30 @@ const helper = (nums, i, j) => {
  * @param {number[]} nums
  * @return {number}
  */
-var findPeakElement = function(nums) { // time: O(log n)
-
-
+var findPeakElement3 = function(nums) { // time: O(log n)
   return helper(nums, 0, nums.length - 1);
 };
 
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findPeakElement = function(nums) { // time: O(log n)
+  let i = 0;
+  let j = nums.length - 1;
+  while (i !== j) {
+    const m1 = Math.floor((i + j) / 2);
+    const m2 = m1 + 1;
+    if (nums[m1] < nums[m2]) {
+      i = m2;
+    } else {
+      j = m1;
+    }
+  }
+  return i;
+};
 
 export default findPeakElement;
