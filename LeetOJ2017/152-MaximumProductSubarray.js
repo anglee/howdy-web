@@ -31,7 +31,7 @@ var maxProduct0 = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var maxProduct = function(nums) {
+var maxProduct1 = function(nums) {
   let max = nums[0];
   let min = nums[0];
   let ret = nums[0];
@@ -44,6 +44,26 @@ var maxProduct = function(nums) {
     ret = Math.max(max, ret);
   };
 
+  return ret;
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxProduct = function(nums) {
+  let ret = nums[0];
+  let min = nums[0];
+  let max = nums[0];
+
+  for (let i = 1; i < nums.length; ++i) {
+    const num = nums[i];
+    [min, max] = [
+      Math.min(num, num * min, num * max),
+      Math.max(num, num * min, num * max)
+    ];
+    ret = Math.max(ret, max);
+  }
   return ret;
 };
 
