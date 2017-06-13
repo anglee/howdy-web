@@ -10,7 +10,7 @@
  * @param {number} n
  * @return {ListNode}
  */
-var removeNthFromEnd = function(head, n) {
+var removeNthFromEnd0 = function(head, n) {
   let ptr1 = head;
   for (let i = 0; i < n; ++i) {
     ptr1 = ptr1.next;
@@ -32,6 +32,35 @@ var removeNthFromEnd = function(head, n) {
     head.next = null;
     head = next;
   }
+
+  return head;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ */
+var removeNthFromEnd = function(head, n) {
+  let ptr1 = head;
+  for (let i = 0; i < n; ++i) {
+    ptr1 = ptr1.next;
+  }
+  if (ptr1 === null) {
+    return head.next;
+  }
+
+  ptr1 = ptr1.next;
+
+  let ptr2 = head;
+  while (ptr1) {
+    ptr1 = ptr1.next;
+    ptr2 = ptr2.next;
+  }
+  // at this point ptr2 is pointing to the previous node of the node to be removed
+  ptr2.next = ptr2.next.next;
 
   return head;
 };

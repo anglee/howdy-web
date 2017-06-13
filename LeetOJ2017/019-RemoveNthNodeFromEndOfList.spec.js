@@ -11,7 +11,7 @@ describe('LeetOJ 019-RemoveNthNodeFromEndOfList', () => {
       expect(LL.toArray(ret)).to.eql([1, 2, 3, 5]);
     });
 
-    it('should solve test case that the linked list has only on element', () => {
+    it('should solve test case that the linked list has only one element', () => {
       const head = LL.fromArray([1]);
       const n = 1;
       const ret = removeNthFromEnd(head, n);
