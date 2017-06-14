@@ -23,6 +23,11 @@ describe('LeetOJ 523-ContinuousSubarraySum', () => {
       const k = 6;
       expect(checkSubarraySum(input, k)).to.equal(true);
     });
+    it('should solve test case 3, start with zero', () => {
+      const input = [0, 1, 2];
+      const k = 5;
+      expect(checkSubarraySum(input, k)).to.equal(false);
+    });
     it('should solve special case when k == 0, 1', () => {
       const input = [0, 0];
       const k = 0;
