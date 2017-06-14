@@ -33,6 +33,34 @@ var canCompleteCircuit0 = function(gas, cost) {
  * @param {number[]} cost
  * @return {number}
  */
+var canCompleteCircuit1 = function(gas, cost) {
+  const n = gas.length;
+  const nets = [];
+  for (let i = 0; i < n; ++i) {
+    nets.push(gas[i] - cost[i]);
+  }
+
+  let tail = n;
+  let head = 0;
+  let total = 0;
+
+  while (head !== tail) {
+    while (total + nets[head] < 0) { // can not reach head
+      if (tail <= head) {
+        return -1;
+      }
+      total += nets[--tail];
+    }
+    total += nets[head++];
+  }
+  return tail === n ? 0 : tail;
+};
+
+/**
+ * @param {number[]} gas
+ * @param {number[]} cost
+ * @return {number}
+ */
 var canCompleteCircuit = function(gas, cost) {
   const n = gas.length;
   const nets = [];
@@ -54,6 +82,5 @@ var canCompleteCircuit = function(gas, cost) {
   }
   return j !== n ? j : 0;
 };
-
 
 export default canCompleteCircuit;
