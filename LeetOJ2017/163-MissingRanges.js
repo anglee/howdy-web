@@ -38,7 +38,7 @@ const printRange = (s, e) => (s === e ? `${s}` : `${s}->${e}`);
  * @param {number} upper
  * @return {string[]}
  */
-var findMissingRanges = function(nums, lower, upper) {
+var findMissingRanges0 = function(nums, lower, upper) {
   const ranges = findRanges(unique(nums));
   const missingRanges = [];
 
@@ -58,6 +58,29 @@ var findMissingRanges = function(nums, lower, upper) {
   }
 
   return missingRanges.map(([s, e]) => printRange(s, e));
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number[]} nums
+ * @param {number} lower
+ * @param {number} upper
+ * @return {string[]}
+ */
+var findMissingRanges = function(nums, lower, upper) {
+  const A = [lower - 1, ...nums, upper + 1];
+  const ranges = [];
+  for (let i = 0; i + 1 < A.length; ++i) {
+    if (A[i] === A[i + 1]) {
+      // duplicate => skip
+      continue;
+    }
+    if (A[i] !== A[i + 1] - 1) {
+      ranges.push(printRange(A[i] + 1, A[i + 1] - 1));
+    }
+  }
+  return ranges;
 };
 
 export default findMissingRanges;
