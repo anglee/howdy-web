@@ -88,5 +88,33 @@ describe('LeetOJ 138-CopyListWithRandomPointer', () => {
       expect(newHead.next).to.equal(null);
       expect(newHead.random).to.equal(null);
     });
+    it('should solve the test case 3', () => {
+      const head = fromArray([1, 2, 3, 4]);
+      const node1 = findNodeOfValue(head, 1);
+      const node2 = findNodeOfValue(head, 2);
+      const node3 = findNodeOfValue(head, 3);
+      const node4 = findNodeOfValue(head, 4);
+      node1.random = null;
+      node2.random = null;
+      node3.random = null;
+      node4.random = null;
+      // console.log('original', toArray(head));
+
+      const newHead = copyRandomList(head);
+      // console.log('new', toArray(newHead));
+      const newNode1 = findNodeOfValue(newHead, 1);
+      const newNode2 = findNodeOfValue(newHead, 2);
+      const newNode3 = findNodeOfValue(newHead, 3);
+      const newNode4 = findNodeOfValue(newHead, 4);
+
+      expect(newNode1.next).to.equal(newNode2);
+      expect(newNode2.next).to.equal(newNode3);
+      expect(newNode3.next).to.equal(newNode4);
+      expect(newNode4.next).to.equal(null);
+      expect(newNode1.random).to.equal(null);
+      expect(newNode2.random).to.equal(null);
+      expect(newNode3.random).to.equal(null);
+      expect(newNode4.random).to.equal(null);
+    });
   });
 });
