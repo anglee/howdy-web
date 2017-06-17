@@ -14,7 +14,7 @@ const findPrefix = (s1, s2) => {
  * @param {string[]} strs
  * @return {string}
  */
-var longestCommonPrefix = function(strs) {
+var longestCommonPrefix0 = function(strs) {
   if (strs.length == 0) {
     return '';
   }
@@ -23,6 +23,42 @@ var longestCommonPrefix = function(strs) {
     prefix = findPrefix(prefix, strs[i]);
   }
   return prefix;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+const _ = {
+  every: (A, f) => {
+    for (let i = 0; i < A.length; ++i) {
+      if (f(A[i]) === false) {
+        return false;
+      }
+    }
+    return true;
+  }
+};
+
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+  let i = 0;
+  let ret = '';
+  while (true) {
+    if (i >= strs[0].length) {
+      break;
+    }
+
+    const targetChar = strs[0][i];
+    if (_.every(strs, str => i <= str.length && str[i] === targetChar)) {
+      ret += targetChar;
+      i++;
+    } else {
+      break;
+    }
+  }
+  return ret;
 };
 
 export default longestCommonPrefix;
