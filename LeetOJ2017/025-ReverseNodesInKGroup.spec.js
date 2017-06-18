@@ -10,5 +10,11 @@ describe('LeetOJ 025-ReverseNodesInKGroup', () => {
       const output = reverseKGroup(input, k);
       expect(toArray(output)).to.eql([3, 2, 1, 4, 5]);
     });
+    it('should solve test case 1', () => {
+      const input = fromArray([1, 2, 3, 4, 5, 6, 7]);
+      const k = 3;
+      const output = reverseKGroup(input, k);
+      expect(toArray(output)).to.eql([3, 2, 1, 6, 5, 4, 7]);
+    });
   });
 });

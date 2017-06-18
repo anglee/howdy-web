@@ -33,11 +33,11 @@ const reverseGroup = (start, k) => {
     ++length
   }
   const ret = {
-    last: start,
+    tail: start,
     head: prev,
     length
   };
-  ret.last.next = nextGroupHead;
+  ret.tail.next = nextGroupHead;
   return ret;
 };
 /**
@@ -49,13 +49,13 @@ var reverseKGroup = function(head, k) {
   let firstGroup = null;
   let lastGroup = null;
   while (true) {
-    const groupHead = lastGroup ? lastGroup.last.next : head;
+    const groupHead = lastGroup ? lastGroup.tail.next : head;
     const reversedGroup = reverseGroup(groupHead, k);
     if (!reversedGroup) {
       break;
     }
     if (lastGroup) {
-      lastGroup.last.next = reversedGroup.head;
+      lastGroup.tail.next = reversedGroup.head;
     }
     if (!firstGroup) {
       firstGroup = reversedGroup;
