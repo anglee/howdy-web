@@ -31,4 +31,68 @@ var isHappy = function(n) {
   return doCheckIsHappy(n);
 };
 
-export default isHappy;
+//--------------------------------------------------------------------------------------------------
+
+const getNext = x => x.toString(10).split('').reduce((sqSum, digit) => {
+  digit = parseInt(digit);
+  return sqSum + digit * digit;
+}, 0);
+
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isHappy0 = function(n) {
+  const seen = new Set();
+  let x = n;
+  while (x !== 1) {
+    x = getNext(x);
+    if (seen.has(x)) {
+      return false;
+    } else {
+      seen.add(x);
+    }
+  }
+  return true;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isHappy1 = (() => { // isHappy0 with memoization
+
+  const map = new Map();
+  map.set(1, true);
+
+  return (n) => {
+    if (map.has(n)) {
+      return map.get(n);
+    }
+
+    let x = n;
+    const seen = new Set([x]);
+    while (x !== 1) {
+      x = getNext(x);
+      if (seen.has(x)) {
+        // return false, plus, add all seen to memoization map
+        for (let it of seen) {
+          map.set(it, false);
+        }
+        return false;
+      } else {
+        seen.add(x);
+      }
+    }
+    // return true, plus, add all seen to memoization map
+    for (let it of seen) {
+      map.set(it, true);
+    }
+    return true;
+  };
+
+})();
+
+export default isHappy1;
