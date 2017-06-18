@@ -2,7 +2,7 @@
  * @param {number[]} heights
  * @return {number}
  */
-var largestRectangleArea0 = function(heights) { // brute force
+var largestRectangleArea0 = function(heights) { // brute force, Time: O(n^2)
   let maxArea = 0;
   for (let i = 0; i < heights.length; ++i) {
     let minH = heights[i];
@@ -37,24 +37,24 @@ var largestRectangleArea = function(heights) {
 
   for (let i = 0; i < heights.length; ++i) {
     const h = heights[i];
-    let pos = i;
+    let x = i;
     while (!isEmpty(stack) && peek(stack).h > h) {
-      const it = stack.pop();
-      const width = (i - 1) - it.pos + 1;
-      maxArea = Math.max(maxArea, it.h * width);
-      
-      pos = it.pos;
+      const leftEdge = stack.pop();
+      const width = (i - 1) - leftEdge.x + 1;
+      maxArea = Math.max(maxArea, leftEdge.h * width);
+
+      x = leftEdge.x;
     }
     if (isEmpty(stack) || h > peek(stack).h) {
-      stack.push({ h, pos });
+      stack.push({ h, x });
     }
   }
 
   const i = heights.length;
   while (!isEmpty(stack)) {
-    const it = stack.pop();
-    const width = (i - 1) - it.pos + 1;
-    maxArea = Math.max(maxArea, it.h * width);
+    const leftEdge = stack.pop();
+    const width = (i - 1) - leftEdge.x + 1;
+    maxArea = Math.max(maxArea, leftEdge.h * width);
   }
   return maxArea;
 };
