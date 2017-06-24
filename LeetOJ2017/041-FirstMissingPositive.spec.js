@@ -13,5 +13,10 @@ describe('LeetOJ 041-FirstMissingPositive', () => {
       const expected = 2;
       expect(firstMissingPositive(input)).to.equal(expected);
     });
+    it('should solve test case 1 - duplicates', () => {
+      const input = [1, 1, 3, 4];
+      const expected = 2;
+      expect(firstMissingPositive(input)).to.equal(expected);
+    });
   });
 });

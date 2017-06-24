@@ -56,10 +56,8 @@ var firstMissingPositive0 = function(nums) {
 // https://discuss.leetcode.com/topic/8293/my-short-c-solution-o-1-space-and-o-n-time
 var firstMissingPositive = function(nums) {
   for (let i = 0; i < nums.length; ++i) {
-    let num = nums[i];
-    while (nums[num - 1] !== nums[i] && num > 0 && num <= nums.length) {
-      swap(nums, i, num - 1);
-      num = nums[i];
+    while (nums[nums[i] - 1] !== nums[i] && nums[i] > 0 && nums[i] <= nums.length) {
+      swap(nums, i, nums[i] - 1);
     }
   }
   let num = 1;
