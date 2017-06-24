@@ -39,7 +39,7 @@ var remove = function(s, ans) {
       // need to remove a ')', which one? any one that appear before i (including i)
       for (let j = 0; j <= i; ++j) {
         if (s[j] === ')') {
-          if (s[j - 1] !== ')') { // only remove the first one if there is a consecutive series of '('
+          if (s[j - 1] !== ')') { // only remove the first one if there is a consecutive series of ')'
             remove(removeCharAtI(s, j), ans);
           }
         }
