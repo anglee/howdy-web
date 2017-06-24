@@ -161,13 +161,12 @@ var removeInvalidParentheses2 = function(s) {
 
 //--------------------------------------------------------------------------------------------------
 
-
 // Improved BFS, add less to the queue
 /**
  * @param {string} s
  * @return {string[]}
  */
-var removeInvalidParentheses = function(s) {
+var removeInvalidParentheses3 = function(s) {
   const seen = new Set();
   const q = [s];
   const ret = [];
@@ -217,4 +216,4 @@ var removeInvalidParentheses = function(s) {
   return ret;
 };
 
-export default removeInvalidParentheses;
+export default removeInvalidParentheses3;
