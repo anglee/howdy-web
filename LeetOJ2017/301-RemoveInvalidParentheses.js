@@ -153,7 +153,6 @@ var removeInvalidParentheses = function(s) { // BFS, http://www.cnblogs.com/gran
       }
     }
   }
-  console.log('i', i);
   return ret;
 };
 
