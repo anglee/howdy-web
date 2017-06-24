@@ -76,6 +76,7 @@ var remove = function(s, ans) {
   ans.add(s);
 };
 
+// DFS, http://blog.csdn.net/qq508618087/article/details/50408894
 /**
  * @param {string} s
  * @return {string[]}
@@ -103,27 +104,29 @@ const isValid = (s) => {
   return count === 0;
 };
 
-
+// BFS
 // Basically, try start with s,
 // and then all substr with length s.length - 1
 // and then all substr with length s.length - 2
+// ...
 // and so on so forth
 // when generating substring, there will be duplicates,
 // so use a Set to keep all the ones that are seen
 // also, once we know how long a valid substring is
 // we don't want to process any substring that is shorter than the one we already found.
+// reference:
+// https://discuss.leetcode.com/topic/28827/share-my-java-bfs-solution/14
+// http://www.cnblogs.com/grandyang/p/4944875.html
 /**
  * @param {string} s
  * @return {string[]}
  */
-var removeInvalidParentheses = function(s) { // BFS, http://www.cnblogs.com/grandyang/p/4944875.html
+var removeInvalidParentheses2 = function(s) {
   const seen = new Set();
   const q = [s];
   const ret = [];
-  let validOutputLength = null;
-  let i = 0;
+  let lengthOfValidOutput = null;
   while (q.length > 0) {
-    i++;
     const str = q.shift();
     if (seen.has(str)) {
       continue;
@@ -131,25 +134,83 @@ var removeInvalidParentheses = function(s) { // BFS, http://www.cnblogs.com/gran
       seen.add(str);
     }
 
-    if (validOutputLength !== null && str.length < validOutputLength) {
+    if (lengthOfValidOutput !== null && str.length < lengthOfValidOutput) {
       continue;
     }
 
     if (isValid(str)) {
       ret.push(str);
-      if (validOutputLength === null) {
-        validOutputLength = str.length;
+      if (lengthOfValidOutput === null) {
+        lengthOfValidOutput = str.length;
       }
       continue;
     }
 
-    if (validOutputLength !== null && str.length === validOutputLength) {
+    if (lengthOfValidOutput !== null && str.length === lengthOfValidOutput) {
       continue;
     }
 
     for (let i = 0; i < str.length; ++i) {
       if (str[i] === '(' || str[i] === ')') {
         q.push(str.substring(0, i) + str.substring(i + 1));
+      }
+    }
+  }
+  return ret;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+
+// Improved BFS, add less to the queue
+/**
+ * @param {string} s
+ * @return {string[]}
+ */
+var removeInvalidParentheses = function(s) {
+  const seen = new Set();
+  const q = [s];
+  const ret = [];
+  let lengthOfValidOutput = null;
+  while (q.length > 0) {
+    const str = q.shift();
+    if (seen.has(str)) {
+      continue;
+    } else {
+      seen.add(str);
+    }
+    if (str.length < lengthOfValidOutput) {
+      continue;
+    }
+
+    let count = 0;
+    for (let i = 0; i < str.length; ++i) {
+      if (str[i] === '(') {
+        count++;
+      } else if (str[i] === ')') {
+        count--;
+      }
+      if (count < 0) {
+        for (let j = 0; j <= i; ++j) {
+          if (str[j] === ')') {
+            q.push(str.substring(0, j) + str.substring(j + 1));
+          }
+        }
+        break;
+      }
+    }
+    if (count > 0) {
+      for (let j = 0; j < str.length; ++j) {
+        if (str[j] === '(') {
+          q.push(str.substring(0, j) + str.substring(j + 1));
+        }
+      }
+    }
+
+    if (count === 0) { // count === 0, is valid
+      ret.push(str);
+      if (lengthOfValidOutput === null) {
+        lengthOfValidOutput = str.length;
       }
     }
   }
