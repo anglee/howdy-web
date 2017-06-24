@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { expect } from 'chai';
 import wiggleSort from './324-WiggleSortII';
 
@@ -26,35 +25,35 @@ describe('LeetOJ 324-WiggleSortII', () => {
       const nums = original.slice(0);
       wiggleSort(nums);
       expect(isValid(nums)).to.be.true;
-      expect(_.sortBy(nums)).to.eql(_.sortBy(original));
+      expect(nums).to.have.all.members(original);
     });
     it('should solve the given example 2', () => {
       const original = [1, 3, 2, 2, 3, 1];
       const nums = original.slice(0);
       wiggleSort(nums);
       expect(isValid(nums)).to.be.true;
-      expect(_.sortBy(nums)).to.eql(_.sortBy(original));
+      expect(nums).to.have.all.members(original);
     });
     it('should solve OJ test case 1', () => {
       const original = [4, 5, 5, 6];
       const nums = original.slice(0);
       wiggleSort(nums);
       expect(isValid(nums)).to.be.true;
-      expect(_.sortBy(nums)).to.eql(_.sortBy(original));
+      expect(nums).to.have.all.members(original);
     });
     it('should solve OJ test case 2', () => {
       const original = [5, 3, 1, 2, 6, 7, 8, 5, 5];
       const nums = original.slice(0);
       wiggleSort(nums);
       expect(isValid(nums)).to.be.true;
-      expect(_.sortBy(nums)).to.eql(_.sortBy(original));
+      expect(nums).to.have.all.members(original);
     });
     it('should solve OJ test case 3', () => {
       const original = [1, 1, 2, 1, 2, 2, 1];
       const nums = original.slice(0);
       wiggleSort(nums);
       expect(isValid(nums)).to.be.true;
-      expect(_.sortBy(nums)).to.eql(_.sortBy(original));
+      expect(nums).to.have.all.members(original);
     });
   });
 });
