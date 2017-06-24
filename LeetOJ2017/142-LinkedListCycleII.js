@@ -10,7 +10,7 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var detectCycle = function(head) {
+var detectCycle0 = function(head) {
   let slow = head;
   let fast = head;
 
@@ -45,6 +45,44 @@ var detectCycle = function(head) {
   }
 
   return null;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var detectCycle = function(head) {
+  let slow = head;
+  let fast = head;
+  while (slow && fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) {
+      break;
+    }
+  }
+
+  if (slow !== fast) {
+    return null;
+  }
+
+  let node1 = slow;
+  let node2 = head;
+
+  do {
+    node1 = node1.next;
+    node2 = node2.next;
+  } while (node1 !== slow);
+
+  let node3 = head;
+  while (node2 !== node3) {
+    node2 = node2.next;
+    node3 = node3.next;
+  }
+
+  return node3;
 };
 
 export default detectCycle;
