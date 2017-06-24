@@ -1,4 +1,4 @@
-var removeInvalidParentheses0 = function(s) {
+var removeInvalidParentheses0 = function(s) { // doesn't work
   const stack = [];
   let ret = [];
   for (let ch of s) {
@@ -17,14 +17,11 @@ var removeInvalidParentheses0 = function(s) {
   return ret.join('');
 };
 
+//--------------------------------------------------------------------------------------------------
+
+
 // const reverse = (s) => s.split('').reverse().join('');
 const removeCharAtI = (s, i) => s.substring(0, i) + s.substring(i + 1);
-
-var removeInvalidParentheses = function(s) {
-  const ans = new Set();
-  remove(s, ans);
-  return Array.from(ans);
-};
 
 var remove = function(s, ans) {
 
@@ -75,8 +72,18 @@ var remove = function(s, ans) {
     }
   }
 
-  // if we are here, we finished removing all ')'s that would make s invalid
+  // if we are here, we finished removing all '('s that would make s invalid
   ans.add(s);
 };
 
-export default removeInvalidParentheses;
+/**
+ * @param {string} s
+ * @return {string[]}
+ */
+var removeInvalidParentheses = function(s) {
+  const ans = new Set();
+  remove(s, ans);
+  return Array.from(ans);
+};
+
+export default removeInvalidParentheses0;
