@@ -80,10 +80,81 @@ var remove = function(s, ans) {
  * @param {string} s
  * @return {string[]}
  */
-var removeInvalidParentheses = function(s) {
+var removeInvalidParentheses1 = function(s) {
   const ans = new Set();
   remove(s, ans);
   return Array.from(ans);
 };
 
-export default removeInvalidParentheses0;
+//--------------------------------------------------------------------------------------------------
+
+const isValid = (s) => {
+  let count = 0;
+  for (let ch of s) {
+    if (ch === '(') {
+      count++;
+    } else if (ch === ')') {
+      count--;
+      if (count < 0) {
+        return false;
+      }
+    }
+  }
+  return count === 0;
+};
+
+
+// Basically, try start with s,
+// and then all substr with length s.length - 1
+// and then all substr with length s.length - 2
+// and so on so forth
+// when generating substring, there will be duplicates,
+// so use a Set to keep all the ones that are seen
+// also, once we know how long a valid substring is
+// we don't want to process any substring that is shorter than the one we already found.
+/**
+ * @param {string} s
+ * @return {string[]}
+ */
+var removeInvalidParentheses = function(s) { // BFS, http://www.cnblogs.com/grandyang/p/4944875.html
+  const seen = new Set();
+  const q = [s];
+  const ret = [];
+  let validOutputLength = null;
+  let i = 0;
+  while (q.length > 0) {
+    i++;
+    const str = q.shift();
+    if (seen.has(str)) {
+      continue;
+    } else {
+      seen.add(str);
+    }
+
+    if (validOutputLength !== null && str.length < validOutputLength) {
+      continue;
+    }
+
+    if (isValid(str)) {
+      ret.push(str);
+      if (validOutputLength === null) {
+        validOutputLength = str.length;
+      }
+      continue;
+    }
+
+    if (validOutputLength !== null && str.length === validOutputLength) {
+      continue;
+    }
+
+    for (let i = 0; i < str.length; ++i) {
+      if (str[i] === '(' || str[i] === ')') {
+        q.push(str.substring(0, i) + str.substring(i + 1));
+      }
+    }
+  }
+  console.log('i', i);
+  return ret;
+};
+
+export default removeInvalidParentheses;
