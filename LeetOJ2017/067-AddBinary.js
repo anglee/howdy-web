@@ -1,10 +1,9 @@
-
 /**
  * @param {string} a
  * @param {string} b
  * @return {string}
  */
-var addBinary = function(a, b) {
+var addBinary0 = function(a, b) {
   let i = a.length - 1;
   let j = b.length - 1;
   let carry = 0;
@@ -24,6 +23,32 @@ var addBinary = function(a, b) {
   }
 
   return output.split('').reverse().join('');
+};
+
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {string}
+ */
+var addBinary = function(a, b) {
+  let ai = a.length - 1;
+  let bi = b.length - 1;
+  let co = 0;
+
+  const buffer = [];
+  while (ai >= 0 || bi >= 0 || co > 0) {
+    const va = ai >= 0 && a[ai] === '1' ? 1 : 0;
+    const vb = bi >= 0 && b[bi] === '1' ? 1 : 0;
+    const sum = va + vb + co;
+    buffer.push(sum & 1);
+    co = sum > 1 ? 1 : 0;
+    ai--;
+    bi--;
+  }
+  return buffer.reverse().join('');
 };
 
 export default addBinary;
