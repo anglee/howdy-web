@@ -62,13 +62,38 @@ const comb = (prefix, ds, ret) => {
  * @param {string} digits
  * @return {string[]}
  */
-var letterCombinations = function(digits) {
+var letterCombinations1 = function(digits) {
   if (digits.length === 0) {
     return [];
   }
   const ret = [];
   comb('', digits.split(''), ret);
   return ret;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function(digits) {
+  if (digits.length === 0) {
+    return [];
+  }
+  let buffer = [''];
+  for (let digit of digits) {
+    const newBuffer = [];
+    const chars = map.get(digit);
+    chars.forEach(char => {
+      buffer.forEach(comb => {
+        newBuffer.push(`${comb}${char}`);
+      });
+    });
+    buffer = newBuffer;
+  }
+  return buffer;
 };
 
 export default letterCombinations;
