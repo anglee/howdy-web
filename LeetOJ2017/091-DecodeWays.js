@@ -29,12 +29,13 @@ var numDecodings0 = function(s) { // recursive
   return s.length === 0 ? 0 : decode(s);
 };
 
+//--------------------------------------------------------------------------------------------------
 
 /**
  * @param {string} s
  * @return {number}
  */
-var numDecodings = function(s) { // DP
+var numDecodings1 = function(s) { // DP
 
   const buffer = [];
   for (let i = 0; i < s.length; i++) {
@@ -48,6 +49,36 @@ var numDecodings = function(s) { // DP
   }
 
   return buffer.length ? buffer[s.length - 1] : 0;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var numDecodings = function(s) { // DP
+  if (s.length === 0) { return 0; }
+
+  let prev1 = 1;
+  let prev2 = 1;
+
+  for (let i = 0; i < s.length; ++i) {
+    let current = 0;
+    if (s[i] !== '0') {
+      current += prev1;
+    }
+    if (
+      i > 0
+      && s[i - 1] !== '0' // isSingleDigitDecodable
+      && parseInt(s.substr(i - 1, 2)) <= 26 // isDoubleDigitsDecodeable
+    ) {
+      current += prev2;
+    }
+    prev2 = prev1;
+    prev1 = current;
+  }
+  return prev1;
 };
 
 export default numDecodings;

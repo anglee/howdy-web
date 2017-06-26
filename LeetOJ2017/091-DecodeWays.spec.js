@@ -8,17 +8,17 @@ describe('LeetOJ 091-DecodeWays', () => {
       expect(numDecodings(s)).to.equal(2); // 'AB' and 'L'
     });
 
-    it('should work with test case', () => {
+    it('should work with empty test case', () => {
       const s = '';
       expect(numDecodings(s)).to.equal(0); // by definition
     });
 
-    it('should work with test case', () => {
+    it("should work with test case '123'", () => {
       const s = '123';
       expect(numDecodings(s)).to.equal(3); // 'LC', 'ABC', 'AW'
     });
 
-    it('should work with test case', () => {
+    it("should work with test case '103'", () => {
       const s = '103';
       expect(numDecodings(s)).to.equal(1); // 'JC'
     });
