@@ -96,6 +96,9 @@ describe('LeetOJ 010-RegularExpressionMatching', () => {
         it("'aaac', 'b*a.*c'", () => {
           expect(isMatch('aaac', 'b*a.*c')).to.be.true;
         });
+        it("'aaaaaaaaaaac', '.*.*c'", () => {
+          expect(isMatch('aaaaaaaaaaac', '.*.*c')).to.be.true;
+        });
       });
     });
   });
