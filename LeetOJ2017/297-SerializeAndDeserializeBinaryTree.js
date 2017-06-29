@@ -116,6 +116,38 @@ var deserialize0 = function(data) {
   return root;
 };
 
+
+/**
+ * Decodes your encoded data to tree.
+ *
+ * @param {string} data
+ * @return {TreeNode}
+ */
+export var deserialize1 = function(data) {
+  let root = null;
+  const queue = [];
+  let lastNode = null;
+  for (let i = 0; i < data.length; ++i) {
+    const node = data[i] === NULL ? null : new TreeNode(data[i]);
+    if (i === 0) {
+      root = node;
+    } else {
+      if (lastNode === null || lastNode.done) {
+        lastNode = queue.shift();
+        lastNode.left = node;
+      } else {
+        lastNode.right = node;
+        lastNode.done = true;
+      }
+    }
+
+    if (node) {
+      queue.push(node);
+    }
+  }
+  return root;
+};
+
 /**
  * Decodes your encoded data to tree.
  *
@@ -144,7 +176,6 @@ export var deserialize = function(data) {
 
   return root;
 };
-
 /**
  * Your functions will be called as such:
  * deserialize(serialize(root));
