@@ -10,8 +10,10 @@ var numIslands0 = function(grid) { // union find
   const isWater = (x, y) => x < 0 || y < 0 || x >= width || y >= height || grid[y][x] === '0';
   const findRoot = (x, y) => {
     while (parentMap[y][x].x !== x || parentMap[y][x].y !== y) {
-      x = parentMap[y][x].x;
-      y = parentMap[y][x].y;
+      const px = parentMap[y][x].x;
+      const py = parentMap[y][x].y;
+      x = px;
+      y = py;
     }
     return {x, y};
   };

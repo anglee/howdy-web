@@ -21,6 +21,14 @@ describe('LeetOJ 200-NumberOfIslands', () => {
       ];
       expect(numIslands(grid)).to.equal(3);
     });
+    it('should work with OJ test case 1', () => {
+      const grid = [
+        '111',
+        '010',
+        '010',
+      ];
+      expect(numIslands(grid)).to.equal(1);
+    });
     it('should work with empty input', () => {
       const grid = [];
       expect(numIslands(grid)).to.equal(0);
