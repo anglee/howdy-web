@@ -24,7 +24,8 @@ var addOperators0 = function(num, target) {
   return getHits(num[0], num.slice(1), target, num[0] === '0');
 };
 
-// ===============================================================================
+//--------------------------------------------------------------------------------------------------
+
 
 const doesntHaveLeadZero = exp => (
   exp[0] !== '0' ||
@@ -69,5 +70,85 @@ var addOperators = function(num, target) {
   const expressions = generateExpressions(num).filter(doesntHaveLeadZero);
   return expressions.filter(exp => eval(exp) === target);
 };
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {string} num
+ * @param {number} target
+ * @return {string[]}
+ */
+var addOperators = function(num, target) {
+  if (num.length === 0) {
+    return [];
+  }
+  const ret = [];
+
+  const helper = ({i, expression, prevNumber, prevProduct, value}) => {
+    // console.log('helper', 'i', i, 'expression', expression, 'prevNumber', prevNumber, 'prevProduct', prevProduct, 'value', value);
+    if (i === num.length) {
+      if (value === target) {
+        ret.push(expression);
+      }
+      return;
+    }
+
+    const digit = parseInt(num[i], 10);
+    (() => {
+      helper({
+        i: i + 1,
+        expression: `${expression}+${num[i]}`,
+        prevNumber: digit,
+        prevProduct: digit,
+        value: value + digit,
+      });
+    })();
+    (() => {
+      helper({
+        i: i + 1,
+        expression: `${expression}-${num[i]}`,
+        prevNumber: digit,
+        prevProduct: digit * -1,
+        value: value - digit,
+      });
+    })();
+    (() => {
+      const currentProduct = prevProduct * digit;
+      helper({
+        i: i + 1,
+        expression: `${expression}*${num[i]}`,
+        prevNumber: digit,
+        prevProduct: currentProduct,
+        value: value - prevProduct + currentProduct,
+      });
+    })();
+    (() => {
+      if (prevNumber === 0) {
+        return;
+      }
+      const currentNumber = prevNumber * 10 + digit;
+      const currentProduct = prevProduct / prevNumber * currentNumber;
+      helper({
+        i: i + 1,
+        expression: `${expression}${num[i]}`,
+        prevNumber: currentNumber,
+        prevProduct: currentProduct,
+        value: value - prevProduct + currentProduct,
+      });
+
+    })();
+  };
+
+  helper({
+    i:1,
+    expression: num[0],
+    prevNumber: parseInt(num[0], 10),
+    prevProduct: parseInt(num[0], 10),
+    value: parseInt(num[0], 10)
+  });
+
+  return ret;
+};
+
 
 export default addOperators;

@@ -18,5 +18,8 @@ describe('LeetOJ 282-ExpressionAddOperators', () => {
     it.skip('should solve the given examples 5', () => {
       expect(addOperators("3456237490", 9191)).to.have.all.members([]);
     });
+    it('should solve the OJ test case', () => {
+      expect(addOperators("", 5)).to.have.all.members([]);
+    });
   });
 });
