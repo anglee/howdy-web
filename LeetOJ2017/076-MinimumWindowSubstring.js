@@ -18,9 +18,7 @@ var minWindow0 = function(s, t) { // this doesn't handle when t contains duplica
       map.set(s[head], head);
 
       if (shouldMoveTail) {
-        while (tail < s.length &&
-        (!map.has(s[tail]) || map.get(s[tail]) !== tail)
-          ) {
+        while (tail < s.length && (!map.has(s[tail]) || map.get(s[tail]) !== tail)) {
           tail++;
         }
         // console.log('tail, s[tail]', tail, s[tail]);
@@ -41,6 +39,8 @@ var minWindow0 = function(s, t) { // this doesn't handle when t contains duplica
 
   return minWindow ? minWindow : '';
 };
+
+//--------------------------------------------------------------------------------------------------
 
 class Bag {
   constructor(t) {
@@ -120,7 +120,7 @@ class Bag {
  * @param {string} t
  * @return {string}
  */
-var minWindow = function(s, t) {
+var minWindow1 = function(s, t) {
 
   // use 2 pointers, head and tail,
   // for any given time, in the range [tail, head]
@@ -141,8 +141,8 @@ var minWindow = function(s, t) {
         tail = head;
       }
 
-      const isRemoveHappend = bag.add(head, s[head]);
-      if (isRemoveHappend) {
+      const isRemoveHappened = bag.add(head, s[head]);
+      if (isRemoveHappened) {
         // while the tail index is not in the bag,
         // we don't need it and hence can move tail forward
         while (!bag.has(tail) && tail < s.length) {
@@ -161,5 +161,94 @@ var minWindow = function(s, t) {
   return minWindow ? minWindow : '';
 };
 
+//--------------------------------------------------------------------------------------------------
+import DoublyLinkedList, { Node } from '../lib/DoublyLinkedList';
+
+class MultiLinkedHashMap {
+  constructor () {
+    this.map = new Map();
+    this.list = new DoublyLinkedList();
+    this.size = 0;
+  }
+
+  has(key) {
+    return this.map.has(key);
+  }
+
+  set(key, value) {
+    if (!this.map.has(key)) {
+      this.map.set(key, []);
+    }
+    const node = new Node({ key, value });
+    this.map.get(key).push(node);
+    this.list.push(node);
+    this.size++;
+    return this;
+  }
+
+  delete(key) {
+    const node = this.map.get(key).shift();
+    this.list.delete(node);
+    this.size--;
+    return node.value;
+  }
+
+  getSizeOfKey(key) {
+    return this.map.get(key).length;
+  }
+
+  get tail() {
+    return this.list.head.data.value;
+  }
+}
+
+const generateCountMap = (t) => {
+  const countMap = new Map();
+  for (let char of t) {
+    if (!countMap.has(char)) {
+      countMap.set(char, 0);
+    }
+    countMap.set(char, countMap.get(char) + 1);
+  }
+  return countMap;
+};
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {string}
+ */
+var minWindow = function(s, t) {
+
+  const tSet = new Set(t.split(''));
+  const tCountMap = generateCountMap(t);
+  const bag = new MultiLinkedHashMap();
+  let minWindow = null;
+
+  for (let head = 0; head < s.length; ++head) {
+    const char = s[head];
+    if (!tSet.has(char)) { // ignore positions where char is not in t
+      continue;
+    }
+
+    bag.set(char, head); // add the char to the bag
+    // if the count of char in the bag exceeds the count of char in t,
+    // eject the oldest entry of char
+    if (bag.getSizeOfKey(char) > tCountMap.get(char)) {
+      const deleted = bag.delete(char);
+    }
+
+    // if the bag is 'full', meaning the bag holds everything in t and nothing else,
+    // update the minWindow if the window from the current bag is smaller
+    if (bag.size === t.length) {
+      const tail = bag.tail;
+      if (minWindow === null || head - tail + 1 < minWindow.length) {
+        minWindow = s.substring(tail, head + 1);
+      }
+    }
+  }
+
+  return minWindow ? minWindow : '';
+};
 
 export default minWindow;
