@@ -60,7 +60,7 @@ class Graph {
  * @param {number[][]} prerequisites
  * @return {boolean}
  */
-var canFinish = function(numCourses, prerequisites) {
+var canFinish0 = function(numCourses, prerequisites) {
   const graph = new Graph(prerequisites);
 
   for (let i = 0; i < numCourses; ++i) {
@@ -68,6 +68,59 @@ var canFinish = function(numCourses, prerequisites) {
       return false;
     }
   }
+  return true;
+};
+
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number} numCourses
+ * @param {number[][]} prerequisites
+ * @return {boolean}
+ */
+var canFinish = function(numCourses, prerequisites) {
+  const nodes = [];
+  for (let i = 0; i < numCourses; ++i) {
+    nodes.push({
+      state: null,
+      dependents: []
+    });
+  }
+
+  for (let prerequisite of prerequisites) {
+    const [course, pre] = prerequisite;
+    nodes[pre].dependents.push(course);
+  }
+
+  const ret = [];
+
+  const visit = (i) => {
+    if (nodes[i].state === 'visited') {
+      return;
+    }
+    if (nodes[i].state === 'visiting') {
+      throw new Error('cycle detected');
+    }
+    nodes[i].state = 'visiting';
+    for (let dep of nodes[i].dependents) {
+      visit(dep);
+    }
+    nodes[i].state = 'visited';
+    ret.push(i);
+  };
+
+  try {
+    for (let i = 0; i < numCourses; ++i) {
+      visit(i);
+    }
+  } catch(err) {
+    if (err.message === 'cycle detected') {
+      return false;
+    }
+    throw err;
+  }
+
   return true;
 };
 
