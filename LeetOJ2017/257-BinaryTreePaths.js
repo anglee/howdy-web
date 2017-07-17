@@ -34,6 +34,7 @@ var binaryTreePaths0 = function(root) {
   return allRootToLeafPaths.map(path => path.join('->'));
 };
 
+//--------------------------------------------------------------------------------------------------
 
 /**
  * Definition for a binary tree node.
@@ -47,7 +48,7 @@ var binaryTreePaths0 = function(root) {
  * @return {string[]}
  */
 var binaryTreePaths = function(root) {
-  
+
   const buildParentMap = (root) => {
     const parentMap = new Map();
     const doBuildParentMap = (node, parent) => {
