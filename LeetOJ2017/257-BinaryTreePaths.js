@@ -47,7 +47,7 @@ var binaryTreePaths0 = function(root) {
  * @param {TreeNode} root
  * @return {string[]}
  */
-var binaryTreePaths = function(root) {
+var binaryTreePaths1 = function(root) {
 
   const buildParentMap = (root) => {
     const parentMap = new Map();
@@ -89,6 +89,33 @@ var binaryTreePaths = function(root) {
   };
 
   return visitLeafs(root, buildParentMap(root));
+};
+
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {TreeNode} root
+ * @return {string[]}
+ */
+var binaryTreePaths = function(root) {
+  const paths = [];
+  const path = [];
+  const helper = (node) => {
+    if (node === null) { return; }
+
+    path.push(node.val);
+    if (node.left === null && node.right === null) {
+      paths.push(path.join('->'));
+    }
+    helper(node.left);
+    helper(node.right);
+    path.pop(node);
+  };
+
+  helper(root);
+
+  return paths;
 };
 
 export default binaryTreePaths;
