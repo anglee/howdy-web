@@ -14,20 +14,10 @@ const LCS = (S1, S2) => { // recursive
   }
 };
 
-const create2DArray = (w, h) => {
-  const A = [];
-  _.times(w, () => {
-    const temp = [];
-    _.times(h, () => {
-      temp.push('');
-    });
-    A.push(temp);
-  });
-  return A;
-};
+//--------------------------------------------------------------------------------------------------
 
 const LCS2 = (S1, S2) => { // non-recursive
-  const L = create2DArray(S1.length + 1, S2.length + 1);
+  const L = Array(S1.length + 1).fill().map(() => Array(S2.length + 1).fill(''));
   for (let j = 1; j <= S2.length; j++) {
     for (let i = 1; i <= S1.length; i++) {
       if (S1[i-1] === S2[j-1]) {
@@ -40,6 +30,8 @@ const LCS2 = (S1, S2) => { // non-recursive
 
   return L[S1.length][S2.length];
 };
+
+//--------------------------------------------------------------------------------------------------
 
 
 const LCS3 = (S1, S2) => { // same as LCS2, but use a bit less space
