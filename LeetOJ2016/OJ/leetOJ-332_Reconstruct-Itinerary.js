@@ -1,5 +1,4 @@
-
-
+import _ from 'lodash';
 
 const without = function (array, index) {
   var ret = array.slice();
@@ -33,7 +32,7 @@ const doFindItinerary = function (startAirport, ticketMap, ticketCount) {
  * @param {string[][]} tickets
  * @return {string[]}
  */
-var findItinerary = function(tickets) {
+var findItinerary0 = function(tickets) {
   const ticketMap = {};
   tickets.forEach((ticket) => {
     const from = ticket[0];
@@ -48,5 +47,57 @@ var findItinerary = function(tickets) {
 
   return doFindItinerary('JFK', ticketMap, tickets.length);
 };
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {string[][]} tickets
+ * @return {string[]}
+ */
+var findItinerary = function(tickets) {
+
+  const ticketMap = {};
+  tickets.forEach((ticket) => {
+    const from = ticket[0];
+    const to = ticket[1];
+    ticketMap[from] = ticketMap[from] || [];
+    ticketMap[from].push({
+      destination: to,
+      used: false
+    });
+  });
+
+  for (var prop in ticketMap) {
+    ticketMap[prop] = _.sortBy(ticketMap[prop], 'destination');
+  }
+
+  let usedTicketCount = 0;
+  const doFindItinerary = (startAirport) => {
+    if (usedTicketCount === tickets.length) {
+      return [startAirport];
+    }
+    if (!ticketMap[startAirport]) {
+      return null;
+    }
+
+    for (let ticket of ticketMap[startAirport]) {
+      if (ticket.used === false) {
+        ticket.used = true;
+        usedTicketCount++;
+        const itinerary = doFindItinerary(ticket.destination);
+        if (!itinerary) {
+          ticket.used = false;
+          usedTicketCount--;
+        } else {
+          return [startAirport, ...itinerary];
+        }
+      }
+    }
+    return null;
+  };
+
+  return doFindItinerary('JFK');
+};
+
 
 export default findItinerary;
