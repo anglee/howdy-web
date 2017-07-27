@@ -54,7 +54,7 @@ var findItinerary0 = function(tickets) {
  * @param {string[][]} tickets
  * @return {string[]}
  */
-var findItinerary = function(tickets) {
+var findItinerary1 = function(tickets) {
 
   const ticketMap = {};
   tickets.forEach((ticket) => {
@@ -99,5 +99,35 @@ var findItinerary = function(tickets) {
   return doFindItinerary('JFK');
 };
 
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {string[][]} tickets
+ * @return {string[]}
+ */
+var findItinerary = function(tickets) { // similar to Topological sort
+  const ticketMap = {};
+  tickets.forEach((ticket) => {
+    const from = ticket[0];
+    const to = ticket[1];
+    ticketMap[from] = ticketMap[from] || []; // putIfAbsent
+    ticketMap[from].push(to);
+  });
+
+  for (var prop in ticketMap) {
+    ticketMap[prop].sort();
+  }
+
+  const visited = [];
+  const dfs = (airport) => {
+    while (ticketMap[airport] && ticketMap[airport].length) {
+      dfs(ticketMap[airport].shift());
+    }
+    visited.unshift(airport);
+  };
+
+  dfs("JFK");
+  return visited;
+};
 
 export default findItinerary;
