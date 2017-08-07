@@ -14,7 +14,7 @@ const dfs = (i, M, isVisited) => {
  * @param {number[][]} M
  * @return {number}
  */
-var findCircleNum0 = function(M) {
+var findCircleNum0 = function(M) { // time: O(n ^ 2)
   const n = M.length;
   const isVisited = Array(n).fill(false);
   let ret = 0;
@@ -28,10 +28,10 @@ var findCircleNum0 = function(M) {
  * @param {number[][]} M
  * @return {number}
  */
-var findCircleNum = function(M) { // union find
+var findCircleNum = function(M) { // union find, time: O(n ^ 3)
   const n = M.length;
   const parents = Array(n).fill(null);
-  const getParentOf = (i) => { // find
+  const find = (i) => { // get parent(root)
     let node = i;
     while (parents[node] !== null) {
       node = parents[node];
@@ -42,8 +42,8 @@ var findCircleNum = function(M) { // union find
   for (let j = 0; j < n; ++j) {
     for (let i = j + 1; i < n; ++i) {
       if (M[j][i] === 1) {
-        const parentOfJ = getParentOf(j);
-        const parentOfI = getParentOf(i);
+        const parentOfJ = find(j);
+        const parentOfI = find(i);
         if (parentOfI !== parentOfJ) {
           parents[parentOfI] = parentOfJ; // union
           ret--;
