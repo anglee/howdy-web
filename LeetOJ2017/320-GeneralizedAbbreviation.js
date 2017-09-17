@@ -50,4 +50,39 @@ var generateAbbreviations = function(word) {
   ];
 };
 
-export default generateAbbreviations;
+/**
+ * @param {string} word
+ * @return {string[]}
+ */
+var generateAbbreviations1 = function(word) { // DP
+  if (word.length === 0) {
+    return [''];
+  }
+
+  const endWithChar = Array(word.length).fill().map(it => []);
+  const endWithNum = Array(word.length).fill().map(it => []);
+
+  for (let i = 0; i < word.length; ++i) {
+    endWithNum[i].push(`${i + 1}`);
+    endWithChar[i].push(`${word.substring(0, i + 1)}`);
+    for (let j = 0; j < i; ++j) {
+      endWithNum[i].push(
+        ...endWithChar[j].map(
+          it => `${it}${i - j}`
+        )
+      );
+      endWithChar[i].push(
+        ...endWithNum[j].map(
+          it => `${it}${word.substring(j + 1, i + 1)}`
+        )
+      );
+    }
+  }
+  
+  return [
+    ...endWithChar[word.length - 1],
+    ...endWithNum[word.length - 1],
+  ];
+};
+
+export default generateAbbreviations1;
