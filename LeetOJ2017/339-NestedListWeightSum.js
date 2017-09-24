@@ -28,7 +28,7 @@
  * @param {NestedInteger[]} nestedList
  * @return {number}
  */
-var depthSum = function(nestedList) {
+var depthSum0 = function(nestedList) {
   const getDepthSum = (list, depth) => {
     let ret = 0;
     for (let it of list) {
@@ -42,6 +42,36 @@ var depthSum = function(nestedList) {
   };
 
   return getDepthSum(nestedList, 1);
+};
+
+/**
+ * @param {NestedInteger[]} nestedList
+ * @return {number}
+ */
+var depthSum = function(nestedList) {
+  let ret = 0;
+  const stack = [{
+    node: {
+      isInteger: () => false,
+      getList: () => nestedList
+    },
+    depth: 0
+  }];
+
+  while (stack.length) {
+    const {node, depth} = stack.pop();
+    if (node.isInteger()) {
+      ret += node.getInteger() * depth;
+    } else {
+      node.getList().forEach(it => {
+        stack.push({
+          node: it,
+          depth: depth + 1
+        })
+      });
+    }
+  }
+  return ret;
 };
 
 export default depthSum;
