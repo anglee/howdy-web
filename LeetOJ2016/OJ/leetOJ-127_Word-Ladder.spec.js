@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { words1, words2 } from './leetOJ-127_Word-Ladder.data';
+import { words1, words2 } from './data/leetOJ-127_Word-Ladder.data';
 import ladderLength from './leetOJ-127_Word-Ladder';
 
 describe('leetOJ-127_Word-Ladder', () => {
