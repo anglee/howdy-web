@@ -82,7 +82,7 @@ var threeSum = function(nums) { // O(n^2) + O(1) space
 
   const ret = [];
   let i = 0;
-  while (i < nums.length) {
+  while (i < nums.length && nums[i] <= 0) {
     const target = 0 - nums[i];
     let l = i + 1;
     let r = nums.length - 1;
