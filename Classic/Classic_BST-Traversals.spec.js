@@ -13,7 +13,8 @@ import {
   preOrderTraversal3,
   postOrderTraversal1,
   postOrderTraversal2,
-  postOrderTraversal3
+  postOrderTraversal3,
+  postOrderTraversal4,
 } from './Classic_BST-Traversals';
 
 describe('Classic_BST-Traversals', () => {
@@ -87,6 +88,7 @@ describe('Classic_BST-Traversals', () => {
       expect(postOrderTraversal1(root)).deep.equal(expected);
       expect(postOrderTraversal2(root)).deep.equal(expected);
       expect(postOrderTraversal3(root)).deep.equal(expected);
+      expect(postOrderTraversal4(root)).deep.equal(expected);
     });
     it('should traverse [1, #, 2, 3]', () => {
       const root = treeDeserializer([1, '#', 2, 3]);
@@ -94,6 +96,7 @@ describe('Classic_BST-Traversals', () => {
       expect(postOrderTraversal1(root)).deep.equal(expected);
       expect(postOrderTraversal2(root)).deep.equal(expected);
       expect(postOrderTraversal3(root)).deep.equal(expected);
+      expect(postOrderTraversal4(root)).deep.equal(expected);
     });
     it('should traverse [1,2,3,#,#,4,#,#,5]', () => {
       const root = treeDeserializer([1, 2, 3, '#', '#', 4, '#', '#', 5]);
@@ -101,6 +104,7 @@ describe('Classic_BST-Traversals', () => {
       expect(postOrderTraversal1(root)).deep.equal(expected);
       expect(postOrderTraversal2(root)).deep.equal(expected);
       expect(postOrderTraversal3(root)).deep.equal(expected);
+      expect(postOrderTraversal4(root)).deep.equal(expected);
     });
     it('should traverse [1, 2, 3, 4, 5, 6, 7]', () => {
       const root = treeDeserializer([1, 2, 3, 4, 5, 6, 7]);
@@ -108,6 +112,7 @@ describe('Classic_BST-Traversals', () => {
       expect(postOrderTraversal1(root)).deep.equal(expected);
       expect(postOrderTraversal2(root)).deep.equal(expected);
       expect(postOrderTraversal3(root)).deep.equal(expected);
+      expect(postOrderTraversal4(root)).deep.equal(expected);
     });
     it('should traverse [7,1,6,#,#,4,5,2,3]', () => {
       const root = treeDeserializer([7,1,6,'#','#',4,5,2,3]);
@@ -115,6 +120,7 @@ describe('Classic_BST-Traversals', () => {
       expect(postOrderTraversal1(root)).deep.equal(expected);
       expect(postOrderTraversal2(root)).deep.equal(expected);
       expect(postOrderTraversal3(root)).deep.equal(expected);
+      expect(postOrderTraversal4(root)).deep.equal(expected);
     });
   });
 });

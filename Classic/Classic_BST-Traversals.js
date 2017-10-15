@@ -162,6 +162,61 @@ const postOrderTraversal3 = (root) => {
   return ret;
 };
 
+const postOrderTraversal4 = (root) => {
+
+  // General thoughts:
+  //
+  // while (node) {
+  //   if (last === parent) {
+  //     node = node.left
+  //   } else if (last == node.left) {
+  //     node = node.right
+  //     node = parent
+  //   } else if (last == node.left) {
+  //     output(node.val)
+  //     node = parent
+  //   }
+  // }
+
+  let node = root;
+  let last = null;
+  const parents = [null];
+  const ret = [];
+  while (node) {
+    const parent = parents[parents.length - 1];
+    let next;
+    if (last === parent) {
+      if (node.left) {
+        parents.push(node);
+        next = node.left
+      } else if (node.right) {
+        parents.push(node);
+        next = node.right
+      } else {
+        ret.push(node.val); //output node.val
+        parents.pop();
+        next = parent;
+      }
+    } else if (last == node.left) {
+      if (node.right) {
+        parents.push(node);
+        next = node.right
+      } else {
+        ret.push(node.val); //output node.val
+        parents.pop();
+        next = parent;
+      }
+    } else if (last == node.right) {
+      ret.push(node.val); //output node.val
+      parents.pop();
+      next = parent
+    }
+    last = node;
+    node = next;
+  }
+  return ret;
+};
+
 export {
   TreeNode,
   treeSerializer,
@@ -175,4 +230,5 @@ export {
   postOrderTraversal1,
   postOrderTraversal2,
   postOrderTraversal3,
+  postOrderTraversal4,
 };
