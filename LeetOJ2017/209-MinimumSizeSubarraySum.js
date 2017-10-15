@@ -105,7 +105,7 @@ var minSubArrayLen = function(s, nums) {
       sum -= nums[tail++];
     }
   }
-  return minLength === Number.isFinite(minLength) ? minLength : 0;
+  return Number.isFinite(minLength) ? minLength : 0;
 };
 
 export default minSubArrayLen;
