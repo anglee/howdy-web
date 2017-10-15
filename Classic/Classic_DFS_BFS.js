@@ -1,32 +1,45 @@
-import _ from 'lodash';
-
-export const BFS = (root) => {
+export const DFS = (root) => {
   let ret = '';
   const stack = [root];
-  while (!_.isEmpty(stack)) {
+  while (stack.length > 0) {
     const n = stack.pop();
     ret += n.val;
-    if (n.rightChild) {
-      stack.push(n.rightChild);
+    if (n.right) {
+      stack.push(n.right);
     }
-    if (n.leftChild) {
-      stack.push(n.leftChild);
+    if (n.left) {
+      stack.push(n.left);
     }
   }
   return ret;
 };
 
-export const DFS = (root) => {
+export const DFS_recursive = (root) => {
+  let ret = '';
+  const doDFS = (node) => {
+    if (node === null) {
+      return;
+    }
+    ret += node.val;
+    doDFS(node.left);
+    doDFS(node.right);
+  };
+
+  doDFS(root);
+  return ret;
+};
+
+export const BFS = (root) => {
   let ret = '';
   const queue = [root];
-  while (!_.isEmpty(queue)) {
+  while (queue.length > 0) {
     const n = queue.shift();
     ret += n.val;
-    if (n.leftChild) {
-      queue.push(n.leftChild);
+    if (n.left) {
+      queue.push(n.left);
     }
-    if (n.rightChild) {
-      queue.push(n.rightChild);
+    if (n.right) {
+      queue.push(n.right);
     }
   }
   return ret;

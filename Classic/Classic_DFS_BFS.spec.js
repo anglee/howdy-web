@@ -1,11 +1,11 @@
 import { expect } from 'chai';
-import {BFS, DFS} from './Classic_DFS_BFS';
+import {BFS, DFS, DFS_recursive} from './Classic_DFS_BFS';
 
 export class Node {
-  constructor(val, leftChild = null, rightChild = null) {
+  constructor(val, leftChild = null, right = null) {
     this.val = val;
-    this.leftChild = leftChild;
-    this.rightChild = rightChild;
+    this.left = leftChild;
+    this.right = right;
   }
 }
 
@@ -18,15 +18,21 @@ const F = new Node('F', D, E);
 const G = new Node('G', C, F);
 
 describe('Classic_DFS_BFS', () => {
-  describe('BFS', () => {
+  describe('DFS', () => {
     it('should traverse the tree', () => {
-      expect(BFS(G)).to.equal('GCABFDE');
+      expect(DFS(G)).to.equal('GCABFDE');
     });
   });
 
-  describe('DFS', () => {
+  describe('DFS_recursive', () => {
     it('should traverse the tree', () => {
-      expect(DFS(G)).to.equal('GCFABDE');
+      expect(DFS_recursive(G)).to.equal('GCABFDE');
+    });
+  });
+
+  describe('BFS', () => {
+    it('should traverse the tree', () => {
+      expect(BFS(G)).to.equal('GCFABDE');
     });
   });
 });
