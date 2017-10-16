@@ -109,13 +109,6 @@ var countComponents0 = function(n, edges) {
 
 // =============================================================
 
-const range = (x, y) => {
-  const ret = [];
-  for (let i = x; i < y; ++i) {
-    ret.push(i);
-  }
-  return ret;
-};
 const findRoot = (parentMap, node) => {
   let n = node;
   while (n !== parentMap[n]) {
@@ -134,7 +127,7 @@ var countComponents = function(n, edges) {
 
   // use an array to store the parent,
   // e,g. parentMap[8] = 7 will mean the parent of node 8 is node 7
-  const parentMap = range(0, n);
+  const parentMap = Array(n).fill().map((_,i) => i);
 
   edges.forEach(([v1, v2]) => {
     const rootOfV1 = findRoot(parentMap, v1);
