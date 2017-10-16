@@ -146,7 +146,7 @@ var countComponents1 = function(n, edges) {
 };
 
 //--------------------------------------------------------------------------------------------------
-// Union Find, with path shortening
+// Union Find, with path compression
 //--------------------------------------------------------------------------------------------------
 
 
@@ -159,7 +159,7 @@ const findRootAndNodesAlongThePath = (parentMap, node) => {
   };
   return {
     root: n,
-    nodesAlongThePath
+    nodesAlongThePath,
   };
 };
 
