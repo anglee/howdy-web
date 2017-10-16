@@ -107,14 +107,60 @@ var countComponents0 = function(n, edges) {
   return uniqueGroups.size;
 };
 
-// =============================================================
-
+//--------------------------------------------------------------------------------------------------
+// Union Find
+//--------------------------------------------------------------------------------------------------
 const findRoot = (parentMap, node) => {
   let n = node;
   while (n !== parentMap[n]) {
     n = parentMap[n];
   };
   return n;
+};
+
+
+/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @return {number}
+ */
+var countComponents1 = function(n, edges) {
+
+  // use an array to store the parent,
+  // e,g. parentMap[8] = 7 will mean the parent of node 8 is node 7
+  const parentMap = Array(n).fill().map((_,i) => i);
+
+  edges.forEach(([v1, v2]) => {
+    const rootOfV1 = findRoot(parentMap, v1);
+    const rootOfV2 = findRoot(parentMap, v2);
+    parentMap[rootOfV2] = rootOfV1;
+  });
+
+  let ret = 0;
+  parentMap.forEach((v, i) => {
+    if (v === i) {
+      ++ret;
+    }
+  });
+  return ret;
+};
+
+//--------------------------------------------------------------------------------------------------
+// Union Find, with path shortening
+//--------------------------------------------------------------------------------------------------
+
+
+const findRootAndNodesAlongThePath = (parentMap, node) => {
+  let n = node;
+  const nodesAlongThePath = [n];
+  while (n !== parentMap[n]) {
+    n = parentMap[n];
+    nodesAlongThePath.push(n);
+  };
+  return {
+    root: n,
+    nodesAlongThePath
+  };
 };
 
 
@@ -130,9 +176,11 @@ var countComponents = function(n, edges) {
   const parentMap = Array(n).fill().map((_,i) => i);
 
   edges.forEach(([v1, v2]) => {
-    const rootOfV1 = findRoot(parentMap, v1);
-    const rootOfV2 = findRoot(parentMap, v2);
-    parentMap[rootOfV2] = rootOfV1;
+    const { root: rootOfV1, nodesAlongThePath: nodes1 } = findRootAndNodesAlongThePath(parentMap, v1);
+    const { nodesAlongThePath: nodes2 } = findRootAndNodesAlongThePath(parentMap, v2);
+    [...nodes1, ...nodes2].forEach(node => {
+      parentMap[node] = rootOfV1;
+    });
   });
 
   let ret = 0;
