@@ -16,7 +16,7 @@ const canCross0 = (stones) => { // recursive
   return canCrossI(0, 0);
 };
 
-const canCross = (stones) => { // recursive + memoize
+const canCross1 = (stones) => { // recursive + memoize
   const stonesSet = new Set(stones);
   const lastStone = stones[stones.length - 1];
   const memoizeMap = new Map();
@@ -46,7 +46,39 @@ const canCross = (stones) => { // recursive + memoize
   return canCrossI(0, 0);
 };
 
-const canCross1 = (stones) => { // dp
+/**
+ * @param {number[]} stones
+ * @return {boolean}
+ */
+var canCross2 = function(stones) {
+  if (stones.length === 1) {
+    return true;
+  }
+  const stonesSet = new Set(stones);
+  const lastStone = stones[stones.length - 1];
+
+  const move = (currentPos, kUnits) => {
+    if (kUnits <= 0) {
+      return false;
+    }
+    const nextPos = currentPos + kUnits;
+    if (nextPos === lastStone) {
+      return true;
+    }
+    if (!stonesSet.has(nextPos)) {
+      return false;
+    }
+    return (
+      move(nextPos, kUnits - 1) ||
+      move(nextPos, kUnits) ||
+      move(nextPos, kUnits + 1)
+    );
+  };
+
+  return move(0, 1);
+};
+
+const canCross3 = (stones) => { // dp
 
   const generateNextKs = (ks) => {
     const nextKs = new Set();
@@ -88,6 +120,36 @@ const canCross1 = (stones) => { // dp
     nextKsMap[i] = generateNextKs(ksMap[i]);
   }
   return ksMap[stones.length - 1].size > 0;
+};
+
+/**
+ * @param {number[]} stones
+ * @return {boolean}
+ */
+var canCross = function(stones) { // DP
+
+  // use a map for each stone to record all the possible units that frog can use to jump
+  // to that stone.
+  const arrivedStepsMap = stones.map(() => new Set());
+  arrivedStepsMap[0].add(0);
+
+  // because the frog can only go forward, we scan through the stones from left to right,
+  // for each stone check if the fog can be reached from any of the previous stones.
+  for (let i = 1; i < stones.length; ++i) {
+    const stoneI = stones[i];
+    for (let j = 0; j < i; ++j) {
+      const stoneJ = stones[j];
+      const distance = stoneI - stoneJ;
+      if (
+        arrivedStepsMap[j].has(distance) ||
+        arrivedStepsMap[j].has(distance - 1) ||
+        arrivedStepsMap[j].has(distance + 1)
+      ) {
+        arrivedStepsMap[i].add(distance);
+      }
+    }
+  }
+  return arrivedStepsMap[stones.length - 1].size !== 0;
 };
 
 export default canCross;
