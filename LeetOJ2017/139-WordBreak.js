@@ -37,7 +37,7 @@ var wordBreak0 = function(s, wordDict) { // recursion
  * @param {string[]} wordDict
  * @return {boolean}
  */
-var wordBreak = function(s, wordDict) { // DP
+var wordBreak1 = function(s, wordDict) { // DP
   const dict = new Set(wordDict);
   const isWordBreakableAt = [];
   for (let i = 0; i < s.length; ++i) {
@@ -54,6 +54,23 @@ var wordBreak = function(s, wordDict) { // DP
     }
   }
   return isWordBreakableAt[s.length - 1];
+};
+
+
+const range = (i, j) => Array(j - i).fill().map((_, index) => index + i);
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+var wordBreak = function(s, wordDict) { // DP
+  const dict = new Set(wordDict);
+  const breakables = Array(s.length + 1).fill(false);
+  breakables[0] = true;
+  for (let i = 1; i <= s.length; ++i) {
+    breakables[i] = range(0, i).some(j => breakables[j] && dict.has(s.substring(j, i)));
+  }
+  return breakables[s.length];
 };
 
 export default wordBreak;
