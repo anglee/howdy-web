@@ -156,7 +156,7 @@ const getDateStringStartPositions = string => {
 const getBasicTypeTokens = string => {
   // first search for all the valid date strings
   // create a date tokens from each of the date strings.
-  // And for other parts(substrings) of the input strings that don't contain valid date strings,
+  // And for other parts(substrings) of the input string that don't contain valid date strings,
   // parse each to get number and alphabets tokens
   const dateStringStarts = getDateStringStartPositions(string);
   let lastEnd = 0;
