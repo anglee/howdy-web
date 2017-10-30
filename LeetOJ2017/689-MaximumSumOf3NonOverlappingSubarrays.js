@@ -3,7 +3,7 @@
  * @param {number} k
  * @return {number[]}
  */
-var maxSumOfThreeSubarrays0 = function(nums, k) {
+var maxSumOfThreeSubarrays0 = function(nums, k) { // Brute force
   const sums = Array(nums.length).fill(0);
 
   let sum = 0;
@@ -96,8 +96,10 @@ var maxSumOfThreeSubarrays1 = function(nums, k) {
  * @return {number[]}
  */
 var maxSumOfThreeSubarrays = function(nums, k) {
-  const sums = Array(nums.length).fill(0);
 
+  // Array 'sums' stores sums of each length = k subarrays starting at index i;
+  // e.g. sums[5] = the sum of subarray(5, 5 + k);
+  const sums = Array(nums.length).fill(0);
   let sum = 0;
   for (let i = 0; i < nums.length; ++i) {
     sum += nums[i];
@@ -109,6 +111,8 @@ var maxSumOfThreeSubarrays = function(nums, k) {
     }
   }
 
+  // Array 'lefts' stores the max sum to the left of i including i
+  // e.g. left[8] stores the max of sums among sums[0..8]
   const lefts = (() => {
     const ret = [];
     let max = 0;
@@ -123,6 +127,8 @@ var maxSumOfThreeSubarrays = function(nums, k) {
     return ret;
   })();
 
+  // Array 'rights' stores the max sum to the right of i including i
+  // e.g. left[8] stores the max of sums among sums[8...(end)]
   const rights = (() => {
     const ret = [];
     let max = 0;
