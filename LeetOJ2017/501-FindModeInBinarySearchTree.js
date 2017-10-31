@@ -20,7 +20,7 @@ const findCount = (node, value) => {
  * @param {TreeNode} root
  * @return {number[]}
  */
-var findMode = function(root) {
+var findMode0 = function(root) {
 
   const findModesAndTheirCounts = (node) => {
     if (node === null) {
@@ -53,5 +53,38 @@ var findMode = function(root) {
 
   return findModesAndTheirCounts(root).modes;
 };
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var findMode = function(root) {
+  let prev = null;
+  let count = 0;
+  let maxCount = 0;
+  let modes = [];
+  const traverseInOrder = (node) => {
+    if (node === null) { return; }
+    traverseInOrder(node.left);
+    if (node.val === prev) {
+      count++;
+    } else {
+      count = 1;
+    }
+    if (count === maxCount) {
+      modes.push(node.val);
+    } else if (count > maxCount) {
+      modes = [node.val];
+      maxCount = count;
+    }
+    prev = node.val;
+    traverseInOrder(node.right);
+  };
+  traverseInOrder(root);
+  return modes;
+};
+
 
 export default findMode;
