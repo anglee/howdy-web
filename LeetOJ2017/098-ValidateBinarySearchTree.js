@@ -40,11 +40,42 @@ const getTreeStats = (root) => {
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isValidBST = function(root) { // recursive
+var isValidBST0 = function(root) { // recursive
   if (root === null) {
     return true;
   }
   return getTreeStats(root).isValid;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isValidBST = function(root) {
+  if (root === null) {
+    return true;
+  }
+  const poll = (node) => {
+    const leftStats = node.left ? poll(node.left) : null;
+    const rightStats = node.right ? poll(node.right) : null;
+    const isValid = (
+      (leftStats ? leftStats.isValid && leftStats.max < node.val : true) &&
+      (rightStats ? rightStats.isValid && rightStats.min > node.val : true)
+    );
+
+    if (isValid) {
+      return {
+        isValid,
+        min: leftStats ? leftStats.min : node.val,
+        max: rightStats ? rightStats.max : node.val,
+      };
+    }
+    return { isValid };
+  };
+  return poll(root).isValid;
 };
 
 
