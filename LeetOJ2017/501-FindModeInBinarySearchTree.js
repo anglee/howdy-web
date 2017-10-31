@@ -37,6 +37,7 @@ var findMode = function(root) {
       modes = left.modes;
       count = left.count;
     } else if (left.count === count) {
+      // note that node cannot be among left.modes
       modes = modes.concat(left.modes);
     }
     const right = findModesAndTheirCounts(node.right);
@@ -44,6 +45,7 @@ var findMode = function(root) {
       modes = right.modes;
       count = right.count;
     } else if (right.count === count) {
+      // note that node cannot be among right.modes
       modes = modes.concat(right.modes);
     }
     return { modes, count }
