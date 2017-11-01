@@ -109,7 +109,7 @@ var recoverTree = function(root) {
   };
 
 
-  // traverse in-order from left to right to find left
+  // traverse in-order from right to left to find right
   const findRight = () => {
     let prev = null;
     let right = null;
