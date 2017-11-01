@@ -72,7 +72,7 @@ var wordBreak1 = function(s, wordDict) {
  * @param {string[]} wordDict
  * @return {string[]}
  */
-var wordBreak = function(s, wordDict) {
+var wordBreak = function(s, wordDict) { // DP
   const wordSet = new Set(wordDict);
   const buf = [null];
   for (let j = 1; j <= s.length; ++j) {
@@ -92,4 +92,28 @@ var wordBreak = function(s, wordDict) {
   return buf[s.length];
 };
 
-export default wordBreak;
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {string[]}
+ */
+var wordBreak2 = function(s, wordDict) { // DP 2, Similar to DP 1
+  const wordSet = new Set(wordDict);
+  const sentencesBuffer = new Map();
+  sentencesBuffer.set(-1, [[]]);
+  for (let i = 0; i < s.length; ++i) {
+    sentencesBuffer.set(i, []);
+    for (let j = -1; j < i; ++j) {
+      const word = s.substring(j + 1, i + 1);
+      if (wordSet.has(word)) {
+        sentencesBuffer.get(j).forEach(array => {
+          sentencesBuffer.get(i).push(array.concat(word));
+        });
+      }
+    }
+  }
+  return sentencesBuffer.get(s.length - 1).map(array => array.join(' '));
+};
+
+
+export default wordBreak2;
