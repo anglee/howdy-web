@@ -1,0 +1,83 @@
+@import "./style/searchBox";
+@import "./style/lightbox";
+
+@wide-screen: ~"only screen and (min-width: 650px)";
+@iphone-6-screen: ~"only screen and (min-width: 375px) and (max-width: 649px)";
+@iphone-5-screen: ~"only screen and (min-width: 320px) and (max-width: 374px)";
+@narrow-screen: "only screen and (max-width: 319px)";
+@column-width: 90px;
+@main-container-width-7: @column-width * 7;
+@main-container-width-4: @column-width * 4;
+@main-container-width-3: @column-width * 3;
+@main-container-width-2: @column-width * 2;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+@media @wide-screen {
+  .section {
+    width: @main-container-width-7;
+  }
+}
+@media @iphone-6-screen {
+  .section {
+    width: @main-container-width-4;
+  }
+}
+
+@media @iphone-5-screen {
+  .section {
+    width: @main-container-width-3;
+  }
+}
+
+@media @narrow-screen {
+  .section {
+    width: @main-container-width-2;
+  }
+}
+
+.main {
+  margin: 0 auto;
+  text-align: left;
+
+  .image-grid {
+    padding-top: 36px;
+
+    .thumbnail {
+      cursor: pointer;
+    }
+  }
+
+  #loadMoreButton {
+    margin-top: 6px;
+    border-radius: 4px;
+    color: #a1a1a1;
+    background: #FFF;
+    border: solid #D9D9D9 1px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-bottom: 9px;
+
+    &:hover {
+      background: #3f46ad;
+      border: solid #3f46ad 1px;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  #loadingStatus {
+    margin-top: 6px;
+    color: #a1a1a1;
+    background: #FFF;
+    text-decoration: none;
+    font-size: 11px;
+    margin-bottom: 9px;
+
+    display: none;
+  }
+}

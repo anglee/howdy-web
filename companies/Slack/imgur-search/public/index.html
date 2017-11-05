@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <title>Imgur Search</title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div class="search-box">
+      <div class="search-box__inner-container section">
+        <input class="search-box__input" id="searchBox" type="text" placeholder="search (e.g. cat)"></input>
+        <input class="search-box__button" id="searchButton" type="image" title="search"></input>
+      </div>
+    </div>
+    <div class="main section">
+      <div class="image-grid" id="imageGrid"></div>
+      <div id="loadingStatus">loading more... </div>
+      <button id="loadMoreButton">load more</button>
+    </div>
+    <div class="lightbox__overlay" id="lightboxOverlay"></div>
+    <div class="lightbox__close-container" id="lightboxCloseButton">
+      <div class="lightbox__close-button"></div>
+    </div>
+    <div class="lightbox" id="lightbox">
+      <div class="lightbox__outer-container" id="lightboxImageContainer">
+        <div class="lightbox__image-container">
+          <img class="lightbox__image" id="lightboxImage" />
+          <div class="lightbox__nav" id="lightboxNav">
+            <a class="lightbox__prev-button" id="lightboxPrevButton"></a>
+            <a class="lightbox__next-button" id="lightboxNextButton"></a>
+          </div>
+          <div class="lightbox__loader" id="lightboxLoader">
+            <a class="lightbox__loader-icon"></a>
+          </div>
+        </div>
+      </div>
+      <div class="lightbox__data-container" id="lightboxTitleContainer">
+        <div class="lightbox__data">
+          <div class="lightbox__data-details">
+            <span class="lightbox__data-caption" id="lightboxTitle"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
