@@ -13,7 +13,7 @@
 var closestValue = function(root, target) {
 
   let node = root;
-  let lower = Number.POSITIVE_INFINITY;
+  let lower = Number.NEGATIVE_INFINITY;
   let upper = Number.POSITIVE_INFINITY;
   while (node) {
     if (target > node.val) {
@@ -24,7 +24,7 @@ var closestValue = function(root, target) {
       node = node.left;
     }
   }
-  return Math.abs(target - lower) < Math.abs(target - upper) ? lower : upper;
+  return target - lower < upper - target ? lower : upper;
 };
 
 export default closestValue;
