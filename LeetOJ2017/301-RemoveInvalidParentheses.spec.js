@@ -52,5 +52,24 @@ describe('LeetOJ 301-RemoveInvalidParentheses', () => {
         'k()',
       ]);
     });
+    it("should work with OJ test case2", () => {
+      const s = "())(((()m)(";
+      expect(removeInvalidParentheses(s)).to.have.all.members([
+        "()(()m)",
+      ]);
+    });
+    it("should work with OJ test case3", () => {
+      const s = ")k)))())()())))())";
+      expect(removeInvalidParentheses(s)).to.have.all.members([
+        "k((())())",
+        "k((()))()",
+        "k(()()())",
+        "k(()())()",
+        "k()(()())",
+        "k()(())()",
+        "k()()(())",
+        "k()()()()"
+      ]);
+    });
   });
 });
