@@ -134,7 +134,7 @@ var maxSumOfThreeSubarrays2 = function(nums, k) {
     let max = 0;
     let maxI = null;
     for (let i = sums.length - k; i >= 0; --i) {
-      if (sums[i] > max) {
+      if (sums[i] >= max) {
         max = sums[i];
         maxI = i;
       }
