@@ -114,4 +114,66 @@ var leastInterval = function (tasks, n) {
   return ret.length;
 };
 
-export default leastInterval;
+
+//--------------------------------------------------------------------------------------------------
+// Similar to the above, use less space but code is less readable
+const binarySearchGreatestLessThan = (sortedA, num) => {
+  let left = 0;
+  let right = sortedA.length - 1;
+  if (sortedA[right] >= num) {
+    return sortedA.length;
+  }
+  while (left < right) {
+    const middle = Math.floor((left + right) / 2);
+    if (sortedA[middle] >= num) {
+      left = middle + 1;
+    } else {
+      right = middle;
+    }
+  }
+  return left;
+};
+
+/**
+ * @param {character[]} tasks
+ * @param {number} n
+ * @return {number}
+ */
+var leastInterval2 = function (tasks, n) {
+  const taskCountMap = tasks.reduce((map, task) => { // task -> count
+    if (!map.has(task)) {
+      map.set(task, 1);
+    } else {
+      map.set(task, map.get(task) + 1);
+    }
+    return map;
+  }, new Map());
+
+  const queue = Array.from(taskCountMap.values());
+  queue.sort((count1, count2) => count2 - count1);
+
+  const insert = (sortedA, num) => {
+    const i = binarySearchGreatestLessThan(sortedA, num);
+    sortedA.splice(i, 0, num);
+  };
+
+  let t = 0;
+  const putBackMap = new Map(); // t -> count
+  while (queue.length > 0 || putBackMap.size > 0) {
+    if (putBackMap.has(t)) {
+      insert(queue, putBackMap.get(t));
+      putBackMap.delete(t);
+    }
+
+    if (queue.length) {
+      const count = queue.shift();
+      if (count - 1 > 0) {
+        putBackMap.set(t + n + 1, count - 1);
+      }
+    }
+    t++;
+  }
+  return t;
+};
+
+export default leastInterval2;
