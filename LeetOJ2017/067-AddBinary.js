@@ -15,14 +15,14 @@ var addBinary0 = function(a, b) {
     sum += i >= 0 ? parseInt(a[i]) : 0;
     sum += j >= 0 ? parseInt(b[j]) : 0;
 
-    output += sum % 2;
+    output = `${sum % 2}` + output;
     carry = Math.floor(sum / 2);
 
     i--;
     j--;
   }
 
-  return output.split('').reverse().join('');
+  return output;
 };
 
 //--------------------------------------------------------------------------------------------------
