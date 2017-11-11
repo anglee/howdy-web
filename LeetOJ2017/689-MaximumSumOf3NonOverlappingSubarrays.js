@@ -95,7 +95,7 @@ var maxSumOfThreeSubarrays1 = function(nums, k) {
  * @param {number} k
  * @return {number[]}
  */
-var maxSumOfThreeSubarrays = function(nums, k) {
+var maxSumOfThreeSubarrays2 = function(nums, k) {
 
   // Array 'sums' stores sums of each length = k subarrays starting at index i;
   // e.g. sums[5] = the sum of subarray(5, 5 + k);
@@ -152,6 +152,69 @@ var maxSumOfThreeSubarrays = function(nums, k) {
     if (sum > maxSum) {
       maxSum = sum;
       ret = [leftI, i, rightI];
+    }
+  }
+  return ret;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+// similar to maxSumOfThreeSubarrays2
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var maxSumOfThreeSubarrays = function(nums, k) {
+  const sums = Array(nums.length - k + 1).fill(Number.NEGATIVE_INFINITY);
+  let sum = 0;
+  nums.forEach((num, i) => {
+    sum += num;
+    if (i - k >= 0) {
+      sum -= nums[i - k];
+    }
+    if (i - k + 1 >= 0) {
+      sums[i - k + 1] = sum;
+    }
+  });
+
+  // console.log('sums', sums);
+
+  // lefts[i] will have value { maxSum and maxI}, where maxSum is the left max sum of subarrays,
+  // who doesn't overlap with i (start + k <= i)
+  const lefts = Array(sums.length).fill(null);
+  for (
+    let i = k, maxSum = 0, maxI = null;
+    i < sums.length;
+    ++i
+  ) {
+    if (sums[i - k] > maxSum) {
+      maxSum = sums[i - k];
+      maxI = i - k;
+    }
+    lefts[i] = { maxSum, maxI }
+  }
+
+  const rights = Array(sums.length).fill(null);
+  for (
+    let i = sums.length - 1 - k, maxSum = 0, maxI = null;
+    i >= 0;
+    --i
+  ) {
+    if (sums[i + k] >= maxSum) {
+      maxSum = sums[i + k];
+      maxI = i + k;
+    }
+    rights[i] = { maxSum, maxI }
+  }
+
+  let maxTotal = 0;
+  let ret = null;
+  for (let i = k; i + k < sums.length; ++i) {
+    const total = lefts[i].maxSum + sums[i] + rights[i].maxSum;
+    if (total > maxTotal) {
+      maxTotal = total;
+      ret = [lefts[i].maxI, i, rights[i].maxI]
     }
   }
   return ret;
