@@ -35,7 +35,7 @@ var verticalOrder0 = function(root) {
  * @param {TreeNode} root
  * @return {number[][]}
  */
-var verticalOrder = function(root) {
+var verticalOrder1 = function(root) {
   const q = [{node: root, x: 0}];
   const map = new Map();
   let minX = Number.POSITIVE_INFINITY;
@@ -58,6 +58,38 @@ var verticalOrder = function(root) {
     ret.push(map.get(x));
   }
   return ret;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var verticalOrder = function(root) {
+  if (root === null) { return []; }
+  let leftOffset = 0;
+  let rightOffset = 0;
+  const findOffsets = (node, x) => {
+    leftOffset = Math.min(leftOffset, x);
+    rightOffset = Math.max(rightOffset, x);
+    node.left && findOffsets(node.left, x - 1);
+    node.right && findOffsets(node.right, x + 1);
+  };
+  findOffsets(root, 0);
+
+  const buckets = Array(-leftOffset + 1 + rightOffset).fill().map(() => []);
+  // BFS
+  const queue = [{ node: root, x: -leftOffset }];
+  while (queue.length > 0) {
+    const {node, x} = queue.shift();
+    if (node) {
+      buckets[x].push(node.val);
+      queue.push({node: node.left, x: x - 1});
+      queue.push({node: node.right, x: x + 1});
+    }
+  }
+  return buckets
 };
 
 export default verticalOrder;
