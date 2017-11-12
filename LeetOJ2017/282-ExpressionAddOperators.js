@@ -65,7 +65,7 @@ const generateExpressions = memoize((num) => {
  * @param {number} target
  * @return {string[]}
  */
-var addOperators = function(num, target) {
+var addOperators0 = function(num, target) {
   if (num.length === 0) { return []; }
   const expressions = generateExpressions(num).filter(doesntHaveLeadZero);
   return expressions.filter(exp => eval(exp) === target);
@@ -78,7 +78,7 @@ var addOperators = function(num, target) {
  * @param {number} target
  * @return {string[]}
  */
-var addOperators = function(num, target) {
+var addOperators1 = function(num, target) {
   if (num.length === 0) {
     return [];
   }
@@ -150,5 +150,66 @@ var addOperators = function(num, target) {
   return ret;
 };
 
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {string} num
+ * @param {number} target
+ * @return {string[]}
+ */
+var addOperators = function(num, target) {
+  let ret = [];
+  const hasLeadingZero = (str) => str.length > 1 && str[0] === '0';
+
+  const add = (prefix, todo, value, lastGroupValue) => {
+    if (todo.length === 0) {
+      if (value === target) {
+        ret.push(prefix);
+      }
+      return;
+    }
+
+    // add
+    for (let len = 1; len <= todo.length; ++len) {
+      const str = todo.substr(0, len);
+      if (hasLeadingZero(str)) { continue; }
+      const val = parseInt(str);
+      add(prefix + '+' + str, todo.substr(len), value + val, val);
+    }
+
+    // subtract
+    for (let len = 1; len <= todo.length; ++len) {
+      const str = todo.substr(0, len);
+      if (hasLeadingZero(str)) { continue; }
+      const val = parseInt(str);
+      add(prefix + '-' + str, todo.substr(len), value - val, -val);
+    }
+
+    // multiply
+    for (let len = 1; len <= todo.length; ++len) {
+      const str = todo.substr(0, len);
+      if (hasLeadingZero(str)) { continue; }
+      const val = parseInt(str);
+      add(prefix + '*' + str, todo.substr(len), value - lastGroupValue + lastGroupValue * val, lastGroupValue * val);
+    }
+
+    // divide
+    // for (let len = 1; len <= todo.length; ++len) {
+    //   const str = todo.substr(0, len);
+    //   if (hasLeadingZero(str)) { continue; }
+    //   const val = parseInt(str);
+    //   add(prefix + '/' + str, todo.substr(len), value - lastGroupValue + lastGroupValue / val, lastGroupValue / val);
+    // }
+  };
+
+  for (let len = 1; len <= num.length; ++len) {
+    const str = num.substr(0, len);
+    if (hasLeadingZero(str)) { continue; }
+    const value = parseInt(str);
+    add(str, num.substr(len), value, value);
+  }
+
+  return ret;
+};
 
 export default addOperators;
