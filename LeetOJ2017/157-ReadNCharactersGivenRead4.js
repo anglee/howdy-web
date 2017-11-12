@@ -12,7 +12,7 @@
  * @param {function} read4()
  * @return {function}
  */
-var solution = function(read4) {
+var solution0 = function(read4) {
   const addToBuffer = (buffer, toAdd) => buffer.splice(buffer.length, 0, ...toAdd);
 
   /**
@@ -35,6 +35,39 @@ var solution = function(read4) {
     }
 
     return buf.length;
+  };
+};
+
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {function} read4()
+ * @return {function}
+ */
+var solution = function(read4) {
+
+  let buffer = [];
+  /**
+   * @param {character[]} buf Destination buffer
+   * @param {number} n Maximum number of characters to read
+   * @return {number} The number of characters read
+   */
+  return function (buf, n) {
+    while (buffer.length < n) {
+      const read4Buf = [];
+      const read4Count = read4(read4Buf);
+      buffer = buffer.concat(read4Buf);
+      if (read4Count < 4) {
+        break;
+      }
+    }
+
+    const retCount = Math.min(buffer.length, n);
+    const ret = buffer.slice(0, retCount);
+    buffer = buffer.slice(retCount);
+    buf.splice(0, buf.length, ...ret);
+    return retCount;
   };
 };
 
