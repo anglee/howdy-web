@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { treeDeserializer } from '../lib/tree';
-import verticalOrder from './314-BinaryTreeVericalOrderTraversal';
+import verticalOrder from './314-BinaryTreeVerticalOrderTraversal';
 
 describe('LeetOJ 314-BinaryTreeVericalOrderTraversal', () => {
   describe('verticalOrder', () => {
