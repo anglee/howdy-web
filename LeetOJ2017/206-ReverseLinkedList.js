@@ -26,7 +26,7 @@ var reverseList0 = function(head) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var reverseList = function(head) { // recursive
+var reverseList0 = function(head) { // recursive
 
   const reverseListI = (head, last) => {
     if (head === null) {
@@ -38,6 +38,15 @@ var reverseList = function(head) { // recursive
   };
 
   return reverseListI(head, null);
+};
+
+var reverseList = function (head, last = null) { // recursive
+  if (head === null) {
+    return last;
+  }
+  const next = head.next;
+  head.next = last;
+  return reverseList(next, head);
 };
 
 export default reverseList;
