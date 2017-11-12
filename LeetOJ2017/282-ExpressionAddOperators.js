@@ -161,7 +161,7 @@ var addOperators = function(num, target) {
   let ret = [];
   const hasLeadingZero = (str) => str.length > 1 && str[0] === '0';
 
-  const add = (prefix, todo, value, lastGroupValue) => {
+  const add = (prefix, todo, value, lastProductValue) => {
     if (todo.length === 0) {
       if (value === target) {
         ret.push(prefix);
@@ -190,7 +190,7 @@ var addOperators = function(num, target) {
       const str = todo.substr(0, len);
       if (hasLeadingZero(str)) { continue; }
       const val = parseInt(str);
-      add(prefix + '*' + str, todo.substr(len), value - lastGroupValue + lastGroupValue * val, lastGroupValue * val);
+      add(prefix + '*' + str, todo.substr(len), value - lastProductValue + lastProductValue * val, lastProductValue * val);
     }
 
     // divide
@@ -198,7 +198,7 @@ var addOperators = function(num, target) {
     //   const str = todo.substr(0, len);
     //   if (hasLeadingZero(str)) { continue; }
     //   const val = parseInt(str);
-    //   add(prefix + '/' + str, todo.substr(len), value - lastGroupValue + lastGroupValue / val, lastGroupValue / val);
+    //   add(prefix + '/' + str, todo.substr(len), value - lastProductValue + lastProductValue / val, lastProductValue / val);
     // }
   };
 
