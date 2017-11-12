@@ -45,7 +45,7 @@ var isMatch0 = function(s, p) {
  * @param {string} p
  * @return {boolean}
  */
-var isMatch = function(s, p) {
+var isMatch1 = function(s, p) {
   if (p.length === 0) {
     return s.length === 0;
   }
@@ -101,6 +101,59 @@ var isMatch2 = function(s, p) { // memoize base on keys composed of s.length and
     }
   });
   return isMatchI(s, p);
+};
+
+//--------------------------------------------------------------------------------------------------
+
+const tokenize = (p) => { // tokenize a regex pattern, e.g. ab*c is turned into ['a', 'b*', 'c'];
+  const tokens = [];
+  for (let i = 0; i < p.length; ++i) {
+    if (i + 1 < p.length && p[i + 1] === '*') {
+      tokens.push(p.substr(i, 2));
+      ++i;
+    } else {
+      tokens.push(p[i]);
+    }
+  }
+  return tokens;
+};
+
+const create2DArray = (h, w, initvalue) =>
+  Array(h).fill().map(() => Array(w).fill(initvalue));
+
+/**
+ * @param {string} s
+ * @param {string} p
+ * @return {boolean}
+ */
+var isMatch = function(s, p) { // DP
+  const pTokens = [''].concat(tokenize(p));
+  const sTokens = [''].concat(s.split(''));
+  const h = sTokens.length;
+  const w = pTokens.length;
+  const buffer = create2DArray(sTokens.length, pTokens.length, false);
+  for (let y = 0; y < h; ++y) {
+    const sToken = sTokens[y];
+    for (let x = 0; x < w; ++x) {
+      const pToken = pTokens[x];
+      if (pToken.length !== 2) {
+        if (x === 0 && y === 0) {
+          buffer[0][0] = true;
+        } else if (x === 0 || y === 0) {
+          buffer[y][x] = false;
+        } else {
+          buffer[y][x] = buffer[y - 1][x - 1] && (pToken === '.' || pToken === sToken);
+        }
+      } else { // pToken.length === 2
+        if (pToken[0] === '.' || pToken[0] === sToken) {
+          buffer[y][x] = (x > 0 && buffer[y][x - 1]) || (y > 0 && buffer[y - 1][x]);
+        } else {
+          buffer[y][x] = (x > 0 && buffer[y][x - 1]);
+        }
+      }
+    }
+  }
+  return buffer[h - 1][w - 1];
 };
 
 export default isMatch;
