@@ -10,7 +10,7 @@
  * @constructor
  * @param {TreeNode} root - root of the binary search tree
  */
-var BSTIterator = function(root) {
+var BSTIterator0 = function(root) {
   const stack = [];
 
   // hint: start by looking at the example:
@@ -84,18 +84,18 @@ var BSTIterator = function(root) {
 
 
 /**
- * @this BSTIterator
+ * @this BSTIterator0
  * @returns {boolean} - whether we have a next smallest number
  */
-BSTIterator.prototype.hasNext = function() {
+BSTIterator0.prototype.hasNext = function() {
   return this.stack.length > 0;
 };
 
 /**
- * @this BSTIterator
+ * @this BSTIterator0
  * @returns {number} - the next smallest number
  */
-BSTIterator.prototype.next = function() {
+BSTIterator0.prototype.next = function() {
   let node = this.stack.pop(); // node = D
 
   //output node
@@ -112,9 +112,64 @@ BSTIterator.prototype.next = function() {
 };
 
 /**
+ * Your BSTIterator0 will be called like this:
+ * var i = new BSTIterator0(root), a = [];
+ * while (i.hasNext()) a.push(i.next());
+ */
+
+// export default BSTIterator0;
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * Definition for binary tree
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+
+/**
+ * @constructor
+ * @param {TreeNode} root - root of the binary search tree
+ */
+var BSTIterator = function(root) {
+  this.stack = [];
+  let node = root;
+  while (node) {
+    this.stack.push(node);
+    node = node.left;
+  }
+};
+
+
+/**
+ * @this BSTIterator
+ * @returns {boolean} - whether we have a next smallest number
+ */
+BSTIterator.prototype.hasNext = function() {
+  return this.stack.length > 0
+};
+
+/**
+ * @this BSTIterator
+ * @returns {number} - the next smallest number
+ */
+BSTIterator.prototype.next = function() {
+  const ret = this.stack.pop();
+  let node = ret.right;
+  while (node) {
+    this.stack.push(node);
+    node = node.left;
+  }
+  return ret.val;
+};
+
+/**
  * Your BSTIterator will be called like this:
  * var i = new BSTIterator(root), a = [];
  * while (i.hasNext()) a.push(i.next());
  */
 
 export default BSTIterator;
+
