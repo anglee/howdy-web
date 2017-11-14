@@ -68,14 +68,14 @@ var accountsMerge = function(accounts) {
 
   const graph = new Map();
   const addEdge = (graph, email1, email2) => {
-    if (!graph.has(email1)) {
-      graph.set(email1, new Set());
-    }
-    graph.get(email1).add(email2);
-    if (!graph.has(email2)) {
-      graph.set(email2, new Set());
-    }
-    graph.get(email2).add(email1);
+    const getOrCreate = (graph, key) => {
+      if (!graph.has(key)) {
+        graph.set(key, new Set());
+      }
+      return graph.get(key);
+    };
+    getOrCreate(graph, email1).add(email2);
+    getOrCreate(graph, email2).add(email1);
   };
 
   const emailToNameMap = new Map();
