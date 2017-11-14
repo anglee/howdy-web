@@ -19,7 +19,7 @@ const search = (root, s) => {
 /**
  * @constructor
  */
-var WordDictionary = function() {
+var WordDictionary0 = function() {
   this.tree = {};
   this.memoized = {};
 };
@@ -29,7 +29,7 @@ var WordDictionary = function() {
  * @return {void}
  * Adds a word into the data structure.
  */
-WordDictionary.prototype.addWord = function(word) {
+WordDictionary0.prototype.addWord = function(word) {
   if (this.memoized[word]) {
     return;
   }
@@ -52,7 +52,7 @@ WordDictionary.prototype.addWord = function(word) {
  * Returns if the word is in the data structure. A word could
  * contain the dot character '.' to represent any one letter.
  */
-WordDictionary.prototype.search = function(word) {
+WordDictionary0.prototype.search = function(word) {
   if (this.memoized.hasOwnProperty(word)) {
     return this.memoized[word];
   }
@@ -63,9 +63,76 @@ WordDictionary.prototype.search = function(word) {
 };
 
 /**
- * Your WordDictionary object will be instantiated and called as such:
- * var wordDictionary = new WordDictionary();
+ * Your WordDictionary0 object will be instantiated and called as such:
+ * var wordDictionary = new WordDictionary0();
  * wordDictionary.addWord("word");
  * wordDictionary.search("pattern");
  */
+// export default WordDictionary0;
+
+//--------------------------------------------------------------------------------------------------
+
+class Node {
+  constructor() {
+    this.children = {};
+    this.isLeaf = false;
+  }
+}
+
+/**
+ * Initialize your data structure here.
+ */
+var WordDictionary = function() {
+  this.trie = new Node();
+};
+
+/**
+ * Adds a word into the data structure.
+ * @param {string} word
+ * @return {void}
+ */
+WordDictionary.prototype.addWord = function(word) {
+  let node = this.trie;
+  for (let char of word) {
+    if (!node.children[char]) {
+      node.children[char] = new Node();
+    }
+    node = node.children[char];
+  }
+  node.isLeaf = true;
+};
+
+/**
+ * Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+ * @param {string} word
+ * @return {boolean}
+ */
+WordDictionary.prototype.search = function(word) {
+  const dfs = (node, word) => {
+    if (word.length === 0) {
+      return node.isLeaf;
+    }
+    if (word[0] !== '.') {
+      const char = word[0];
+      return !!(node.children[char] && dfs(node.children[char], word.substring(1)));
+    } else {
+      for (let child in node.children) {
+        if (dfs(node.children[child], word.substring(1))) {
+          return true;
+        }
+      }
+      return false;
+    }
+  };
+  return dfs(this.trie, word);
+};
+
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * var obj = Object.create(WordDictionary).createNew()
+ * obj.addWord(word)
+ * var param_2 = obj.search(word)
+ */
+
 export default WordDictionary;
+
