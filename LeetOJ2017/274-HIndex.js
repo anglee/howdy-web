@@ -17,11 +17,13 @@ var hIndex0 = function (citations) { // time: O(n ^ 2)
   return 0;
 };
 
+//--------------------------------------------------------------------------------------------------
+
 /**
  * @param {number[]} citations
  * @return {number}
  */
-var hIndex = function (citations) { // time: O(n log n)
+var hIndex1 = function (citations) { // time: O(n log n)
   citations.sort((a, b) => b - a);
   for (let h = citations.length; h > 0; --h) {
     if (citations[h - 1] >= h) {
@@ -30,4 +32,22 @@ var hIndex = function (citations) { // time: O(n log n)
   }
   return 0;
 };
+
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {number[]} citations
+ * @return {number}
+ */
+var hIndex = function (citations) {
+  citations.sort((a, b) => b - a);
+  for (let i = 0; i < citations.length; ++i) {
+    if (citations[i] < i + 1) {
+      return i;
+    }
+  }
+  return citations.length;
+};
+
 export default hIndex;
