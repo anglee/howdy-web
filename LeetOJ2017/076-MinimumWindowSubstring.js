@@ -227,11 +227,15 @@ var minWindow = function(s, t) {
 
   for (let head = 0; head < s.length; ++head) {
     const char = s[head];
-    if (!tSet.has(char)) { // ignore positions where char is not in t
+
+    // ignore positions where char is not in t
+    if (!tSet.has(char)) {
       continue;
     }
 
-    bag.set(char, head); // add the char to the bag
+    // add the char to the bag
+    bag.set(char, head);
+
     // if the count of char in the bag exceeds the count of char in t,
     // eject the oldest entry of char
     if (bag.getSizeOfKey(char) > tCountMap.get(char)) {
