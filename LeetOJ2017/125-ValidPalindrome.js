@@ -50,6 +50,18 @@ var isPalindrome1 = function(s) {
 
 //--------------------------------------------------------------------------------------------------
 
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome2 = function(s) {
+  const ss = s.toLowerCase();
+  const sss = ss.split('').filter(it => isAlphanumeric(it)).join('');
+  return sss.split('').reverse().join('') === sss;
+};
+
+//--------------------------------------------------------------------------------------------------
+
 // const isAlphanumeric = char => char.match(/^[a-z0-9]+$/i);
 /**
  * @param {string} s
