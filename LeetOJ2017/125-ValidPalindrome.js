@@ -20,11 +20,14 @@ var isPalindrome0 = function(s) {
   return true;
 };
 
+//--------------------------------------------------------------------------------------------------
+
+
 /**
  * @param {string} s
  * @return {boolean}
  */
-var isPalindrome = function(s) {
+var isPalindrome1 = function(s) {
   let left = 0;
   let right = s.length - 1;
 
@@ -44,4 +47,32 @@ var isPalindrome = function(s) {
 
   return true;
 };
+
+//--------------------------------------------------------------------------------------------------
+
+// const isAlphanumeric = char => char.match(/^[a-z0-9]+$/i);
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function(s) {
+  let l = 0;
+  let r = s.length - 1;
+
+  while (l < r) {
+    if (!isAlphanumeric(s[l])) {
+      ++l;
+    } else if (!isAlphanumeric(s[r])) {
+      --r;
+    } else if (s[l].toLowerCase() === s[r].toLowerCase()) {
+      ++l;
+      --r;
+    } else {
+      return false;
+    }
+  }
+  return true;
+
+};
+
 export default isPalindrome;
