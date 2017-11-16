@@ -13,14 +13,8 @@ var canAttendMeetings = function(intervals) {
   const moments = [];
   intervals.forEach((it) => {
     moments.push(
-      {
-        at: it.start,
-        isStart: true,
-      },
-      {
-        at: it.end,
-        isStart: false,
-      }
+      { at: it.start, isStart: true },
+      { at: it.end, isStart: false }
     );
   });
 
@@ -28,7 +22,6 @@ var canAttendMeetings = function(intervals) {
     if (a.at === b.at && a.isStart !== b.isStart) {
       return a.isStart ? 1 : -1;
     }
-
     return a.at - b.at;
   });
 
