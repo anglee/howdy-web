@@ -80,6 +80,24 @@ var wordBreak2 = function(s, wordDict) { // DP
   return breakables[s.length];
 };
 
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+var wordBreak3 = function(s, wordDict) { // DP
+  const breakables = Array(s.length).fill(false);
+  const dict = new Set(wordDict);
+  for (let i = 0; i < s.length; ++i) {
+    for (let j = 0; j <= i; ++j) {
+      if ((j === 0 || breakables[j - 1]) && dict.has(s.substring(j, i + 1))) {
+        breakables[i] = true;
+        break;
+      }
+    }
+  }
+  return breakables[s.length - 1];
+};
 
 const range = (i, j) => Array(j - i).fill().map((_, index) => index + i);
 /**
@@ -97,4 +115,4 @@ var wordBreak = function(s, wordDict) { // DP
   return breakables[s.length];
 };
 
-export default wordBreak;
+export default wordBreak3;
