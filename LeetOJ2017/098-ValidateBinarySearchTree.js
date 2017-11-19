@@ -78,5 +78,45 @@ var isValidBST = function(root) {
   return poll(root).isValid;
 };
 
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isValidBST = function(root) {
+  if (root === null) {
+    return true;
+  }
+
+  const poll = (node) => {
+    let min = node.val;
+    let max = node.val;
+    if (node.left) {
+      const leftPoll = poll(node.left);
+      if (!leftPoll.isValid || leftPoll.max >= node.val) {
+        return { isValid: false }
+      }
+      min = leftPoll.min;
+    }
+    if (node.right) {
+      const rightPoll = poll(node.right);
+      if (!rightPoll.isValid || rightPoll.min <= node.val) {
+        return { isValid: false }
+      }
+      max = rightPoll.max;
+    }
+    return { isValid: true, min, max };
+  };
+
+  return poll(root).isValid;
+};
 
 export default isValidBST;
