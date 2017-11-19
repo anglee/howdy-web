@@ -11,7 +11,6 @@ class SlowHeights {
     const index = this.heights.indexOf(height);
     this.heights.splice(index, 1);
   }
-
   getMax() {
     return Math.max(...this.heights, 0);
   }
