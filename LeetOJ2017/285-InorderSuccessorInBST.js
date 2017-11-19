@@ -50,7 +50,7 @@ var inorderSuccessor0 = function(root, p) {
  * @param {TreeNode} p
  * @return {TreeNode}
  */
-var inorderSuccessor = function(root, p) {
+var inorderSuccessor1 = function(root, p) {
   const findLeftMostLeaf = (node) => {
     let current = node;
     while (current && current.left) {
@@ -103,6 +103,56 @@ var inorderSuccessor = function(root, p) {
     }
     return null;
   }
+};
+
+//--------------------------------------------------------------------------------------------------
+
+const findLeftMostNode = (root) => {
+  let node = root;
+  while (node.left) {
+    node = node.left;
+  }
+  return node;
+};
+
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @return {TreeNode}
+ */
+var inorderSuccessor = function(root, p) {
+
+  if (p.right) {
+    return findLeftMostNode(p.right);
+  }
+
+  const getParent = (() => {
+    const parentMap = new Map();
+    parentMap.set(root, null);
+    const stack = [root];
+    while (stack.length) {
+      const node = stack.pop();
+      if (node.right) {
+        parentMap.set(node.right, node);
+        if (node.right === p) { break; }
+        stack.push(node.right);
+      }
+      if (node.left) {
+        parentMap.set(node.left, node);
+        if (node.left === p) { break; }
+        stack.push(node.left);
+      }
+    }
+    return (queryNode) => parentMap.get(queryNode);
+  })();
+
+  let node = p;
+
+  while (getParent(node) && node === getParent(node).right) {
+    node = getParent(node);
+  }
+
+  return getParent(node);
 };
 
 export default inorderSuccessor;
