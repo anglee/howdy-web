@@ -27,11 +27,13 @@ var validPalindrome0 = function(s) { // call stack overflow on long inputs
   return helper(0, s.length - 1, 0);
 };
 
+//--------------------------------------------------------------------------------------------------
+
 /**
  * @param {string} s
  * @return {boolean}
  */
-var validPalindrome = function(s) {
+var validPalindrome1 = function(s) {
   const isPalindromeInRange = (l, r, deleteCount) => {
     while (l < r) {
       if (s[l] === s[r]) {
@@ -54,6 +56,40 @@ var validPalindrome = function(s) {
   };
 
   return isPalindromeInRange(0, s.length - 1, 0);
+};
+
+const isPalindrome = (s) => {
+  let i = 0;
+  let j = s.length - 1;
+  while (i < j) {
+    if (s[i++] !== s[j--]) {
+      return false;
+    }
+  }
+  return true;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var validPalindrome = function(s) {
+  let i = 0;
+  let j = s.length - 1;
+
+  while (i < j) {
+    if (s[i] !== s[j]) {
+      return isPalindrome(s.substring(i, j)) ||
+        isPalindrome(s.substring(i + 1, j + 1));
+    }
+    i++;
+    j--;
+  }
+  return true;
 };
 
 export default validPalindrome;
