@@ -38,6 +38,26 @@ var combinationSum1 = function(candidates, target) { // DP
   return buf[target];
 };
 
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum12 = function(candidates, target) { // DP, almost the same as above, only diff is how push/concat to buffer[i]
+  const buffer = Array(target + 1).fill().map(() => []);
+  buffer[0] = [[]];
+  for (let can of candidates) {
+    for (let i = 0; i < buffer.length; ++i) {
+      if (i - can >= 0) {
+        buffer[i - can].forEach(it => {
+          buffer[i].push([...it, can]);
+        });
+      }
+    }
+  }
+  return buffer[target];
+};
+
 
 //--------------------------------------------------------------------------------------------------
 // alternative recursive solution, easy to understand
