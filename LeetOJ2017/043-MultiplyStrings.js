@@ -91,7 +91,7 @@ const memoize = (f) => {
  * @param {string} num2
  * @return {string}
  */
-var multiply = function(num1, num2) {
+var multiply1 = function(num1, num2) {
   if (num1 === '0' || num2 === '0') { return '0'; }
   let retDigits = [];
   const digits1 = num1.split('').map(it => parseInt(it, 10)).reverse();
@@ -102,6 +102,35 @@ var multiply = function(num1, num2) {
     retDigits = add(retDigits, [...Array(i).fill(0), ...prod]);
   });
   return retDigits.reverse().join('');
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
+ */
+var multiply = function(num1, num2) {
+  const digits1 = num1.split('').reverse().map(it => parseInt(it));
+  const digits2 = num2.split('').reverse().map(it => parseInt(it));
+  let product = Array(digits1.length + digits2.length).fill(0);
+  for (let j = 0; j < digits1.length; ++j) {
+    for (let i = 0; i < digits2.length; ++i) {
+      product[i + j] += digits2[i] * digits1[j];
+    }
+  }
+  let carryOver = 0;
+  for (let i = 0; i < product.length; ++i) {
+    const temp = (product[i] + carryOver) % 10;
+    carryOver = (product[i] + carryOver - temp) / 10;
+    product[i] = temp;
+  }
+  // trim leading zeros
+  while (product[product.length - 1] === 0 && product.length > 1) {
+    product.pop();
+  }
+  return product.reverse().join('');
 };
 
 export default multiply;
