@@ -58,6 +58,8 @@ var validPalindrome1 = function(s) {
   return isPalindromeInRange(0, s.length - 1, 0);
 };
 
+//--------------------------------------------------------------------------------------------------
+
 const isPalindrome = (s) => {
   let i = 0;
   let j = s.length - 1;
@@ -68,10 +70,6 @@ const isPalindrome = (s) => {
   }
   return true;
 };
-
-//--------------------------------------------------------------------------------------------------
-
-
 
 /**
  * @param {string} s
