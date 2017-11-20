@@ -57,35 +57,43 @@ var exist0 = function(board, word) {
 var exist = function(board, word) {
   const h = board.length;
   if (h === 0) { return false; }
-  const w = board[0].length;
+  const w = board[1].length;
   if (w === 0) { return false; }
+
+  const used = Array(h).fill().map(() => Array(w).fill(false));
+  const dfs = (x, y, i) => {
+    if (i === word.length) {
+      return true;
+    }
+    if (
+      x < 0 ||
+      y < 0 ||
+      x >= w ||
+      y >=h ||
+      used[y][x] === true ||
+      board[y][x] !== word[i]
+    ) {
+      return false;
+    }
+    used[y][x] = true;
+    const ret = (
+      dfs(x + 1, y, i + 1) ||
+      dfs(x - 1, y, i + 1) ||
+      dfs(x, y + 1, i + 1) ||
+      dfs(x, y + 1, i + 1)
+    );
+    used[y][x] = false;
+    return ret;
+  };
+
   for (let y = 0; y < h; ++y) {
     for (let x = 0; x < w; ++x) {
-      const isUsed = Array(h).fill().map(() => Array(w).fill(false));
-      const search = (x, y, i) => {
-        if (x < 0 || x >= w || y < 0 || y >= h || isUsed[y][x]) {
-          return false;
-        }
-        if (board[y][x] !== word[i]) {
-          return false;
-        }
-        if (i === word.length - 1) {
-          return true;
-        }
-        isUsed[y][x] = true;
-        return (
-          search(x - 1, y, i + 1) ||
-          search(x + 1, y, i + 1) ||
-          search(x, y - 1, i + 1) ||
-          search(x, y + 1, i + 1)
-        );
-      };
-      const found = search(x, y, 0);
-      if (found) {
+      if (dfs(x, y, 0)) {
         return true;
       }
     }
   }
+
   return false;
 };
 
