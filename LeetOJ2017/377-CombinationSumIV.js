@@ -3,7 +3,7 @@
  * @param {number} target
  * @return {number}
  */
-var combinationSum4_0 = (nums, target) => {
+var combinationSum4_0 = (nums, target) => { // recursion
   if (target < 0) {
     return 0;
   }
@@ -18,7 +18,7 @@ var combinationSum4_0 = (nums, target) => {
  * @param {number} target
  * @return {number}
  */
-var combinationSum4_1 = (nums, target) => {
+var combinationSum4_1 = (nums, target) => { // recursion + memoize
   const memoize = f => {
     const map = new Map();
     return (nums, target) => {
@@ -47,7 +47,7 @@ var combinationSum4_1 = (nums, target) => {
  * @param {number} target
  * @return {number}
  */
-var combinationSum4 = function(nums, target) {
+var combinationSum4_2 = function(nums, target) { // DP
   const buf = [];
   for (let i = 0; i <= target; ++i) {
     buf.push(0);
@@ -63,6 +63,27 @@ var combinationSum4 = function(nums, target) {
   }
 
   return buf[target];
+};
+
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var combinationSum4 = function(nums, target) { // Redo DP
+  const buffer = Array(target + 1).fill(0);
+  buffer[0] = 1;
+  for (let i = 1; i <= target; ++i) {
+    for (let num of nums) {
+      if (i - num >= 0) {
+        buffer[i] += buffer[i - num];
+      }
+    }
+  }
+  return buffer[target];
 };
 
 export default combinationSum4;
