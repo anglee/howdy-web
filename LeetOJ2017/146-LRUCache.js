@@ -61,14 +61,15 @@ LRUCache0.prototype._evict = function () {
 
 //export default LRUCache0;
 
-// =========================================================================
+//--------------------------------------------------------------------------------------------------
+
 
 import LinkedHashMap from '../lib/LinkedHashMap';
 
 /**
  * @param {number} capacity
  */
-var LRUCache = function(capacity) {
+var LRUCache1 = function(capacity) {
   this.linkedHashMap = new LinkedHashMap();
   this.capacity = capacity;
 };
@@ -77,7 +78,7 @@ var LRUCache = function(capacity) {
  * @param {number} key
  * @return {number}
  */
-LRUCache.prototype.get = function(key) {
+LRUCache1.prototype.get = function(key) {
   if (!this.linkedHashMap.has(key)) {
     return -1;
   }
@@ -92,11 +93,83 @@ LRUCache.prototype.get = function(key) {
  * @param {number} value
  * @return {void}
  */
-LRUCache.prototype.put = function(key, value) {
+LRUCache1.prototype.put = function(key, value) {
   this.linkedHashMap.delete(key);
   this.linkedHashMap.set(key, value);
   if (this.linkedHashMap.size > this.capacity) {
     this.linkedHashMap.shift();
+  }
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number} capacity
+ */
+var LRUCache = function(capacity) {
+  this.capacity = capacity;
+  this.list = null;
+  this.map = new Map();
+};
+
+/**
+ * @param {number} key
+ * @return {number}
+ */
+LRUCache.prototype.get = function(key) {
+  if (!this.map.has(key)) {
+    return -1;
+  }
+  const node = this.map.get(key);
+  deleteNode(node);
+  node.next = this.list;
+  if (this.list) {
+    this.list.prev = node;
+  }
+  this.list = node;
+  return node.val;
+};
+
+const deleteNode = (node) => {
+  if (node.next) {
+    node.next.prev = node.prev;
+  }
+  if (node.prev) {
+    node.prev.next = node.next;
+  }
+};
+
+/**
+ * @param {number} key
+ * @param {number} value
+ * @return {void}
+ */
+LRUCache.prototype.put = function(key, value) {
+  if (this.map.has(key)) {
+    const existingNode = this.map.get(key);
+    deleteNode(existingNode);
+  }
+  const newNode = {
+    key: key,
+    val: value,
+    prev: null,
+    next: this.list,
+  } ;
+  if (this.list) {
+    this.list.prev = newNode;
+  }
+  this.list = newNode;
+  this.map.set(key, newNode);
+  if (this.map.size > this.capacity) {
+    const tail = (() => {
+      let node = this.list;
+      while (node.next) {
+        node = node.next;
+      }
+      return node;
+    })();
+    deleteNode(tail);
+    this.map.delete(tail.key);
   }
 };
 
@@ -108,3 +181,4 @@ LRUCache.prototype.put = function(key, value) {
  */
 
 export default LRUCache;
+
