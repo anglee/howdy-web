@@ -36,7 +36,7 @@ var checkSubarraySum0 = function(nums, k) { // brute force, Time: O(n ^ 2), Spac
  * @param {number} k
  * @return {boolean}
  */
-var checkSubarraySum = function(nums, k) { // Time: O(n * k), Space: O(k)
+var checkSubarraySum1 = function(nums, k) { // Time: O(n * k), Space: O(k)
   if (nums.length < 2) { return false; }
   if (k === 0) { return checkZero(nums); }
 
@@ -50,6 +50,30 @@ var checkSubarraySum = function(nums, k) { // Time: O(n * k), Space: O(k)
       newSet.add((item + num) % k);
     }
     set = newSet;
+  }
+  return false;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {boolean}
+ */
+var checkSubarraySum = function(nums, k) { // O(n)
+  if (nums.length < 2) { return false; }
+  if (k === 0) { return checkZero(nums); }
+
+  const sums = new Set([0]);
+  let runningSum = 0;
+  for (let i = 0; i < nums.length; ++i) {
+    const num = nums[i];
+    runningSum  = (runningSum + num) % k;
+    if (i > 0 && sums.has(runningSum)) {
+      return true;
+    }
+    sums.add(runningSum);
   }
   return false;
 };
