@@ -14,7 +14,7 @@ function UndirectedGraphNode(label) {
  * @param {UndirectedGraphNode} graph
  * @return {UndirectedGraphNode}
  */
-var cloneGraph = function(graph) {
+var cloneGraph0 = function(graph) {
   if (!graph) {
     return null;
   }
@@ -45,6 +45,53 @@ var cloneGraph = function(graph) {
   }
 
   return getClonedNodeByLabel(root.label);
+};
+
+//export default cloneGraph;
+
+//--------------------------------------------------------------------------------------------------
+
+const createMap = (root) => {
+  const isVisited = new Set();
+  const stack = [root];
+  const map = new Map();
+  while (stack.length > 0) {
+    const node = stack.pop();
+    if (isVisited.has(node)) {
+      continue;
+    }
+    isVisited.add(node);
+    map.set(node, new UndirectedGraphNode(node.label));
+    stack.push(...node.neighbors);
+  }
+  return map;
+};
+
+const setNeighbors = (root, map) => {
+  const isVisited = new Set();
+  const stack = [root];
+  while (stack.length > 0) {
+    const node = stack.pop();
+    if (isVisited.has(node)) {
+      continue;
+    }
+    isVisited.add(node);
+    const newNode = map.get(node);
+    newNode.neighbors = node.neighbors.map(it => map.get(it));
+    stack.push(...node.neighbors);
+  }
+  return map;
+};
+
+/**
+ * @param {UndirectedGraphNode} graph
+ * @return {UndirectedGraphNode}
+ */
+var cloneGraph = function(graph) {
+  if (graph === null) { return null; }
+  const map = createMap(graph);
+  setNeighbors(graph, map);
+  return map.get(graph);
 };
 
 export default cloneGraph;
