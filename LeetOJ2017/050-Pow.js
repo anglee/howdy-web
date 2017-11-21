@@ -11,6 +11,8 @@ var myPow0 = function(x, n) {
   return ret;
 };
 
+//--------------------------------------------------------------------------------------------------
+
 
 const toBinaryDigits = (number) => {
   return number.toString(2).split('').map(it => parseInt(it, 10));
@@ -21,7 +23,7 @@ const toBinaryDigits = (number) => {
  * @param {number} n
  * @return {number}
  */
-var myPow = function(x, n) {
+var myPow1 = function(x, n) {
   if (n === 0) {
     return 1;
   }
@@ -40,5 +42,27 @@ var myPow = function(x, n) {
   return ret;
 };
 
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number} x
+ * @param {number} n
+ * @return {number}
+ */
+var myPow = function(x, n) {
+  if (n < 0) {
+    return 1 / myPow(x, -n);
+  }
+  const binary = n.toString(2);
+  let factor = x;
+  let ret = 1;
+  for (let i = binary.length - 1; i >= 0; --i) {
+    if (binary[i] === '1') {
+      ret *= factor;
+    }
+    factor = factor * factor;
+  }
+  return ret;
+};
 
 export default myPow;
