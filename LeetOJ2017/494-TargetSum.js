@@ -60,12 +60,15 @@ var findTargetSumWays1 = function(nums, S) {
   return findTargetSumWaysI(0, 0);
 };
 
+//--------------------------------------------------------------------------------------------------
+
+
 /**
  * @param {number[]} nums
  * @param {number} S
  * @return {number}
  */
-var findTargetSumWays = function(nums, S) {
+var findTargetSumWays2 = function(nums, S) {
 
   const addToMap = (map, key, delta) => {
     if (!map.has(key)) {
@@ -86,6 +89,27 @@ var findTargetSumWays = function(nums, S) {
     prev = map;
   }
   return prev.has(S) ? prev.get(S) : 0;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number[]} nums
+ * @param {number} S
+ * @return {number}
+ */
+var findTargetSumWays = function(nums, S) { // similar to findTargetSumWays2, but code is shorter
+  let sumsMap = new Map();
+  sumsMap.set(0, 1);
+  for (let num of nums) {
+    const newSumsMap = new Map();
+    for (let [k, v] of sumsMap) {
+      newSumsMap.set(k + num, (newSumsMap.get(k + num) || 0) + v);
+      newSumsMap.set(k - num, (newSumsMap.get(k - num) || 0) + v);
+    }
+    sumsMap = newSumsMap;
+  }
+  return sumsMap.get(S) || 0;
 };
 
 export default findTargetSumWays;
