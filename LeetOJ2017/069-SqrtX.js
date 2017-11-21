@@ -31,29 +31,23 @@ export var mySqrt0 = function(x) {
 };
 
 /**
- * @param {number} x [INTEGER!!!!]
- * @return {number} [INTEGER!!!!]
+ * @param {number} x
+ * @return {number}
  */
 var mySqrt = function(x) {
-  if (x < 0) {
-    return Number.NaN;
-  }
-  if (x <= 1) { return x; }
-  let i = 0;
+  if (x === 0) { return 0; }
+  if (x < 0) { return Number.NaN; }
+  let i = 1;
   let j = x;
   while (i < j) {
-    const m = Math.floor((i + j) / 2);
-    if (m === i) { return m; }
-
-    const mSq = m * m;
-    if (mSq === x) { return m; }
-
-    if (mSq < x) {
-      i = m;
+    const m = Math.ceil((i + j) / 2);
+    if (m * m > x) {
+      j = m - 1;
     } else {
-      j = m;
+      i = m;
     }
   }
+  return i;
 };
 
 export default mySqrt;
