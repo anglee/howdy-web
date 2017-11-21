@@ -69,5 +69,11 @@ describe('LeetOJ 133-CloneGraph', () => {
       const cloned = cloneGraph(graph);
       expect(serialize(cloned)).to.equal(serialize(graph));
     });
+    it('should solve OJ test case', () => {
+      const graph = deSerialize('{-1,1#1}');
+      // console.log("g=", serialize(graph));
+      const cloned = cloneGraph(graph);
+      expect(serialize(cloned)).to.equal(serialize(graph));
+    });
   });
 });
