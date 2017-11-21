@@ -45,7 +45,7 @@ var largestRectangleArea = function(heights) {
  * @param {character[][]} matrix
  * @return {number}
  */
-var maximalRectangle = function(matrix) {
+var maximalRectangle0 = function(matrix) {
   if (matrix.length === 0) { return 0; }
   const w = matrix[0].length;
   let maxRectArea = 0;
@@ -59,5 +59,46 @@ var maximalRectangle = function(matrix) {
   return maxRectArea;
 };
 
-export default maximalRectangle;
+//--------------------------------------------------------------------------------------------------
 
+
+var maximalRectangle = function(matrix) {
+  const h = matrix.length;
+  const w = matrix[0].length;
+
+  const buffer = Array(h).fill().map(() => Array(w).fill(0));
+  for (let y = 0; y < h; ++y) {
+    buffer[y][w - 1] = (matrix[y][w - 1] === '1' ? 1 : 0);
+    for (let x = w - 2; x >= 0; --x) {
+      if (matrix[y][x] === '1') {
+        buffer[y][x] = buffer[y][x + 1] + 1;
+      } else {
+        buffer[y][x] = 0;
+      }
+    }
+  }
+  const findMaxRectangleAreaAtXY = (startX, startY) => {
+    let maxArea = 0;
+    let minX = Number.POSITIVE_INFINITY;
+    for (let y = startY; y < h; ++y) {
+      minX = Math.min(minX, buffer[y][startX]);
+      if (minX === 0) {
+        break;
+      }
+      maxArea = Math.max(maxArea, (y - startY + 1) * minX);
+    }
+    return maxArea;
+  };
+
+  let maxArea = 0;
+
+  for (let y = 0; y < h; ++y) {
+    for (let x = 0; x < w; ++x) {
+      maxArea = Math.max(maxArea, findMaxRectangleAreaAtXY(x, y));
+    }
+  }
+
+  return maxArea;
+};
+
+export default maximalRectangle;
