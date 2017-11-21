@@ -110,8 +110,60 @@ var lowestCommonAncestor1 = function(root, p, q) {
   return ret;
 };
 
+//--------------------------------------------------------------------------------------------------
 
-// ---------------------------------------------
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+var lowestCommonAncestor2 = function(root, p, q) {
+  const getInfo = (node) => {
+    const ret = {
+      commonAncestor: null,
+      count: 0,
+    };
+
+    if (node === null) {
+      return ret;
+    }
+    if (node === p) {
+      ret.count++;
+    }
+    if (node === q) {
+      ret.count++;
+    }
+    if (ret.count === 2) {
+      ret.commonAncestor = node;
+      return ret;
+    }
+    const leftInfo = getInfo(node.left);
+    if (leftInfo.commonAncestor) {
+      ret.commonAncestor = leftInfo.commonAncestor;
+      return ret;
+    }
+    ret.count += leftInfo.count;
+    if (ret.count === 2) {
+      ret.commonAncestor = node;
+      return ret;
+    }
+    const rightInfo = getInfo(node.right);
+    if (rightInfo.commonAncestor) {
+      ret.commonAncestor = rightInfo.commonAncestor;
+      return ret;
+    }
+    ret.count += rightInfo.count;
+    if (ret.count === 2) {
+      ret.commonAncestor = node;
+      return ret;
+    }
+    return ret;
+  };
+
+  return getInfo(root).commonAncestor;
+};
+//--------------------------------------------------------------------------------------------------
 
 
 const memoize = (f) => {
