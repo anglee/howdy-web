@@ -38,7 +38,7 @@ const binarySearchInRange = (nums, i, j, target) => {
  * @param {number} target
  * @return {number}
  */
-var search0 = function(nums, target) {
+var search0 = function(nums, target) { // first find the split, then normal binary search in one of the 2 split halves
   if (nums.length === 0) {
     return -1;
   }
@@ -49,9 +49,9 @@ var search0 = function(nums, target) {
   return binarySearchInRange(nums, 0, breakStart - 1, target);
 };
 
-//===================================================================================
+//--------------------------------------------------------------------------------------------------
 
-const searchI = (A, i, j, target) => {
+const searchI = (A, i, j, target) => { // recursive
   if (i === j) {
     return A[i] === target ? i : -1;
   }
@@ -88,8 +88,51 @@ const searchI = (A, i, j, target) => {
  * @param {number} target
  * @return {number}
  */
-var search = function(nums, target) {
+var search1 = function(nums, target) {
   return searchI(nums, 0, nums.length - 1, target);
+};
+
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search = function(nums, target) { // non-recursive
+  let i = 0;
+  let j = nums.length - 1;
+  while (i < j) {
+    const m = Math.floor((i + j) / 2);
+    if (nums[m] === target) {
+      return m;
+    }
+
+    if (nums[i] < nums[j]) {
+      // normal binary search
+      if (nums[m] > target) {
+        j = m - 1;
+      } else {
+        i = m + 1;
+      }
+    } else {
+      if (nums[m] < nums[j]) {
+        if (nums[m] < target && target <= nums[j]) {
+          i = m + 1;
+        } else {
+          j = m - 1;
+        }
+      } else {
+        if (nums[m] > target && target >= nums[i]) {
+          j = m - 1;
+        } else {
+          i = m + 1;
+        }
+      }
+    }
+  }
+  return nums[i] === target ? i : -1;
 };
 
 export default search;
