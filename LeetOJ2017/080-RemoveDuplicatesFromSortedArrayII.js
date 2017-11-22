@@ -3,13 +3,13 @@
  * @return {number}
  */
 var removeDuplicates0 = function(nums) {
-  let read = 0;
+
   let write = 0;
 
   let last = null;
   let dupCount = 0;
 
-  for (read = 0; read < nums.length; ++read) {
+  for (let read = 0; read < nums.length; ++read) {
     const current = nums[read];
 
     if (current === last) {
@@ -33,7 +33,7 @@ var removeDuplicates0 = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var removeDuplicates = function(nums) {
+var removeDuplicates1 = function(nums) {
 
   let w = 0;
   let count = 0;
@@ -51,6 +51,33 @@ var removeDuplicates = function(nums) {
     }
   }
   return w;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+  let cursor = 0;
+  let currentNum = null;
+  let currentNumCount = 0;
+
+  for (let num of nums) {
+    if (num === currentNum) {
+      if (currentNumCount < 2) {
+        currentNumCount++;
+        currentNum = num;
+        nums[cursor++] = num;
+      }
+    } else {
+      currentNumCount = 1;
+      currentNum = num;
+      nums[cursor++] = num;
+    }
+  }
+  return cursor;
 };
 
 export default removeDuplicates;
