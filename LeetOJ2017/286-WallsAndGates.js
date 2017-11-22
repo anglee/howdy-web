@@ -5,31 +5,26 @@ const WALL = -1;
  * @param {number[][]} rooms
  * @return {void} Do not return anything, modify rooms in-place instead.
  */
-var wallsAndGates0 = function(rooms) { // DFS
+var wallsAndGates = function(rooms) { // DFS
   const h = rooms.length;
   if (h === 0) { return; }
   const w = rooms[0].length;
 
-  const dfs = (rooms, x, y, val) => {
-    if (x < 0 || y < 0 || x >= w || y >= h || rooms[y][x] === WALL) {
+  const dfs = (x, y, steps) => {
+    if (x < 0 || y < 0 || x >= w || y >= h || rooms[y][x] < steps) {
       return;
     }
-    if (rooms[y][x] < val) {
-      return;
-    }
-    rooms[y][x] = val;
-    dfs(rooms, x - 1, y, val + 1);
-    dfs(rooms, x + 1, y, val + 1);
-    dfs(rooms, x, y - 1, val + 1);
-    dfs(rooms, x, y + 1, val + 1);
+    rooms[y][x] = steps;
+    dfs(x - 1, y, steps + 1);
+    dfs(x + 1, y, steps + 1);
+    dfs(x, y - 1, steps + 1);
+    dfs(x, y + 1, steps + 1);
   };
-
 
   for (let y = 0; y < h; ++y) {
     for (let x = 0; x < w; ++x) {
-      if (rooms[y][x] === GATE) {
-        dfs(rooms, x, y, 0);
-      }
+      if (rooms[y][x] === GATE)
+        dfs(x, y, 0);
     }
   }
 };
