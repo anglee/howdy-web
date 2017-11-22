@@ -5,18 +5,12 @@
 var simplifyPath = function(path) {
   const tokens = path.split('/');
   const stack = [];
-  tokens.forEach((token) => {
-    if (token === '.' || token === '') {
-      return;
+  tokens.forEach(token => {
+    if (stack.length && token === '..') {
+      stack.pop();
+    } else if (token !== '.' && token !== '') {
+      stack.push(token);
     }
-    if (token === '..') {
-      if (stack.length > 0) {
-        stack.pop();
-      }
-      return;
-    }
-
-    stack.push(token);
   });
   return '/' + stack.join('/');
 };
