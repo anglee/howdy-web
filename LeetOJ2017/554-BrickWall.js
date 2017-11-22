@@ -3,23 +3,15 @@
  * @return {number}
  */
 var leastBricks = function(wall) {
-  const countMap = new Map();
-  let max = 0;
-  wall.forEach(bricks => {
-    let pos = 0;
-    for (let i = 0; i < bricks.length - 1; ++i) {
-      // skip the last one
-      const brick = bricks[i];
-      pos += brick;
-      if (countMap.has(pos)) {
-        countMap.set(pos, countMap.get(pos) + 1);
-      } else {
-        countMap.set(pos, 1);
-      }
-      max = Math.max(max, countMap.get(pos));
+  const borders = new Map();
+  wall.forEach(row => {
+    let width = 0;
+    for (let i = 0; i < row.length - 1; ++i) {
+      width += row[i];
+      borders.set(width, (borders.get(width) || 0) + 1);
     }
   });
-  return wall.length - max;
+  return wall.length - Math.max(...borders.values(), 0);
 };
 
 export default leastBricks;

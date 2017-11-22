@@ -13,5 +13,10 @@ describe('LeetOJ 554-BrickWall', () => {
       const expected = 2;
       expect(leastBricks(input)).to.equal(expected);
     });
+    it('should solve OJ test case', () => {
+      const input = [[1], [1], [1]];
+      const expected = 3;
+      expect(leastBricks(input)).to.equal(expected);
+    });
   });
 });
