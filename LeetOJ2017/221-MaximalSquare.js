@@ -85,6 +85,54 @@ var maximalSquare0 = function(matrix) {
   const area = width * width;
   return area;
 };
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {character[][]} matrix
+ * @return {number}
+ */
+var maximalSquare1 = function(matrix) {
+  const h = matrix.length;
+  if (h === 0) { return 0; }
+  const w = matrix[0].length;
+  const buffer = Array(h).fill().map(() => Array(w).fill(0));
+  for (let y = 0; y < h; ++y) {
+    buffer[y][w - 1] = matrix[y][w - 1] === '1' ? 1 : 0;
+    for (let x = w - 2; x >= 0; --x) {
+      if (matrix[y][x] === '1') {
+        buffer[y][x] = buffer[y][x + 1] + 1;
+      } else {
+        buffer[y][x] = 0;
+      }
+    }
+  }
+
+  const getMaxSquareAreaAtXY = (x, y) => {
+    let minXLen = Number.POSITIVE_INFINITY;
+    let i = 0;
+    let maxArea = 0;
+    while (y + i < h) {
+      minXLen = Math.min(minXLen, buffer[y + i][x]);
+      const yLen = i + 1;
+      if (minXLen < yLen) {
+        break;
+      }
+      maxArea = Math.max(maxArea, yLen * yLen);
+      i++;
+    }
+    return maxArea;
+  };
+
+  let maxArea = 0;
+  for (let y = 0; y < h; ++y) {
+    for (let x = 0; x < w; ++x) {
+      maxArea = Math.max(maxArea, getMaxSquareAreaAtXY(x, y));
+    }
+  }
+
+  return maxArea;
+};
+
 
 //------------------------------------------------------------------------------------------
 
