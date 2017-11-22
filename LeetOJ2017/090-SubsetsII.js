@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var subsetsWithDup = function(nums) {
+var subsetsWithDup0 = function(nums) {
   const countMap = nums.reduce((map, num) => {
     map.set(num, map.has(num) ? map.get(num) + 1 : 1);
     return map;
@@ -19,6 +19,33 @@ var subsetsWithDup = function(nums) {
     ret = next;
   }
   return ret;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsetsWithDup = function(nums) {
+  const countMap = nums.reduce(
+    (map, num) => map.set(num, (map.get(num) || 0) + 1),
+    new Map()
+  );
+
+  let buffer = [[]];
+  for (let [num, count] of countMap) {
+    const newBuffer = [];
+    buffer.forEach(array => {
+      const current = [];
+      for (let i = 0; i <= count; ++i) {
+        newBuffer.push(array.concat(current));
+        current.push(num);
+      }
+    });
+    buffer = newBuffer
+  }
+  return buffer;
 };
 
 export default subsetsWithDup;
