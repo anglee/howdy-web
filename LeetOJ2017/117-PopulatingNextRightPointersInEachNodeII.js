@@ -35,11 +35,14 @@ var connect0 = function(root) {
   }
 };
 
+//--------------------------------------------------------------------------------------------------
+
+
 /**
  * @param {TreeLinkNode} root
  * @return {void} Do not return anything, modify tree in-place instead.
  */
-var connect = function(root) {
+var connect1 = function(root) {
   const findNext = (node) => {
     while (node && !node.left && !node.right) {
       node = node.next;
@@ -75,6 +78,57 @@ var connect = function(root) {
   while (rowStart) {
     processRow(rowStart);
     rowStart = findNext(rowStart);
+  }
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {TreeLinkNode} root
+ * @return {void} Do not return anything, modify tree in-place instead.
+ */
+var connect = function(root) { // this should be easier to understand than connect1
+
+  const processRow = (start) => {
+    let node = start;
+    let prev = null;
+    while (node) {
+      if (node.left) {
+        if (prev) {
+          prev.next = node.left;
+        }
+        prev = node.left;
+      }
+      if (node.right) {
+        if (prev) {
+          prev.next = node.right;
+        }
+        prev = node.right;
+      }
+      node = node.next;
+    }
+    if (prev) {
+      prev.next = null;
+    }
+  };
+
+  const findNextRowStart = (node) => {
+    while (node) {
+      if (node.left) {
+        return node.left;
+      }
+      if (node.right) {
+        return node.right;
+      }
+      node = node.next;
+    }
+    return null;
+  };
+
+  let rowStart = root;
+  while (rowStart) {
+    processRow(rowStart);
+    rowStart = findNextRowStart(rowStart);
   }
 };
 
