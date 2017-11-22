@@ -73,7 +73,7 @@ var validTree1 = function(n, edges) { // Union Find, alternative solution
  * @param {number[][]} edges
  * @return {boolean}
  */
-var validTree = function(n, edges) { // time: O(E + V), space: O(E)
+var validTree2 = function(n, edges) { // time: O(E + V), space: O(E)
   if (n <= 1) {
     return true;
   }
@@ -127,4 +127,43 @@ var validTree = function(n, edges) { // time: O(E + V), space: O(E)
   return true;
 };
 
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @return {boolean}
+ */
+var validTree = function(n, edges) { // improved, similar to validTree2
+  const neighborMap = new Map();
+  edges.forEach(([n1, n2]) => {
+    if (!neighborMap.has(n1)) {
+      neighborMap.set(n1, new Set());
+    }
+    if (!neighborMap.has(n2)) {
+      neighborMap.set(n2, new Set());
+    }
+    neighborMap.get(n1).add(n2);
+    neighborMap.get(n2).add(n1);
+  });
+
+
+  const visited = new Set();
+  const stack = [0];
+  while (stack.length > 0) {
+    const node = stack.pop();
+    if (visited.has(node)) {
+      return false;
+    }
+    visited.add(node);
+    const neighbors = neighborMap.get(node);
+    neighbors.forEach(neighbor => {
+      neighborMap.get(neighbor).delete(node);
+    });
+    stack.push(...neighbors)
+  }
+  return visited.size === n;
+};
+
 export default validTree;
+
