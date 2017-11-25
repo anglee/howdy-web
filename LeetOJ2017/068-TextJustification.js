@@ -1,18 +1,6 @@
 const totalLength = (buffer) => buffer.reduce((len, w) => len + w.length, 0);
 
-const memoize = (func) => {
-  const resultMap = new Map();
-  return function (count) {
-    if (resultMap.has(count)) {
-      return resultMap.get(count);
-    }
-    const ret = func(count);
-    resultMap.set(count, ret);
-    return ret;
-  }
-};
-
-const spaces = memoize((count) => Array(count).fill(' ').join(''));
+const spaces = (count) => Array(count).fill(' ').join('');
 
 const justify = (words, L) => {
   if (words.length === 1) {
@@ -21,10 +9,10 @@ const justify = (words, L) => {
   const spaceCount = L - totalLength(words);
   const gapCounts = words.length - 1;
   const spacesPerGap = Math.floor(spaceCount / gapCounts);
-  const reminder = spaceCount - spacesPerGap * gapCounts;
+  const longGapCount = spaceCount - spacesPerGap * gapCounts;
   let ret = words[0];
   for (let i = 1; i < words.length; ++i) {
-    if (i <= reminder) {
+    if (i <= longGapCount) {
       ret += `${spaces(spacesPerGap + 1)}${words[i]}`;
     } else {
       ret += `${spaces(spacesPerGap)}${words[i]}`;
