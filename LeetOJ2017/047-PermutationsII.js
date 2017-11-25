@@ -94,7 +94,7 @@ const memoize = (f) => {
  * @return {number[][]}
  */
 var permuteUnique = function (nums) {
-  const doPermuteUnique = memoize((countMap) => {
+  const permute = memoize((countMap) => {
     if (countMap.size === 0) {
       return [[]];
     }
@@ -111,7 +111,7 @@ var permuteUnique = function (nums) {
       }
 
       ret.push(
-        ...doPermuteUnique(countMap).map(it => [num, ...it])
+        ...permute(countMap).map(it => [num, ...it])
       );
       countMap.set(num, count);
     }
@@ -119,7 +119,7 @@ var permuteUnique = function (nums) {
   });
 
   const countMap = nums.reduce((map, num) => map.set(num, map.get(num) + 1 || 1), new Map());
-  return doPermuteUnique(countMap);
+  return permute(countMap);
 };
 
 export default permuteUnique;
