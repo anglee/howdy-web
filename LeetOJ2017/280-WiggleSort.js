@@ -5,7 +5,7 @@ const swap = (A, i, j) => {
 };
 
 const kthElement = (nums, k) => {
-  const process = (A, left, right) => {
+  const split = (A, left, right) => {
     let i = left;
     let j = right;
 
@@ -18,11 +18,11 @@ const kthElement = (nums, k) => {
     }
     return i;
   };
-  
+
   let left = 0;
   let right = nums.length - 1;
   while (left !== right) {
-    const i = process(nums, left, right);
+    const i = split(nums, left, right);
     if (i === k) {
       return;
     }
