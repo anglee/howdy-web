@@ -90,7 +90,7 @@ var minSubArrayLen2 = function(s, nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var minSubArrayLen = function(s, nums) {
+var minSubArrayLen3 = function(s, nums) {
   if (nums.length === 0) {
     return 0;
   }
@@ -106,6 +106,32 @@ var minSubArrayLen = function(s, nums) {
     }
   }
   return Number.isFinite(minLength) ? minLength : 0;
+};
+
+//--------------------------------------------------------------------------------------------------
+
+/**
+ * @param {number} s
+ * @param {number[]} nums
+ * @return {number}
+ */
+var minSubArrayLen = function(s, nums) {
+  let sum = 0;
+  let sums = new Map();
+  sums.set(-1, 0);
+  for (let i = 0; i < nums.length; ++i) {
+    sum += nums[i];
+    sums.set(i, sum);
+  }
+
+  let ret = nums.length + 1;
+  for (let head = 0, tail = 0; head < nums.length; ++head) {
+    while (sums.get(head) - sums.get(tail - 1) >= s) {
+      ret = Math.min(ret, head - tail + 1);
+      tail++;
+    }
+  }
+  return ret === nums.length + 1 ? 0 : ret;
 };
 
 export default minSubArrayLen;
