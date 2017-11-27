@@ -34,8 +34,29 @@ const helper = (root) => {
  * @param {TreeNode} root
  * @return {number}
  */
-var diameterOfBinaryTree = function(root) {
+var diameterOfBinaryTree0 = function(root) {
   return helper(root).diameter;
+};
+
+
+//--------------------------------------------------------------------------------------------------
+
+
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var diameterOfBinaryTree = function(root) {
+  let diameter = 0;
+  const postOrderH = (node) => {
+    if (!node) { return 0; }
+    const leftH = postOrderH(node.left);
+    const rightH = postOrderH(node.right);
+    diameter = Math.max(diameter, leftH + rightH);
+    return Math.max(leftH, rightH) + 1;
+  };
+  postOrderH(root);
+  return diameter;
 };
 
 export default diameterOfBinaryTree;
