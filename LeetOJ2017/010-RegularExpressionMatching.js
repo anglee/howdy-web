@@ -46,19 +46,22 @@ var isMatch0 = function(s, p) {
  * @return {boolean}
  */
 var isMatch1 = function(s, p) {
-  if (p.length === 0) {
-    return s.length === 0;
+  if (p.length === 0 && s.length === 0) {
+    return true;
   }
-  if (p[1] !== '*') {
-    if (s.length > 0 && (s[0] === p[0] || p[0] === '.')) {
-      return isMatch(s.substring(1), p.substring(1));
-    }
+  if (p.length === 0) {
     return false;
-  } else {
+  }
+  if (p.length >= 2 && p[1] === '*') {
     if (s.length > 0 && (s[0] === p[0] || p[0] === '.')) {
       return isMatch(s.substring(1), p) || isMatch(s, p.substring(2));
     }
     return isMatch(s, p.substring(2));
+  } else {
+    if (s.length > 0 && (s[0] === p[0] || p[0] === '.')) {
+      return isMatch(s.substring(1), p.substring(1));
+    }
+    return false;
   }
 };
 
@@ -156,4 +159,4 @@ var isMatch = function(s, p) { // DP
   return buffer[h - 1][w - 1];
 };
 
-export default isMatch;
+export default isMatch1;
