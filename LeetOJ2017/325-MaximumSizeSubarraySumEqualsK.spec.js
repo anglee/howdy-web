@@ -16,6 +16,16 @@ describe('LeetOJ 325-MaximumSizeSubarraySumEqualsK', () => {
       expect(maxSubArrayLen(nums, k)).to.equal(2);
       // because the subarray [-1, 2] sums to 1 and is the longest
     });
+    it('should work test case 1', () => {
+      const nums = [0];
+      const k = 0;
+      expect(maxSubArrayLen(nums, k)).to.equal(1);
+    });
+    it('should work test case 2', () => {
+      const nums = [1, 0];
+      const k = 0;
+      expect(maxSubArrayLen(nums, k)).to.equal(1);
+    });
   });
 
 });
