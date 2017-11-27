@@ -169,37 +169,22 @@ var addOperators = function(num, target) {
       return;
     }
 
-    // add
+
     for (let len = 1; len <= todo.length; ++len) {
       const str = todo.substr(0, len);
-      if (hasLeadingZero(str)) { continue; }
+      if (hasLeadingZero(str)) {
+        continue;
+      }
       const val = parseInt(str);
+      // add
       add(prefix + '+' + str, todo.substr(len), value + val, val);
-    }
-
-    // subtract
-    for (let len = 1; len <= todo.length; ++len) {
-      const str = todo.substr(0, len);
-      if (hasLeadingZero(str)) { continue; }
-      const val = parseInt(str);
+      // subtract
       add(prefix + '-' + str, todo.substr(len), value - val, -val);
-    }
-
-    // multiply
-    for (let len = 1; len <= todo.length; ++len) {
-      const str = todo.substr(0, len);
-      if (hasLeadingZero(str)) { continue; }
-      const val = parseInt(str);
+      // multiply
       add(prefix + '*' + str, todo.substr(len), value - lastProductValue + lastProductValue * val, lastProductValue * val);
+      // divide
+      // add(prefix + '/' + str, todo.substr(len), value - lastProductValue + lastProductValue / val, lastProductValue / val);
     }
-
-    // divide
-    // for (let len = 1; len <= todo.length; ++len) {
-    //   const str = todo.substr(0, len);
-    //   if (hasLeadingZero(str)) { continue; }
-    //   const val = parseInt(str);
-    //   add(prefix + '/' + str, todo.substr(len), value - lastProductValue + lastProductValue / val, lastProductValue / val);
-    // }
   };
 
   for (let len = 1; len <= num.length; ++len) {
