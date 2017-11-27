@@ -354,6 +354,148 @@ var removeInvalidParentheses4 = function (s) {
   return Array.from(new Set(ret));
 };
 
+/**
+ * @param {string} s
+ * @return {string[]}
+ */
+var removeInvalidParentheses5 = function (s) { // similar to removeInvalidParentheses4, different approach of removeInvalidRights and removeInvalidLefts
+  const getCountOfRightsToRemove = (s) => {
+    let unmatchedLeftCount = 0;
+    let countOfRightsToRemove = 0;
+    for (let i = 0; i < s.length; ++i) {
+      if (s[i] === '(') {
+        unmatchedLeftCount++;
+      } else if (s[i] === ')') {
+        if (unmatchedLeftCount === 0) {
+          countOfRightsToRemove++;
+        } else {
+          unmatchedLeftCount--;
+        }
+      }
+    }
+    return countOfRightsToRemove;
+  };
+
+  const getCountOfLeftsToRemove = (s) => {
+    let unmatchedRightCount = 0;
+    let countOfLeftsToRemove = 0;
+    for (let i = s.length - 1; i >= 0; --i) {
+      if (s[i] === ')') {
+        unmatchedRightCount++;
+      } else if (s[i] === '(') {
+        if (unmatchedRightCount === 0) {
+          countOfLeftsToRemove++;
+        } else {
+          unmatchedRightCount--;
+        }
+      }
+    }
+    return countOfLeftsToRemove;
+  };
+
+  const hasNoInvalidRights = (s) => {
+    let count = 0;
+    for (let i = 0; i < s.length; ++i) {
+      const ch = s[i];
+      if (ch === '(') {
+        count++;
+      } else if (ch === ')') {
+        count--;
+        if (count < 0) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
 
 
-export default removeInvalidParentheses4;
+  const unique = A => Array.from(new Set(A));
+  const select = (A, count) => { // select count elements from A, DP
+    let buffer = Array(A.length + 1).fill().map(()=> [[]]);
+    let i = 1;
+    while (i <= count) {
+      const newBuffer = Array(A.length + 1).fill().map(()=> []);
+      for (let j = 1; j <= A.length; ++j) {
+        newBuffer[j] = newBuffer[j - 1].concat(buffer[j - 1].map(it => [...it, A[j - 1]]));
+      }
+      ++i;
+      buffer = newBuffer;
+    }
+    return buffer[buffer.length - 1];
+  };
+  const removeChars = (s, positions) => {
+    let ret = s.substring(0, positions[0]);
+    for (let i = 0; i < positions.length - 1; ++i) {
+      ret += s.substring(positions[i] + 1, positions[i + 1]);
+    }
+    ret += s.substring(positions[positions.length - 1] + 1);
+    return ret;
+  };
+  const removeInvalidRights = (s, countToRemove) => {
+    if (countToRemove === 0) {
+      return [s];
+    }
+    const rightPositions = [];
+    for (let i = 0; i < s.length; ++i) {
+      if (s[i] === ')') {
+        rightPositions.push(i);
+      }
+    }
+    // console.log('rightPositions', rightPositions);
+    const combinations = select(rightPositions, countToRemove);
+    // console.log('combinations', combinations);
+    const rightRemovedStrings = combinations.map(positions => removeChars(s, positions));
+    // console.log('rightRemovedStrings', rightRemovedStrings);
+    return unique(rightRemovedStrings).filter(hasNoInvalidRights)
+  };
+
+
+  const hasNoInvalidLefts = (s) => {
+    let count = 0;
+    for (let i = s.length - 1; i >= 0; --i) {
+      const ch = s[i];
+      if (ch === ')') {
+        count++;
+      } else if (ch === '(') {
+        count--;
+        if (count < 0) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+
+  const removeInvalidLefts = (s, countToRemove) => {
+    if (countToRemove === 0) {
+      return [s];
+    }
+    const leftPositions = [];
+    for (let i = 0; i < s.length; ++i) {
+      if (s[i] === '(') {
+        leftPositions.push(i);
+      }
+    }
+    const combinations = select(leftPositions, countToRemove);
+    const leftRemovedStrings = combinations.map(positions => removeChars(s, positions));
+    return unique(leftRemovedStrings).filter(hasNoInvalidLefts)
+  };
+
+  const ret = [];
+  const countOfRightsToRemove = getCountOfRightsToRemove(s);
+  // console.log('countOfRightsToRemove', countOfRightsToRemove);
+  const countOfLeftsToRemove = getCountOfLeftsToRemove(s);
+  // console.log('countOfLeftsToRemove', countOfLeftsToRemove);
+  const invalidRightsRemoved = removeInvalidRights(s, countOfRightsToRemove);
+  // console.log('invalidRightsRemoved', invalidRightsRemoved);
+  invalidRightsRemoved.forEach(str => {
+    ret.push(...removeInvalidLefts(str, countOfLeftsToRemove));
+  });
+  // console.log('invalidLeftsRemoved', ret);
+  return Array.from(new Set(ret));
+};
+
+
+
+export default removeInvalidParentheses5;
